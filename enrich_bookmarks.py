@@ -205,7 +205,12 @@ def canonicalize_url(url: str) -> str:
     try:
         p = urlparse(url.strip())
         q = parse_qs(p.query)
-        q = {k: v for k, v in q.items() if not k.lower().startswith("utm_")}
+        q = {
+            k: v
+            for k, v in q.items()
+            if not k.lower().startswith("utm_")
+            and k.lower() not in {"tracking", "fbclid", "gclid"}
+        }
         query = urlencode(q, doseq=True)
         path = p.path.rstrip("/") if p.path not in ("", "/") else p.path
         return urlunparse((p.scheme, p.netloc, path, p.params, query, p.fragment))
@@ -451,6 +456,7 @@ def build_sheet_review_candidates(row_cache, header_index):
         needs_review = get_value(row, "Needs Review").upper()
         place_id = get_value(row, "Google Place ID")
         source = get_value(row, "Source").lower()
+        review_reason = get_value(row, "Review Reason").lower()
 
         if needs_review != "TRUE":
             continue
@@ -458,7 +464,10 @@ def build_sheet_review_candidates(row_cache, header_index):
         if place_id:
             continue
 
-        if source != "quick_add":
+        if review_reason not in {"", "manual_review_required"}:
+            continue
+
+        if source != "quick_add" and review_reason != "manual_review_required":
             continue
 
         name = clean_title(get_value(row, "Name"))
@@ -624,6 +633,11 @@ def main():
 
         seen_keys.add(dedupe_key)
         cleaned.append(bm)
+
+    max_candidates = int(os.environ.get("MAX_CANDIDATES", "0"))
+
+    if max_candidates > 0:
+        cleaned = cleaned[:max_candidates]
 
     total = len(cleaned)
 
@@ -855,7 +869,7 @@ def main():
                 if links["website"]:
                     final_website = links["website"]
                 elif google_website:
-                    final_website = google_website
+                    final_website = canonicalize_url(google_website)
 
                 status = (
                     "closed"
