@@ -1438,6 +1438,71 @@ Make Google Places matching behavior deterministic and safe for accepted, reject
 **Next recommended session:**
 - Session 6 — Review queue workflow.
 
+### 10.7 Session 6 — Review queue workflow
+
+**Date:** 2026-06-05
+
+**Goal:**
+Make the manual review queue understandable and define clear actions for each `Review Reason`.
+
+**Completed:**
+- Created and saved a Google Sheets filter view named `Review Queue — Needs Review TRUE`.
+- Filtered the view to `Needs Review = TRUE`.
+- Sorted the view by `Review Reason`.
+- Counted the review queue by reason.
+- Found and fixed 30 blank `Review Reason` rows by setting them to `manual_review_required`.
+- Confirmed the blank rows mostly had `Name + Website`, so they were useful manual-review candidates rather than pure missing-location cases.
+- Found one possible duplicate with the same name and different websites and added notes to both rows.
+- Reviewed samples from `name_mismatch`, `domain_mismatch`, `no_google_candidate`, and `city_mismatch`.
+- Deleted two rows that were bookmark mistakes and not restaurant records.
+- Marked one `no_google_candidate` row as closed.
+- Marked one `city_mismatch` row as closed.
+- Deleted the `Chapter One` test row used in Session 5.
+- Documented manual action rules for each review reason in `SESSION_6_REVIEW_QUEUE_WORKFLOW.md`.
+
+**Tested:**
+- Checked initial review queue counts:
+  - blank: 30
+  - city_mismatch: 9
+  - domain_mismatch: 182
+  - missing_location_hint: 1
+  - name_mismatch: 415
+  - no_google_candidate: 15
+- Rechecked the queue after cleanup.
+
+**Results:**
+- Blank `Review Reason` count is now 0.
+- `missing_location_hint` count is now 0 after deleting the test row.
+- Current approximate review queue shape is:
+  - manual_review_required: 31
+  - city_mismatch: 8
+  - domain_mismatch: 181
+  - name_mismatch: 414
+  - no_google_candidate: 12
+- The review queue is now organized enough to process reason by reason.
+
+**Issues found:**
+- Many `name_mismatch` rows have weak identity/location data and should not be bulk-accepted.
+- `domain_mismatch` is mixed; some rows may be valid restaurants with old/new websites, while others may be wrong matches or non-restaurant links.
+- `city_mismatch` is mixed and requires row-by-row decisions.
+- Some bookmark mistakes are still possible inside the review queue.
+
+**Decisions made:**
+- Keep a saved filter view called `Review Queue — Needs Review TRUE`.
+- Review rows should never have a blank `Review Reason`.
+- Use `manual_review_required` for rows with useful `Name + Website` or rows where a better location hint has been added.
+- Do not bulk-resolve `name_mismatch`, `domain_mismatch`, or `city_mismatch`.
+- Real closed restaurants can be kept with `Status = closed`, `Needs Review = FALSE`, blank `Review Reason`, and blank `Google Place ID` if no verified Google Places record exists.
+- Clear bookmark mistakes can be deleted instead of kept as `not_relevant`.
+
+**Open questions added/updated:**
+- Should a small helper script generate review queue counts by `Review Reason` automatically?
+- Should the next matching improvement evaluate multiple Google candidates before sending rows to `name_mismatch` or `domain_mismatch`?
+- Should old/new website domains be stored as evidence somewhere before manually accepting `domain_mismatch` rows?
+
+**Next recommended session:**
+- Session 7 — Clean Cuisine / Vibe / Features pollution.
+
 ---
 
 ## 11. Open questions
