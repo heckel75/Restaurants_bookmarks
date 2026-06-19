@@ -1,6 +1,6 @@
 # Restaurant Knowledge System — Project Plan
 
-**Version:** 2.1  
+**Version:** 2.2  
 **Scope update:** Paris + suburbs only, easy manual additions, structured Google Places matching, delivery/takeaway tracking, LLM enrichment, and step-by-step session workflow.
 
 ---
@@ -1505,24 +1505,374 @@ Make the manual review queue understandable and define clear actions for each `R
 
 ---
 
+### 10.8 Session 7 — Clean Cuisine / Vibe / Features pollution
+
+**Date:** 2026-06-06
+
+**Goal:**
+Remove old Airtable/script pollution from the structured tag fields before future LLM enrichment.
+
+**Completed:**
+- Created a temporary `Tag Audit` tab.
+- Audited distinct values and counts for:
+  - `Cuisine`
+  - `Vibe`
+  - `Features`
+- Found current tag values:
+  - `Cuisine`: `wine_bar`, `cafe`, `bistro`, `bakery`, `pizza`, `ramen`, `sushi`, plus polluted value `checked`
+  - `Vibe`: `casual`, `classic`
+  - `Features`: polluted value `takeaway`
+- Created a backup tab named `Restaurants backup before tag cleanup`.
+- Removed `checked` from `Cuisine`.
+- Removed `takeaway` from `Features`.
+- Refreshed the audit and confirmed:
+  - `Cuisine` no longer contains `checked`
+  - `Features` has no remaining non-empty values
+- Spot-checked around 20 rows after cleanup.
+
+**Tested:**
+- Used formulas in `Tag Audit` to count distinct values in `Cuisine`, `Vibe`, and `Features`.
+- Confirmed 2 replacements for `Cuisine = checked`.
+- Confirmed 161 replacements for `Features = takeaway`.
+- Confirmed no row shifting or obvious damage after cleanup.
+
+**Results:**
+- `Cuisine` now contains only reasonable temporary values:
+  - `wine_bar`
+  - `cafe`
+  - `bistro`
+  - `bakery`
+  - `pizza`
+  - `ramen`
+  - `sushi`
+- `Vibe` now contains only:
+  - `casual`
+  - `classic`
+- `Features` is currently empty.
+- The tag fields are clean enough for a future controlled-vocabulary LLM tagging step.
+
+**Issues found:**
+- `takeaway` had been stored in `Features`, but takeaway has its own dedicated `Takeaway` column.
+- The old `takeaway` feature values were removed but were not automatically converted to `Takeaway = TRUE`, because evidence quality has not been defined yet.
+
+**Decisions made:**
+- Do not infer `Takeaway = TRUE` from old polluted `Features = takeaway` values.
+- Keep delivery/takeaway evidence handling for Session 8.
+- Treat the current `Cuisine` and `Vibe` values as temporary, not final taxonomy.
+
+**Open questions added/updated:**
+- What is the final controlled vocabulary for `Cuisine`, `Vibe`, and `Features`?
+- Should historical `Features = takeaway` rows be reviewed later as possible evidence for `Takeaway = TRUE`, or ignored as unreliable legacy data?
+
+**Next recommended session:**
+- Session 8 — Delivery and takeaway enrichment design.
+
+### 10.9 Session 8 — Delivery and takeaway enrichment design
+
+**Date:** 2026-06-17
+
+**Goal:**
+Decide how to populate `Delivery` and `Takeaway` reliably without guessing.
+
+**Completed:**
+- Confirmed allowed values for both `Delivery` and `Takeaway`:
+  - `TRUE`
+  - `FALSE`
+  - `UNKNOWN`
+- Extended dropdown/data validation for `Delivery` and `Takeaway` from row 2 downward.
+- Counted existing values in both fields.
+- Found that both columns were mostly blank.
+- Replaced blank `Delivery` and `Takeaway` values with `UNKNOWN`.
+- Confirmed final baseline:
+  - `Delivery = UNKNOWN` for 2353 rows
+  - `Takeaway = UNKNOWN` for 2353 rows
+- Reviewed Google Places `delivery` and `takeout` fields.
+- Decided not to request Google Places delivery/takeout fields in the normal matching script because they are higher-tier fields.
+- Defined evidence rules for when to set:
+  - `TRUE`
+  - `FALSE`
+  - `UNKNOWN`
+- Created a `Delivery Takeaway Test` tab.
+- Tested evidence quality on 10 validated restaurants.
+
+**Tested:**
+- 10 restaurants were reviewed using official websites, official Instagram where relevant, and matched delivery-platform pages where available:
+  - Madame FAN
+  - Vinello
+  - Amonē
+  - Armande
+  - Au Paradis Tropical
+  - Bel-Ami
+  - Bob's Bake Shop
+  - Gloria Osteria Paris
+  - Polpo Brasserie
+  - Barbo - Bistronomie de saison
+
+**Results:**
+- 4 restaurants had strong enough evidence for:
+  - `Delivery = TRUE`
+  - `Takeaway = TRUE`
+- 6 restaurants remained:
+  - `Delivery = UNKNOWN`
+  - `Takeaway = UNKNOWN`
+- No restaurant was marked `FALSE`.
+- No mixed TRUE/UNKNOWN cases appeared in this sample.
+
+**Issues found:**
+- Many official restaurant websites do not clearly mention delivery or takeaway.
+- Absence of delivery/takeaway wording is not evidence of `FALSE`.
+- Legal/company activity descriptions are too broad and should not be used as current customer-facing evidence.
+- Catering, private events, or “à domicile” services are not enough to mark `Delivery = TRUE`.
+- Generic delivery-platform brand pages are not enough unless the restaurant name and address/location clearly match.
+- Current `Delivery` and `Takeaway` columns do not have dedicated evidence fields, so evidence is only stored in the test tab for now.
+
+**Decisions made:**
+- Default value for both fields is `UNKNOWN`.
+- Do not guess delivery or takeaway from restaurant type, cuisine, old tags, or absence of information.
+- Do not infer `Takeaway = TRUE` from the old polluted `Features = takeaway` values.
+- Use `TRUE` only with explicit positive evidence:
+  - official website
+  - official Instagram/social page
+  - clearly matched delivery-platform page
+  - Google Places optional batch result
+  - manual confirmation
+- Use `FALSE` only with explicit negative evidence:
+  - official source clearly says no delivery/takeaway
+  - manual confirmation says no
+  - Google Places optional batch returns false
+- Use `UNKNOWN` for weak, indirect, missing, old, or ambiguous evidence.
+- Google Places `delivery` / `takeout` fields should not be included in the normal matching script.
+- Google Places delivery/takeout can be tested later as a separate optional enrichment batch.
+- Official Instagram can count as evidence when it clearly belongs to the restaurant and the location/address matches.
+- Matched delivery-platform pages can count as delivery evidence when name and location/address are clearly aligned.
+
+**Open questions added/updated:**
+- Should we add dedicated fields later, such as:
+  - `Delivery Evidence`
+  - `Takeaway Evidence`
+  - `Delivery/Takeaway Last Checked`
+- Should Session 10 LLM enrichment also extract delivery/takeaway evidence from official websites?
+- Should Google Places delivery/takeout be tested on a small optional paid batch before any larger run?
+- Should rows with strong website evidence be updated directly in `Restaurants`, or only after an automated script can preserve evidence?
+
+**Next recommended session:**
+- Session 9 — LLM tagging design.
+
+---
+
+### 10.10 Session 9 — LLM tagging design
+
+**Date:** 2026-06-19
+
+**Goal:**
+Design structured LLM tagging for restaurant records without creating uncontrolled tag pollution.
+
+**Completed:**
+- Defined controlled vocabulary v1 for `Cuisine`.
+- Defined controlled vocabulary v1 for `Vibe`.
+- Defined controlled vocabulary v1 for `Features`.
+- Chose OpenAI as the LLM provider for the MVP.
+- Decided that the exact model should be configurable in `.env`.
+- Defined when the LLM is allowed to tag a row.
+- Defined strict JSON output format for LLM responses.
+- Defined conservative delivery/takeaway extraction rules.
+- Defined allowed source policy for LLM evidence.
+- Defined validation rules before writing tags to the sheet.
+- Defined multi-tag storage format.
+- Defined maximum tag limits per field.
+
+**Cuisine vocabulary v1:**
+```text
+african
+bakery
+bistro
+brasserie
+cafe
+chinese
+cocktail_bar
+coffee_shop
+fine_dining
+french
+italian
+japanese
+korean
+lebanese
+mediterranean
+mexican
+north_african
+pizza
+ramen
+seafood
+sushi
+thai
+vegetarian
+vietnamese
+wine_bar
+```
+
+**Vibe vocabulary v1:**
+```text
+casual
+classic
+cozy
+date_night
+festive
+modern
+neighborhood
+trendy
+upscale
+```
+
+**Features vocabulary v1:**
+```text
+bar_seating
+counter_seating
+terrace
+outdoor_seating
+rooftop
+brunch
+breakfast
+lunch
+late_night
+natural_wine
+cocktails
+good_for_groups
+good_for_solo
+kid_friendly
+dog_friendly
+romantic
+business_meal
+private_room
+reservation_recommended
+scene
+```
+
+**Tested:**
+- Reviewed the taxonomy manually against the current project needs.
+- Confirmed that `delivery` and `takeaway` should not be stored in `Features`.
+- Confirmed that `scene` should be available for restaurants where part of the appeal is being seen, social buzz, stylish crowd, or “place to be” energy.
+
+**Results:**
+- LLM tagging now has a controlled design.
+- Tags must come only from the approved vocabularies.
+- The LLM must not invent new values.
+- Existing tags should not be overwritten unless an explicit overwrite mode is enabled.
+- Multiple tags will be stored as comma-separated values, for example:
+  - `italian, pizza`
+  - `casual, modern`
+  - `terrace, good_for_groups`
+
+**LLM run policy:**
+- Run only when:
+  - `Needs Review = FALSE`
+  - `Google Place ID` is filled
+  - `Status = active`
+  - at least one of `Cuisine`, `Vibe`, or `Features` is empty
+- Do not overwrite existing tags by default.
+- Use overwrite mode only if explicitly enabled later.
+
+**LLM output policy:**
+- The LLM should return strict JSON with:
+  - `cuisine`
+  - `vibe`
+  - `features`
+  - `delivery`
+  - `takeaway`
+  - `llm_confidence`
+  - `llm_evidence`
+  - `delivery_takeaway_evidence`
+  - `llm_review_needed`
+- `llm_confidence` must be one of:
+  - `high`
+  - `medium`
+  - `low`
+- `llm_review_needed` must be:
+  - `TRUE`
+  - `FALSE`
+
+**Delivery/takeaway policy:**
+- `Delivery = TRUE` only with explicit positive evidence.
+- `Takeaway = TRUE` only with explicit positive evidence.
+- `Delivery = FALSE` only with explicit negative evidence.
+- `Takeaway = FALSE` only with explicit negative evidence.
+- Otherwise use `UNKNOWN`.
+
+**Allowed evidence sources:**
+- Existing sheet fields.
+- Official website text.
+- Official Instagram only if clearly matched.
+- Clearly matched delivery-platform page only for delivery/takeaway evidence.
+- Do not use Google reviews for the Session 10 MVP.
+
+**Validation rules:**
+- Reject any `Cuisine` tag not in the allowed vocabulary.
+- Reject any `Vibe` tag not in the allowed vocabulary.
+- Reject any `Features` tag not in the allowed vocabulary.
+- Do not write rejected tags to the main tag fields.
+- If rejected tags exist, set `LLM Review Needed = TRUE` and store the issue in `LLM Evidence`.
+
+**Storage rules:**
+- Use lowercase controlled vocabulary values only.
+- Use underscores, not spaces.
+- Separate multiple tags with comma + space.
+- Remove duplicates.
+- Keep tags in vocabulary order where possible.
+
+**Tag limits:**
+- `Cuisine`: maximum 3 tags.
+- `Vibe`: maximum 3 tags.
+- `Features`: maximum 5 tags.
+- Prefer fewer tags when evidence is weak.
+- Do not force every field to be filled.
+- If nothing is clear, leave the field blank.
+- If confidence is low, set `LLM Review Needed = TRUE`.
+
+**Issues found:**
+- None.
+- Main risk remains future tag drift if validation is not enforced in code.
+
+**Decisions made:**
+- OpenAI will be used for the LLM tagging MVP.
+- The model name should be configurable in `.env`.
+- No uncontrolled tags are allowed.
+- LLM tagging should happen only after Google Places validation.
+- LLM tagging should be conservative and evidence-based.
+- Delivery/takeaway extraction can be included, but must follow the strict Session 8 evidence policy.
+- Session 10 should implement a small MVP only, not a full-dataset run.
+
+**Open questions added/updated:**
+- Should `Cuisine`, `Vibe`, and `Features` vocabularies be stored in code, a config file, or a dedicated Google Sheet tab?
+- Should LLM evidence get its own separate fields later, such as `Tag Evidence` and `Delivery/Takeaway Evidence`?
+- Should `scene` be used only manually, or can the LLM assign it when evidence is strong?
+- Which OpenAI model should be used as the default for the MVP?
+- Should the first LLM test batch use 10 restaurants from the Session 8 delivery/takeaway test set?
+
+**Next recommended session:**
+- Session 10 — Implement LLM tagging MVP.
+
+---
+
 ## 11. Open questions
 
 These should be updated as the project evolves.
 
 ### Current open questions
 
-1. What is the final allowed vocabulary for `Cuisine`, `Vibe`, and `Features`?
-2. Should `Delivery` and `Takeaway` be populated from Google Places fields, LLM website extraction, manual confirmation, or a combination?
-3. Is the cost of Google Places delivery/takeout fields acceptable?
-4. Should manual additions go into the main sheet directly or into a separate `Quick Add` tab?
-5. For name + arrondissement additions, what confidence threshold is acceptable before auto-validating?
-6. Should rows with `Needs Review = TRUE` be retried automatically every run, or only when a field changes?
-7. Should closed restaurants be archived, hidden, or kept with `Status = closed`?
-8. Should LLM tagging run only on validated restaurants?
-9. Should Instagram-only links be handled by Google Places search only, or should we add a special resolver?
-10. Should the future map app be local-only or deployed privately online?
-11. How should favorites and notes be protected from script overwrites?
-12. Can `Map Location` and `Geocode Cache` be safely deleted once script dependencies are checked?
+1. Should `Cuisine`, `Vibe`, and `Features` vocabularies be stored in code, a config file, or a dedicated Google Sheet tab?
+2. Should LLM evidence get its own separate fields later, such as `Tag Evidence`, `Delivery Evidence`, `Takeaway Evidence`, and `Delivery/Takeaway Last Checked`?
+3. Should `scene` be used only manually, or can the LLM assign it when evidence is strong?
+4. Which OpenAI model should be used as the default for the LLM tagging MVP?
+5. Should the first LLM test batch use 10 restaurants from the Session 8 delivery/takeaway test set?
+6. Should Google Places delivery/takeout fields be tested later in a small optional paid batch before any larger run?
+7. Should rows with strong website evidence for delivery/takeaway be updated directly in `Restaurants`, or only after an automated script can preserve evidence?
+8. Should a small helper script generate review queue counts by `Review Reason` automatically?
+9. Should the next matching improvement evaluate multiple Google candidates before sending rows to `name_mismatch` or `domain_mismatch`?
+10. Should old/new website domains be stored as evidence somewhere before manually accepting `domain_mismatch` rows?
+11. Should quick-add rows with only a website or Instagram but no arrondissement/town be allowed to call Google Places, or should they also require a location hint?
+12. Should `Last Checked` be filled automatically during Google Places matching?
+13. Should `Favorite` and `Notes` be explicitly protected from all script overwrites?
+14. Can `Map Location` and `Geocode Cache` be safely deleted once script dependencies are checked?
+15. Should the future map app be local-only or deployed privately online?
 
 ---
 
@@ -1577,9 +1927,9 @@ Reply "Done" when completed.
 Recommended next session:
 
 ```text
-Session 2 — Remove Dublin and clean scope
+Session 10 — Implement LLM tagging MVP
 ```
 
 Reason:
 
-Session 1 stabilized the sheet schema. The next priority is to make the production dataset Paris/suburbs only by deleting Dublin rows from the backed-up sheet, then checking that `City`, `Arrondissement`, and `Town` are coherent.
+Session 9 finalized the controlled vocabularies and LLM tagging policy. The next priority is to implement a small, safe MVP that tags only a limited number of validated rows, rejects invalid tags, and writes evidence/confidence fields without overwriting existing manual data.
