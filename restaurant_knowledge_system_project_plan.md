@@ -1,6 +1,6 @@
 # Restaurant Knowledge System — Project Plan
 
-**Version:** 2.2  
+**Version:** 2.3
 **Scope update:** Paris + suburbs only, easy manual additions, structured Google Places matching, delivery/takeaway tracking, LLM enrichment, and step-by-step session workflow.
 
 ---
@@ -613,16 +613,41 @@ Recommended chat starter:
 Ready to start session X
 ```
 
-At the end of each session, update:
+Keep this Markdown file as the project control document, and after each session update the relevant session logs, decisions, open questions, and recommended next session.
 
-- what was completed;
-- what was tested;
-- what remains open;
-- what should happen next.
+### Codex-first implementation rule
 
-One improvement to this approach:
+For code, repository, or Markdown-file changes, the assistant should usually provide a clear Codex work order instead of asking the user to manually edit long blocks.
 
-Keep this Markdown file as the project control document, and after each session append a short log entry under `Session Logs`.
+The preferred workflow is:
+
+1. User starts with:
+
+```text
+Ready to start session X
+```
+
+2. Assistant explains:
+   - the session objective;
+   - why the session matters;
+   - the expected outcome;
+   - any key decisions the user must make before implementation.
+
+3. Assistant asks the user for any required decision before generating implementation steps.
+
+4. Once the decision is made, assistant provides a Codex work order for code or Markdown changes.
+
+5. User runs Codex and reports the result.
+
+6. Assistant reviews outputs, logs, test results, or errors.
+
+7. At the end of the session, assistant provides a final Codex work order to update this project Markdown file, including:
+   - the session log;
+   - updated decisions;
+   - updated open questions;
+   - next recommended session.
+
+Manual copy/paste edits should be avoided when Codex can safely update the repository file.
 
 ### Step-by-step working rule
 
@@ -642,8 +667,17 @@ Rules for each session:
 - When checking a sheet, script, or file, ask the user to paste only the specific thing needed for the next step.
 - After each user reply, verify the result and then provide the next single action.
 - If something is wrong, explain the correction clearly and stay on that step until fixed.
-- At the end of the session, provide a session log entry that can be pasted into this project Markdown file.
 - Keep the session within a practical 45-minute scope and stop at a clean checkpoint.
+
+For implementation sessions, the one concrete action will usually be one of:
+
+- make a decision;
+- run a Codex work order;
+- run a test command;
+- paste a focused terminal output;
+- inspect a focused sheet result.
+
+The assistant should not ask the user to paste long generated Markdown logs manually unless Codex is unavailable.
 
 Preferred interaction style:
 
@@ -657,10 +691,13 @@ Why this matters:
 Expected result:
 <short explanation>
 
-Step 1:
-<one action only>
+Decision needed before implementation:
+<decision or "None">
 
-Reply "Done" when completed.
+Step 1:
+<Codex work order, focused test command, or one concrete action>
+
+Reply with the result when completed.
 ```
 
 ---
@@ -1852,6 +1889,126 @@ scene
 
 ---
 
+### 10.11 Session 10 — Implement LLM tagging MVP
+
+**Date:** 2026-06-23
+
+**Goal:**
+Implement a safe first MVP for structured LLM tagging of validated restaurant rows.
+
+**Completed:**
+- Chose OpenAI as the LLM provider for the MVP.
+- Added `.env` configuration for:
+  - `OPENAI_API_KEY`
+  - `LLM_PROVIDER`
+  - `LLM_MODEL`
+  - `LLM_MAX_ROWS`
+  - `LLM_OVERWRITE_EXISTING`
+- Installed required Python packages:
+  - `openai`
+  - `python-dotenv`
+  - `pydantic`
+  - `tzdata`
+- Created `llm_smoke_test.py` to verify OpenAI structured output.
+- Created `llm_tagger.py` with:
+  - controlled vocabularies for `Cuisine`, `Vibe`, and `Features`
+  - Pydantic structured output validation
+  - tag ordering and deduplication
+  - max tag limits
+  - sheet-ready output conversion
+- Created `website_text.py` to fetch official website text conservatively.
+- Added homepage text extraction with:
+  - timeout protection
+  - HTML cleanup
+  - text length cap
+  - sister-restaurant section filtering
+  - target-address-aware filtering
+- Created `llm_tag_sheet.py` to:
+  - connect to the Google Sheet
+  - find eligible validated rows
+  - fetch website text
+  - call the LLM tagger
+  - build protected updates
+  - run in dry-run mode by default
+- Added deterministic safety filters for weak over-inferred tags:
+  - `bar_seating`
+  - `reservation_recommended`
+  - `business_meal`
+  - weak `french` cuisine inference
+- Added protection so rows already tagged with `LLM Tagged at` are skipped on future runs.
+- Added real write support while keeping `DRY_RUN = True` as the default safe mode.
+- Created a backup tab before the first live write:
+  - `Restaurants backup before LLM MVP write`
+- Ran the first live write on 3 rows only.
+
+**Tested:**
+- Ran `python -m py_compile` successfully for the new scripts.
+- Confirmed OpenAI structured output returned only allowed schema values.
+- Tested website text extraction on Alfi's and improved filtering to remove sister-restaurant contamination.
+- Ran multiple dry runs before writing.
+- Wrote exactly 3 rows to the live `Restaurants` sheet:
+  - Row 2: 19 SAINT ROCH.
+  - Row 4: Alfi's
+  - Row 5: Alfred
+- Switched `DRY_RUN` back to `True` after the live write.
+- Ran a follow-up dry run and confirmed rows 2, 4, and 5 are skipped.
+- Confirmed the next eligible rows are now rows 13, 14, and 15.
+
+**Results:**
+- LLM tagging MVP is working.
+- Tags are constrained to controlled vocabularies.
+- Existing tags are not overwritten when `LLM_OVERWRITE_EXISTING=false`.
+- Delivery and takeaway remain `UNKNOWN` unless explicit evidence exists.
+- LLM metadata is written:
+  - `LLM Confidence`
+  - `LLM Evidence`
+  - `LLM Tagged at`
+  - `LLM Model`
+  - `LLM Review Needed`
+- Rows already processed by the LLM are not reprocessed repeatedly.
+- The script is safe by default because `DRY_RUN = True`.
+
+**Issues found:**
+- Plain website URLs were not enough evidence; official website text extraction was needed.
+- Group restaurant websites can contain sister-restaurant contamination.
+- The LLM can over-infer features from weak wording, especially:
+  - `bar_seating`
+  - `reservation_recommended`
+  - `business_meal`
+- The LLM can over-infer `french` from Paris or French-language website context.
+- Some useful tags may still require stronger deterministic filters before running larger batches.
+- The first MVP wrote only 3 live rows, not a full 10-row production batch, because safety was prioritized.
+
+**Decisions made:**
+- Keep `DRY_RUN = True` by default.
+- Keep `LLM_MAX_ROWS=3` for now.
+- Do not run full-dataset LLM tagging yet.
+- Use official website text as the main evidence source for the MVP.
+- Do not use Google reviews for LLM tagging.
+- Do not infer delivery or takeaway without explicit evidence.
+- Do not write main tags for low-confidence or review-needed outputs.
+- Treat the first live write as a successful MVP checkpoint, not as approval for a full run.
+- Future session logs and project-plan updates should be handled through Codex work orders rather than manual Markdown paste.
+
+**Open questions added/updated:**
+- Should deterministic filters be added for more weakly inferred tags such as:
+  - `cocktails`
+  - `late_night`
+  - `upscale`
+  - `good_for_groups`
+- Should website extraction crawl one additional page such as menu/about/reservation, or stay homepage-only?
+- Should LLM evidence be split later into:
+  - `Tag Evidence`
+  - `Delivery Evidence`
+  - `Takeaway Evidence`
+- Should vocabularies move from code into a config file or dedicated Google Sheet tab?
+- Should a future session run a controlled 10-row LLM batch and manually audit all outputs before expanding?
+
+**Next recommended session:**
+- Session 11 — Improve matching quality.
+
+---
+
 ## 11. Open questions
 
 These should be updated as the project evolves.
@@ -1861,18 +2018,20 @@ These should be updated as the project evolves.
 1. Should `Cuisine`, `Vibe`, and `Features` vocabularies be stored in code, a config file, or a dedicated Google Sheet tab?
 2. Should LLM evidence get its own separate fields later, such as `Tag Evidence`, `Delivery Evidence`, `Takeaway Evidence`, and `Delivery/Takeaway Last Checked`?
 3. Should `scene` be used only manually, or can the LLM assign it when evidence is strong?
-4. Which OpenAI model should be used as the default for the LLM tagging MVP?
-5. Should the first LLM test batch use 10 restaurants from the Session 8 delivery/takeaway test set?
-6. Should Google Places delivery/takeout fields be tested later in a small optional paid batch before any larger run?
-7. Should rows with strong website evidence for delivery/takeaway be updated directly in `Restaurants`, or only after an automated script can preserve evidence?
-8. Should a small helper script generate review queue counts by `Review Reason` automatically?
-9. Should the next matching improvement evaluate multiple Google candidates before sending rows to `name_mismatch` or `domain_mismatch`?
-10. Should old/new website domains be stored as evidence somewhere before manually accepting `domain_mismatch` rows?
-11. Should quick-add rows with only a website or Instagram but no arrondissement/town be allowed to call Google Places, or should they also require a location hint?
-12. Should `Last Checked` be filled automatically during Google Places matching?
-13. Should `Favorite` and `Notes` be explicitly protected from all script overwrites?
-14. Can `Map Location` and `Geocode Cache` be safely deleted once script dependencies are checked?
-15. Should the future map app be local-only or deployed privately online?
+4. Should deterministic filters be added for more weakly inferred tags such as `cocktails`, `late_night`, `upscale`, and `good_for_groups`?
+5. Should website extraction crawl one additional page such as menu/about/reservation, or stay homepage-only?
+6. Should future session logs and project-plan updates always be done through Codex work orders?
+7. Should a future session run a controlled 10-row LLM batch and manually audit all outputs before expanding?
+8. Should Google Places delivery/takeout fields be tested later in a small optional paid batch before any larger run?
+9. Should rows with strong website evidence for delivery/takeaway be updated directly in `Restaurants`, or only after an automated script can preserve evidence?
+10. Should a small helper script generate review queue counts by `Review Reason` automatically?
+11. Should the next matching improvement evaluate multiple Google candidates before sending rows to `name_mismatch` or `domain_mismatch`?
+12. Should old/new website domains be stored as evidence somewhere before manually accepting `domain_mismatch` rows?
+13. Should quick-add rows with only a website or Instagram but no arrondissement/town be allowed to call Google Places, or should they also require a location hint?
+14. Should `Last Checked` be filled automatically during Google Places matching?
+15. Should `Favorite` and `Notes` be explicitly protected from all script overwrites?
+16. Can `Map Location` and `Geocode Cache` be safely deleted once script dependencies are checked?
+17. Should the future map app be local-only or deployed privately online?
 
 ---
 
@@ -1892,15 +2051,16 @@ Ready to start session 4
 
 The assistant should then:
 
-1. read the session objective;
-2. give a short explanation of the objective, why it matters, and the expected outcome;
-3. give only one concrete action at a time;
-4. wait for the user to reply `Done`, paste a result, or ask a question before continuing;
-5. verify each completed step before giving the next one;
-6. avoid giving 5–10 actions at once unless the user explicitly asks for a checklist;
-7. stop after a testable milestone;
-8. produce a session log entry at the end;
-9. update open questions if needed.
+1. read the session objective from this project plan;
+2. explain the objective, why it matters, and the expected outcome;
+3. identify any decision the user needs to make before implementation;
+4. ask the user for that decision when needed;
+5. once the decision is made, provide a Codex work order for code/repository/Markdown changes;
+6. ask the user to run Codex and paste only focused results, errors, or test outputs;
+7. verify each result before giving the next step;
+8. avoid manual long copy/paste edits when Codex can safely update the file;
+9. stop after a testable milestone;
+10. at the end of the session, provide a final Codex work order to update this Markdown file with the session log, decisions, open questions, and next recommended session.
 
 The default session pattern should be:
 
@@ -1914,10 +2074,13 @@ Why this matters:
 Expected result:
 <short explanation>
 
-Step 1:
-<one action only>
+Decision needed before implementation:
+<decision or "None">
 
-Reply "Done" when completed.
+Step 1:
+<Codex work order, focused test command, or one concrete action>
+
+Reply with the result when completed.
 ```
 
 ---
@@ -1927,9 +2090,9 @@ Reply "Done" when completed.
 Recommended next session:
 
 ```text
-Session 10 — Implement LLM tagging MVP
+Session 11 — Improve matching quality
 ```
 
 Reason:
 
-Session 9 finalized the controlled vocabularies and LLM tagging policy. The next priority is to implement a small, safe MVP that tags only a limited number of validated rows, rejects invalid tags, and writes evidence/confidence fields without overwriting existing manual data.
+Session 10 implemented a safe LLM tagging MVP and proved the controlled write workflow on 3 live rows. The next priority is to improve Google Places matching quality by evaluating multiple candidates and reducing false positives/false negatives before expanding enrichment further.
