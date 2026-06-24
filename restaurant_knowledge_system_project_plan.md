@@ -2009,6 +2009,81 @@ Implement a safe first MVP for structured LLM tagging of validated restaurant ro
 
 ---
 
+### 10.12 Session 11 — Improve matching quality
+
+**Date:** 2026-06-24
+
+**Goal:**
+Improve Google Places matching quality by evaluating multiple candidates instead of accepting/rejecting only the first result.
+
+**Completed:**
+- Added `DRY_RUN` support to `enrich_bookmarks.py`, defaulting to `true`.
+- Added dry-run-safe appends and updates.
+- Added bounded Google Places candidate inspection with `MAX_PLACE_CANDIDATES`.
+- Kept legacy row limiting with `MAX_CANDIDATES` and added clearer `MAX_ROWS` support.
+- Added candidate scoring across:
+  - name similarity
+  - Paris arrondissement/postal-code consistency
+  - suburb town/city consistency
+  - website/domain matching
+  - address/postal hints
+- Added candidate explanation output in the terminal.
+- Added `multiple_possible_matches` handling for ambiguous close candidates.
+- Added `TARGET_ROW` support for safe row-specific dry-run debugging.
+- Created `find_match_test_rows.py` to identify unresolved rows suitable for matching tests.
+- Created `debug_match_query.py` to test candidate scoring without reading or writing the Google Sheet.
+- Preserved stable review skipping and blank Google Place ID behavior for rejected matches.
+- Did not modify LLM tagging files.
+
+**Tested:**
+- `python -m py_compile enrich_bookmarks.py` passed.
+- Local scorer sanity checks passed for:
+  - Paris match
+  - suburb match
+  - domain conflict
+  - name-only/no-location case
+  - multiple-match review
+- `DRY_RUN=true MAX_ROWS=1 MAX_PLACE_CANDIDATES=1 PROCESS_BOOKMARKS=false enrich_bookmarks.py` passed and made no live sheet changes.
+- `DRY_RUN=true MAX_ROWS=1 MAX_PLACE_CANDIDATES=5 PROCESS_BOOKMARKS=false enrich_bookmarks.py` processed row 1040 in dry-run mode only and correctly kept A L'épi d'Or in review because of `domain_mismatch`.
+- `TARGET_ROW=1088` tested Kolam in dry-run mode only and correctly rejected weak/no-location candidates.
+- `find_match_test_rows.py` showed there are currently no unresolved rows with `Needs Review = TRUE`, blank Google Place ID, active/to_review status, and Arrondissement or Town filled.
+- `debug_match_query.py` validated matching behavior without sheet writes:
+  - Gloria Osteria + Paris 7 accepted as `strong_name_location_match`.
+  - Polpo + Levallois-Perret accepted as `strong_name_location_match`.
+  - Chapter One with no location hint stayed in review.
+
+**Results:**
+- Google Places matching now evaluates several candidates and ranks them with readable score components.
+- The script is safer because dry-run is now the default.
+- Strong location-hinted Paris and suburb matches are accepted in debug tests.
+- No-location ambiguous queries remain in review instead of being trusted.
+- Domain conflicts remain conservative and become review rows.
+- No production Google Sheet rows were changed during Session 11.
+
+**Issues found:**
+- The current unresolved queue does not contain good location-hinted matching-test rows, so acceptance was validated through `debug_match_query.py` rather than live sheet targets.
+- Some no-location candidates can tie on name score, but the script correctly refuses to accept them without location/domain evidence.
+- Name similarity alone is not enough for safe acceptance.
+
+**Decisions made:**
+- Keep `DRY_RUN=true` as the default for Google Places matching.
+- Do not run a full production reprocessing batch yet.
+- Keep `TARGET_ROW` as a safe debug tool.
+- Keep `debug_match_query.py` for future matching investigations.
+- Use multiple candidate scoring as the default matching approach.
+- Continue to reject uncertain no-location or domain-conflict rows rather than forcing matches.
+
+**Open questions added/updated:**
+- Should `find_match_test_rows.py` and `debug_match_query.py` remain permanent helper scripts, or move later into a `tools/debug` folder?
+- Should candidate score thresholds be exposed in `.env` later?
+- Should candidate explanations be stored in a sheet evidence/debug column, or only printed in terminal output?
+- Should the next matching batch focus on manually adding arrondissement/town hints to review rows before reprocessing them?
+
+**Next recommended session:**
+- Session 12 — Private map app planning.
+
+---
+
 ## 11. Open questions
 
 These should be updated as the project evolves.
@@ -2025,13 +2100,16 @@ These should be updated as the project evolves.
 8. Should Google Places delivery/takeout fields be tested later in a small optional paid batch before any larger run?
 9. Should rows with strong website evidence for delivery/takeaway be updated directly in `Restaurants`, or only after an automated script can preserve evidence?
 10. Should a small helper script generate review queue counts by `Review Reason` automatically?
-11. Should the next matching improvement evaluate multiple Google candidates before sending rows to `name_mismatch` or `domain_mismatch`?
-12. Should old/new website domains be stored as evidence somewhere before manually accepting `domain_mismatch` rows?
-13. Should quick-add rows with only a website or Instagram but no arrondissement/town be allowed to call Google Places, or should they also require a location hint?
-14. Should `Last Checked` be filled automatically during Google Places matching?
-15. Should `Favorite` and `Notes` be explicitly protected from all script overwrites?
-16. Can `Map Location` and `Geocode Cache` be safely deleted once script dependencies are checked?
-17. Should the future map app be local-only or deployed privately online?
+11. Should old/new website domains be stored as evidence somewhere before manually accepting `domain_mismatch` rows?
+12. Should quick-add rows with only a website or Instagram but no arrondissement/town be allowed to call Google Places, or should they also require a location hint?
+13. Should `Last Checked` be filled automatically during Google Places matching?
+14. Should `Favorite` and `Notes` be explicitly protected from all script overwrites?
+15. Can `Map Location` and `Geocode Cache` be safely deleted once script dependencies are checked?
+16. Should the future map app be local-only or deployed privately online?
+17. Should `find_match_test_rows.py` and `debug_match_query.py` remain permanent helper scripts, or move later into a `tools/debug` folder?
+18. Should candidate score thresholds be exposed in `.env` later?
+19. Should candidate explanations be stored in a sheet evidence/debug column, or only printed in terminal output?
+20. Should the next matching batch focus on manually adding arrondissement/town hints to review rows before reprocessing them?
 
 ---
 
@@ -2090,9 +2168,9 @@ Reply with the result when completed.
 Recommended next session:
 
 ```text
-Session 11 — Improve matching quality
+Session 12 — Private map app planning
 ```
 
 Reason:
 
-Session 10 implemented a safe LLM tagging MVP and proved the controlled write workflow on 3 live rows. The next priority is to improve Google Places matching quality by evaluating multiple candidates and reducing false positives/false negatives before expanding enrichment further.
+Session 11 improved Google Places matching and validated the safer multi-candidate scorer in dry-run/debug mode. The main data pipeline is now stable enough to begin planning the private map app MVP, while keeping any full matching reprocessing for a later controlled batch.

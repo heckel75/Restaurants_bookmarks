@@ -3,6 +3,8 @@ import re
 import time
 import random
 import hashlib
+import unicodedata
+from dataclasses import dataclass
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 from difflib import SequenceMatcher
 
@@ -47,6 +49,63 @@ SCRIPT_OWNED_FIELDS = {
     "Review Reason",
     "Match Method",
 }
+
+DEFAULT_MAX_PLACE_CANDIDATES = 5
+MAX_PLACE_CANDIDATES_CAP = 10
+RETRYABLE_REVIEW_REASONS = {"", "manual_review_required"}
+
+
+@dataclass
+class CandidateEvaluation:
+    place_id: str
+    name: str
+    address: str
+    details: dict
+    score: float
+    components: dict
+    name_similarity: float
+    token_overlap: float
+    domain_status: str
+    location_status: str
+    hint_status: str
+    hard_reject_reason: str = ""
+    review_reason: str = ""
+    accept_reason: str = ""
+
+
+def env_bool(name: str, default: bool = False) -> bool:
+    raw_value = os.environ.get(name)
+
+    if raw_value is None:
+        return default
+
+    value = raw_value.strip().lower()
+
+    if value in {"1", "true", "yes", "y", "on"}:
+        return True
+
+    if value in {"0", "false", "no", "n", "off"}:
+        return False
+
+    return default
+
+
+def env_int(names, default: int = 0) -> int:
+    if isinstance(names, str):
+        names = [names]
+
+    for name in names:
+        raw_value = os.environ.get(name)
+
+        if raw_value in (None, ""):
+            continue
+
+        try:
+            return int(raw_value)
+        except ValueError:
+            print(f"Ignoring invalid integer for {name}: {raw_value!r}")
+
+    return default
 
 
 def get_worksheet():
@@ -135,6 +194,7 @@ def upsert_google_sheet_row(
     place_id_to_row,
     fields,
     target_row_num=None,
+    dry_run=False,
 ):
     row_num = target_row_num
 
@@ -149,9 +209,11 @@ def upsert_google_sheet_row(
 
     if not row_num:
         blank_row = [""] * len(header_index)
-        worksheet.append_row(blank_row, value_input_option="USER_ENTERED")
         row_num = max(row_cache.keys(), default=1) + 1
         row_cache[row_num] = blank_row
+
+        if not dry_run:
+            worksheet.append_row(blank_row, value_input_option="USER_ENTERED")
 
     row_data = row_cache.get(row_num, [""] * len(header_index))
     row_data = row_data + [""] * (len(header_index) - len(row_data))
@@ -175,7 +237,11 @@ def upsert_google_sheet_row(
 
     end_col_letter = column_number_to_letter(len(header_index))
     range_name = f"A{row_num}:{end_col_letter}{row_num}"
-    safe_update_row(worksheet, range_name, row_data)
+
+    if dry_run:
+        print(f"  -> DRY RUN: would update row {row_num} ({range_name})")
+    else:
+        safe_update_row(worksheet, range_name, row_data)
 
     row_cache[row_num] = row_data
 
@@ -238,6 +304,52 @@ def get_domain(url: str) -> str:
     return host.replace("www.", "")
 
 
+def strip_accents(text: str) -> str:
+    if not text:
+        return ""
+
+    normalized = unicodedata.normalize("NFKD", text)
+    return "".join(ch for ch in normalized if not unicodedata.combining(ch))
+
+
+def normalize_location_for_match(text: str) -> str:
+    if not text:
+        return ""
+
+    t = strip_accents(text).lower()
+    t = re.sub(r"[’'`]", " ", t)
+    t = re.sub(r"[-_/]", " ", t)
+    t = re.sub(r"[^a-z0-9\s]", " ", t)
+    t = re.sub(r"\s+", " ", t).strip()
+    return t
+
+
+def base_domain(domain: str) -> str:
+    domain = (domain or "").lower().strip(".")
+    parts = [p for p in domain.split(".") if p]
+
+    if len(parts) <= 2:
+        return domain
+
+    if len(parts[-1]) == 2 and parts[-2] in {"co", "com", "net", "org"}:
+        return ".".join(parts[-3:])
+
+    return ".".join(parts[-2:])
+
+
+def domains_match(left_url: str, right_url: str) -> bool:
+    left = get_domain(left_url)
+    right = get_domain(right_url)
+
+    if not left or not right:
+        return False
+
+    if left == right:
+        return True
+
+    return base_domain(left) == base_domain(right)
+
+
 def extract_postal_code(address: str) -> str:
     m = re.search(r"\b(\d{5})\b", address or "")
     return m.group(1) if m else ""
@@ -258,6 +370,90 @@ def parse_paris_arrondissement(postal_code: str):
     if postal_code and re.match(r"^750(0[1-9]|1[0-9]|20)$", postal_code):
         return int(postal_code[-2:])
     return None
+
+
+def parse_arrondissement_hint(value: str):
+    if not value:
+        return None
+
+    m = re.search(r"\b(\d{1,2})\b", str(value))
+    if not m:
+        return None
+
+    arrondissement = int(m.group(1))
+    if 1 <= arrondissement <= 20:
+        return arrondissement
+
+    return None
+
+
+def location_terms_match(expected: str, actual: str) -> bool:
+    expected_norm = normalize_location_for_match(expected)
+    actual_norm = normalize_location_for_match(actual)
+
+    if not expected_norm or not actual_norm:
+        return False
+
+    if expected_norm == actual_norm:
+        return True
+
+    if expected_norm in actual_norm or actual_norm in expected_norm:
+        return True
+
+    return SequenceMatcher(None, expected_norm, actual_norm).ratio() >= 0.88
+
+
+def build_location_expectation(
+    folder: str,
+    arrondissement_hint: str = "",
+    town_hint: str = "",
+    city_hint: str = "",
+    postal_hint: str = "",
+):
+    postal_hint = extract_postal_code(postal_hint or "")
+    folder_l = (folder or "").strip().lower()
+
+    if postal_hint and parse_paris_arrondissement(postal_hint):
+        arrondissement = parse_paris_arrondissement(postal_hint)
+        return {
+            "kind": "paris_arrondissement",
+            "postal_code": postal_hint,
+            "arrondissement": arrondissement,
+            "label": f"Paris {arrondissement}",
+        }
+
+    arrondissement = parse_arrondissement_hint(arrondissement_hint)
+
+    paris_folder_match = re.match(r"^paris\s+(\d{1,2})$", folder_l)
+    if not arrondissement and paris_folder_match:
+        arrondissement = parse_arrondissement_hint(paris_folder_match.group(1))
+
+    if arrondissement:
+        return {
+            "kind": "paris_arrondissement",
+            "postal_code": f"750{arrondissement:02d}",
+            "arrondissement": arrondissement,
+            "label": f"Paris {arrondissement}",
+        }
+
+    if folder_l.startswith("paris") or normalize_location_for_match(city_hint) == "paris":
+        return {"kind": "paris", "label": "Paris"}
+
+    expected_town = (town_hint or "").strip()
+
+    if not expected_town and folder_l.startswith("suburb "):
+        expected_town = folder.replace("Suburb ", "", 1).strip()
+
+    if expected_town:
+        return {"kind": "town", "town": expected_town, "label": expected_town}
+
+    if city_hint:
+        return {"kind": "city", "city": city_hint.strip(), "label": city_hint.strip()}
+
+    if folder_l == "dublin":
+        return {"kind": "city", "city": "Dublin", "label": "Dublin"}
+
+    return {"kind": "", "label": ""}
 
 
 def make_canonical_key(name_hint: str, url: str, city_hint: str = "") -> str:
@@ -292,7 +488,7 @@ def clean_title(text: str) -> str:
 def normalize_name_for_match(text: str) -> str:
     if not text:
         return ""
-    t = text.lower()
+    t = strip_accents(text).lower()
     t = re.sub(r"[’'`]", "", t)
     t = re.sub(r"&", " and ", t)
     t = re.sub(r"[^a-z0-9\s]", " ", t)
@@ -319,6 +515,331 @@ def token_overlap(a: str, b: str) -> float:
     inter = len(a_tokens & b_tokens)
     denom = max(1, len(a_tokens))
     return inter / denom
+
+
+def address_token_overlap(a: str, b: str) -> float:
+    stop_words = {
+        "a",
+        "au",
+        "aux",
+        "bis",
+        "boulevard",
+        "de",
+        "des",
+        "du",
+        "france",
+        "la",
+        "le",
+        "les",
+        "paris",
+        "place",
+        "rue",
+        "saint",
+        "sainte",
+    }
+    a_tokens = set(normalize_location_for_match(a).split()) - stop_words
+    b_tokens = set(normalize_location_for_match(b).split()) - stop_words
+
+    if not a_tokens or not b_tokens:
+        return 0.0
+
+    return len(a_tokens & b_tokens) / max(1, len(a_tokens))
+
+
+def has_location_expectation(expectation: dict) -> bool:
+    return bool((expectation or {}).get("kind"))
+
+
+def is_exact_location_status(status: str) -> bool:
+    return status in {"exact_postal", "exact_town", "exact_city"}
+
+
+def has_reasonable_name_match(evaluation: CandidateEvaluation) -> bool:
+    return evaluation.name_similarity >= 0.72 or evaluation.token_overlap >= 0.67
+
+
+def has_strong_name_match(evaluation: CandidateEvaluation) -> bool:
+    return evaluation.name_similarity >= 0.88 or evaluation.token_overlap >= 0.95
+
+
+def score_name_component(bookmark_title: str, google_name: str):
+    sim = similarity(bookmark_title, google_name)
+    overlap = token_overlap(bookmark_title, google_name)
+    score = max(sim, overlap) * 45
+
+    if sim >= 0.92 or overlap >= 1.0:
+        score += 5
+
+    return min(50.0, round(score, 1)), sim, overlap
+
+
+def score_domain_component(input_website: str, google_website: str):
+    if not input_website:
+        return 0.0, "no_input_website", ""
+
+    if not google_website:
+        return 0.0, "missing_google_website", ""
+
+    if domains_match(input_website, google_website):
+        return 25.0, "match", ""
+
+    return 0.0, "conflict", "domain_mismatch"
+
+
+def score_location_component(expectation: dict, google_address: str):
+    if not has_location_expectation(expectation):
+        return 0.0, "no_location_hint", ""
+
+    postal = extract_postal_code(google_address)
+    city_or_town = extract_city_from_address(google_address)
+    kind = expectation.get("kind")
+
+    if kind == "paris_arrondissement":
+        expected_postal = expectation.get("postal_code")
+
+        if postal == expected_postal:
+            return 25.0, "exact_postal", ""
+
+        if postal and postal.startswith("75"):
+            return 0.0, "wrong_arrondissement", "city_mismatch"
+
+        if postal:
+            return 0.0, "wrong_city", "city_mismatch"
+
+        if location_terms_match("Paris", google_address):
+            return 8.0, "paris_without_postal", ""
+
+        return 0.0, "missing_postal", ""
+
+    if kind == "paris":
+        if postal and postal.startswith("75"):
+            return 18.0, "exact_city", ""
+
+        if postal:
+            return 0.0, "wrong_city", "city_mismatch"
+
+        if location_terms_match("Paris", google_address):
+            return 12.0, "city_match_no_postal", ""
+
+        return 0.0, "missing_city", ""
+
+    if kind in {"town", "city"}:
+        expected = expectation.get("town") or expectation.get("city") or ""
+
+        if location_terms_match(expected, city_or_town) or location_terms_match(
+            expected, google_address
+        ):
+            status = "exact_town" if kind == "town" else "exact_city"
+            return 25.0, status, ""
+
+        if city_or_town:
+            return 0.0, "wrong_city", "city_mismatch"
+
+        return 0.0, "missing_city", ""
+
+    return 0.0, "no_location_hint", ""
+
+
+def score_hint_component(address_hint: str, postal_hint: str, google_address: str):
+    score = 0.0
+    statuses = []
+    hard_reject_reason = ""
+    postal_hint = extract_postal_code(postal_hint or "") or extract_postal_code(
+        address_hint or ""
+    )
+    candidate_postal = extract_postal_code(google_address)
+
+    if postal_hint:
+        if candidate_postal == postal_hint:
+            score += 8.0
+            statuses.append("postal_exact")
+        elif candidate_postal:
+            statuses.append("postal_conflict")
+            hard_reject_reason = "city_mismatch"
+        else:
+            statuses.append("postal_missing")
+
+    if address_hint:
+        overlap = address_token_overlap(address_hint, google_address)
+
+        if overlap >= 0.65:
+            score += 7.0
+            statuses.append("address_overlap")
+        elif overlap >= 0.4:
+            score += 3.0
+            statuses.append("address_partial")
+        else:
+            statuses.append("address_weak")
+
+    return round(score, 1), "+".join(statuses) if statuses else "no_address_hint", hard_reject_reason
+
+
+def candidate_acceptance_reason(evaluation: CandidateEvaluation):
+    if evaluation.hard_reject_reason:
+        return False, evaluation.hard_reject_reason
+
+    reasonable_name = has_reasonable_name_match(evaluation)
+    strong_name = has_strong_name_match(evaluation)
+    exact_location = is_exact_location_status(evaluation.location_status)
+    exact_hint = "postal_exact" in evaluation.hint_status or "address_overlap" in evaluation.hint_status
+
+    if evaluation.domain_status == "match" and reasonable_name and evaluation.score >= 58:
+        return True, "domain_name_match"
+
+    if strong_name and exact_location and evaluation.score >= 70:
+        return True, "strong_name_location_match"
+
+    if strong_name and exact_hint and evaluation.score >= 58:
+        return True, "strong_name_hint_match"
+
+    if evaluation.score >= 82 and reasonable_name and evaluation.components.get("location", 0) > 0:
+        return True, "high_score_match"
+
+    if not reasonable_name:
+        return False, "name_mismatch"
+
+    return False, "manual_review_required"
+
+
+def evaluate_google_candidate(
+    bookmark_title: str,
+    input_website: str,
+    candidate: dict,
+    location_expectation: dict,
+    address_hint: str = "",
+    postal_hint: str = "",
+):
+    google_name = candidate.get("name") or bookmark_title
+    google_address = (
+        candidate.get("formatted_address") or candidate.get("vicinity") or ""
+    )
+    google_website = candidate.get("website", "")
+
+    name_score, sim, overlap = score_name_component(bookmark_title, google_name)
+    domain_score, domain_status, domain_reject = score_domain_component(
+        input_website, google_website
+    )
+    location_score, location_status, location_reject = score_location_component(
+        location_expectation, google_address
+    )
+    hint_score, hint_status, hint_reject = score_hint_component(
+        address_hint, postal_hint, google_address
+    )
+
+    components = {
+        "name": name_score,
+        "location": location_score,
+        "domain": domain_score,
+        "hint": hint_score,
+    }
+    hard_reject_reason = domain_reject or location_reject or hint_reject
+    score = round(sum(components.values()), 1)
+
+    evaluation = CandidateEvaluation(
+        place_id=candidate.get("place_id", ""),
+        name=google_name,
+        address=google_address,
+        details=candidate,
+        score=score,
+        components=components,
+        name_similarity=sim,
+        token_overlap=overlap,
+        domain_status=domain_status,
+        location_status=location_status,
+        hint_status=hint_status,
+        hard_reject_reason=hard_reject_reason,
+    )
+
+    accepted, reason = candidate_acceptance_reason(evaluation)
+
+    if accepted:
+        evaluation.accept_reason = reason
+    else:
+        evaluation.review_reason = reason
+
+    return evaluation
+
+
+def is_close_competing_candidate(best: CandidateEvaluation, other: CandidateEvaluation) -> bool:
+    if other.hard_reject_reason:
+        return False
+
+    if not has_reasonable_name_match(other):
+        return False
+
+    if other.score < 58 or other.score < best.score - 8:
+        return False
+
+    if best.domain_status == "match" and other.domain_status != "match":
+        return False
+
+    if is_exact_location_status(best.location_status) and not is_exact_location_status(
+        other.location_status
+    ):
+        return False
+
+    return True
+
+
+def select_best_candidate(evaluations):
+    if not evaluations:
+        return None, "no_google_candidate"
+
+    evaluations.sort(key=lambda e: e.score, reverse=True)
+    viable = [e for e in evaluations if not e.hard_reject_reason]
+
+    if not viable:
+        return None, evaluations[0].hard_reject_reason or "manual_review_required"
+
+    best = viable[0]
+    close_matches = [
+        e for e in viable[1:] if is_close_competing_candidate(best, e)
+    ]
+
+    if close_matches and (best.accept_reason or close_matches[0].score >= 58):
+        return None, "multiple_possible_matches"
+
+    if best.accept_reason:
+        return best, ""
+
+    return None, best.review_reason or "manual_review_required"
+
+
+def component_summary(evaluation: CandidateEvaluation) -> str:
+    base = ", ".join(
+        f"{name} {score:g}" for name, score in evaluation.components.items()
+    )
+    return (
+        f"{base}; sim {evaluation.name_similarity:.2f}; "
+        f"overlap {evaluation.token_overlap:.2f}; "
+        f"domain {evaluation.domain_status}; "
+        f"location {evaluation.location_status}; hint {evaluation.hint_status}"
+    )
+
+
+def print_candidate_explanations(evaluations, selected: CandidateEvaluation, review_reason: str):
+    selected_place_id = selected.place_id if selected else ""
+
+    for evaluation in evaluations:
+        decision_reason = (
+            evaluation.accept_reason
+            if selected_place_id and evaluation.place_id == selected_place_id
+            else evaluation.hard_reject_reason
+            or review_reason
+            or evaluation.review_reason
+            or "not_best_candidate"
+        )
+        decision = (
+            "accept"
+            if selected_place_id and evaluation.place_id == selected_place_id
+            else "reject"
+        )
+        address = evaluation.address or "no address"
+        print(
+            "  -> Candidate: "
+            f"{evaluation.name} | {address} | score {evaluation.score:g} | "
+            f"{component_summary(evaluation)} | {decision} ({decision_reason})"
+        )
 
 
 def city_matches(folder: str, address: str) -> bool:
@@ -438,98 +959,161 @@ def parse_bookmarks_html(path: str):
     return results
 
 
+def get_sheet_value(row, header_index, field_name):
+    if field_name not in header_index:
+        return ""
+
+    idx = header_index[field_name]
+
+    if idx >= len(row):
+        return ""
+
+    return (row[idx] or "").strip()
+
+
+def is_clearly_restaurants_row(row, header_index):
+    name = clean_title(get_sheet_value(row, header_index, "Name"))
+
+    if not name:
+        return False
+
+    identity_fields = [
+        "Website",
+        "Instagram",
+        "Facebook",
+        "Address",
+        "City",
+        "Postal Code",
+        "Arrondissement",
+        "Town",
+        "Source",
+        "Status",
+        "Review Reason",
+    ]
+
+    return any(get_sheet_value(row, header_index, field) for field in identity_fields)
+
+
+def build_sheet_candidate_from_row(
+    row,
+    header_index,
+    sheet_row_num,
+    allow_restaurants_row_source=False,
+):
+    needs_review = get_sheet_value(row, header_index, "Needs Review").upper()
+    place_id = get_sheet_value(row, header_index, "Google Place ID")
+    source = get_sheet_value(row, header_index, "Source").lower()
+    review_reason = get_sheet_value(row, header_index, "Review Reason").lower()
+
+    if needs_review == "FALSE" and place_id:
+        return None, "already validated (Needs Review is FALSE and Google Place ID is present)"
+
+    if needs_review != "TRUE":
+        return None, f"Needs Review is {needs_review or 'blank'}, not TRUE"
+
+    if place_id:
+        return None, "Google Place ID is already present"
+
+    if review_reason not in RETRYABLE_REVIEW_REASONS:
+        return None, f"stable Review Reason is {review_reason}"
+
+    source_is_eligible = source == "quick_add" or review_reason == "manual_review_required"
+    clearly_restaurants_row = is_clearly_restaurants_row(row, header_index)
+
+    if not source_is_eligible and not (
+        allow_restaurants_row_source and clearly_restaurants_row
+    ):
+        return None, f"Source is {source or 'blank'}, not quick_add/manual_review_required"
+
+    name = clean_title(get_sheet_value(row, header_index, "Name"))
+    if not name:
+        return None, "Name is blank"
+
+    arrondissement = get_sheet_value(row, header_index, "Arrondissement")
+    town = get_sheet_value(row, header_index, "Town")
+    city = get_sheet_value(row, header_index, "City")
+    address = get_sheet_value(row, header_index, "Address")
+    postal_code = get_sheet_value(row, header_index, "Postal Code")
+
+    website = canonicalize_url(get_sheet_value(row, header_index, "Website"))
+    instagram = canonicalize_url(get_sheet_value(row, header_index, "Instagram"))
+    facebook = canonicalize_url(get_sheet_value(row, header_index, "Facebook"))
+
+    if arrondissement:
+        folder = f"Paris {arrondissement}"
+    elif town:
+        folder = f"Suburb {town}"
+    elif city:
+        folder = city
+    else:
+        folder = "Unsorted"
+
+    url = website or instagram or facebook
+
+    return (
+        {
+            "folder": folder,
+            "title": name,
+            "url": url,
+            "website": website,
+            "instagram": instagram,
+            "facebook": facebook,
+            "arrondissement": arrondissement,
+            "town": town,
+            "city": city,
+            "address": address,
+            "postal_code": postal_code,
+            "sheet_row_num": sheet_row_num,
+            "source_type": "quick_add",
+            "dedupe_key": f"sheet_row:{sheet_row_num}",
+            "location_hint_missing": not bool(
+                arrondissement or town or city or address or postal_code
+            ),
+        },
+        "",
+    )
+
+
 def build_sheet_review_candidates(row_cache, header_index):
     candidates = []
 
-    def get_value(row, field_name):
-        if field_name not in header_index:
-            return ""
-
-        idx = header_index[field_name]
-
-        if idx >= len(row):
-            return ""
-
-        return (row[idx] or "").strip()
-
     for sheet_row_num, row in row_cache.items():
-        needs_review = get_value(row, "Needs Review").upper()
-        place_id = get_value(row, "Google Place ID")
-        source = get_value(row, "Source").lower()
-        review_reason = get_value(row, "Review Reason").lower()
+        candidate, _ = build_sheet_candidate_from_row(row, header_index, sheet_row_num)
 
-        if needs_review != "TRUE":
-            continue
-
-        if place_id:
-            continue
-
-        if review_reason not in {"", "manual_review_required"}:
-            continue
-
-        if source != "quick_add" and review_reason != "manual_review_required":
-            continue
-
-        name = clean_title(get_value(row, "Name"))
-        if not name:
-            continue
-
-        arrondissement = get_value(row, "Arrondissement")
-        town = get_value(row, "Town")
-        city = get_value(row, "City")
-
-        website = canonicalize_url(get_value(row, "Website"))
-        instagram = canonicalize_url(get_value(row, "Instagram"))
-        facebook = canonicalize_url(get_value(row, "Facebook"))
-
-        if arrondissement:
-            folder = f"Paris {arrondissement}"
-        elif town:
-            folder = f"Suburb {town}"
-        elif city:
-            folder = city
-        else:
-            folder = "Unsorted"
-
-        url = website or instagram or facebook
-
-        candidates.append(
-            {
-                "folder": folder,
-                "title": name,
-                "url": url,
-                "website": website,
-                "instagram": instagram,
-                "facebook": facebook,
-                "arrondissement": arrondissement,
-                "town": town,
-                "city": city,
-                "sheet_row_num": sheet_row_num,
-                "source_type": "quick_add",
-                "dedupe_key": f"sheet_row:{sheet_row_num}",
-                "location_hint_missing": not bool(arrondissement or town or city),
-            }
-        )
+        if candidate:
+            candidates.append(candidate)
 
     return candidates
 
 
-def google_find_place(query: str):
-    url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
-    params = {
-        "input": query,
-        "inputtype": "textquery",
-        "fields": "place_id,name",
-        "key": GOOGLE_KEY,
-    }
+def build_target_row_candidate(row_cache, header_index, target_row):
+    if target_row == 1:
+        return None, "row 1 is the header row"
+
+    row = row_cache.get(target_row)
+
+    if row is None:
+        return None, "row is empty or outside the loaded Restaurants sheet"
+
+    return build_sheet_candidate_from_row(
+        row,
+        header_index,
+        target_row,
+        allow_restaurants_row_source=True,
+    )
+
+
+def google_find_place_candidates(query: str, max_candidates: int):
+    url = "https://maps.googleapis.com/maps/api/place/textsearch/json"
+    params = {"query": query, "key": GOOGLE_KEY}
 
     r = requests.get(url, params=params, timeout=30)
     r.raise_for_status()
 
     data = r.json()
-    candidates = data.get("candidates", []) or []
+    results = data.get("results", []) or []
 
-    return candidates[0]["place_id"] if candidates else None
+    return results[:max_candidates]
 
 
 def google_place_details(place_id: str):
@@ -545,6 +1129,8 @@ def google_place_details(place_id: str):
                 "business_status",
                 "website",
                 "url",
+                "place_id",
+                "vicinity",
             ]
         ),
         "key": GOOGLE_KEY,
@@ -554,6 +1140,27 @@ def google_place_details(place_id: str):
     r.raise_for_status()
 
     return r.json().get("result", {}) or {}
+
+
+def google_place_candidate_details(query: str, max_candidates: int):
+    search_candidates = google_find_place_candidates(query, max_candidates)
+    detailed_candidates = []
+    seen_place_ids = set()
+
+    for search_candidate in search_candidates:
+        place_id = search_candidate.get("place_id")
+
+        if not place_id or place_id in seen_place_ids:
+            continue
+
+        seen_place_ids.add(place_id)
+        details = google_place_details(place_id)
+        merged = dict(search_candidate)
+        merged.update({k: v for k, v in details.items() if v not in (None, "", [])})
+        merged["place_id"] = place_id
+        detailed_candidates.append(merged)
+
+    return detailed_candidates
 
 
 def auto_classify(name: str, folder: str, types: list):
@@ -607,14 +1214,51 @@ def auto_classify(name: str, folder: str, types: list):
 
 
 def main():
+    dry_run = env_bool("DRY_RUN", True)
+    max_rows = env_int(["MAX_ROWS", "MAX_CANDIDATES"], 0)
+    target_row_raw = os.environ.get("TARGET_ROW", "").strip()
+    target_row = env_int("TARGET_ROW", 0)
+    max_place_candidates = max(
+        1,
+        min(
+            env_int("MAX_PLACE_CANDIDATES", DEFAULT_MAX_PLACE_CANDIDATES),
+            MAX_PLACE_CANDIDATES_CAP,
+        ),
+    )
+
+    if dry_run:
+        print("DRY_RUN=true; sheet writes are disabled.")
+
+    print(f"Google Places candidates per search: {max_place_candidates}")
+
     worksheet = get_worksheet()
     headers, header_index, row_cache, canonical_key_to_row, place_id_to_row = (
         load_sheet_cache(worksheet)
     )
 
-    process_bookmarks = os.environ.get("PROCESS_BOOKMARKS", "false").lower() == "true"
-    bookmarks = parse_bookmarks_html(HTML_PATH) if process_bookmarks else []
-    sheet_candidates = build_sheet_review_candidates(row_cache, header_index)
+    if target_row_raw:
+        if target_row <= 1:
+            print(f"TARGET_ROW enabled: processing Restaurants row {target_row_raw}")
+            print("  -> Skipping target row: TARGET_ROW must be a sheet data row number greater than 1")
+            return
+
+        print(f"TARGET_ROW enabled: processing Restaurants row {target_row}")
+        bookmarks = []
+        target_candidate, skip_reason = build_target_row_candidate(
+            row_cache,
+            header_index,
+            target_row,
+        )
+
+        if not target_candidate:
+            print(f"  -> Skipping target row {target_row}: {skip_reason}")
+            return
+
+        sheet_candidates = [target_candidate]
+    else:
+        process_bookmarks = os.environ.get("PROCESS_BOOKMARKS", "false").lower() == "true"
+        bookmarks = parse_bookmarks_html(HTML_PATH) if process_bookmarks else []
+        sheet_candidates = build_sheet_review_candidates(row_cache, header_index)
 
     candidates = bookmarks + sheet_candidates
 
@@ -634,10 +1278,8 @@ def main():
         seen_keys.add(dedupe_key)
         cleaned.append(bm)
 
-    max_candidates = int(os.environ.get("MAX_CANDIDATES", "0"))
-
-    if max_candidates > 0:
-        cleaned = cleaned[:max_candidates]
+    if max_rows > 0:
+        cleaned = cleaned[:max_rows]
 
     total = len(cleaned)
 
@@ -659,6 +1301,8 @@ def main():
         arrondissement_hint = str(bm.get("arrondissement", "") or "").strip()
         town_hint = str(bm.get("town", "") or "").strip()
         city_hint_from_row = str(bm.get("city", "") or "").strip()
+        address_hint = str(bm.get("address", "") or "").strip()
+        postal_code_hint = str(bm.get("postal_code", "") or "").strip()
 
         city_hint = ""
 
@@ -674,6 +1318,14 @@ def main():
         elif folder == "Dublin":
             city_hint = "Dublin"
 
+        location_expectation = build_location_expectation(
+            folder,
+            arrondissement_hint=arrondissement_hint,
+            town_hint=town_hint,
+            city_hint=city_hint_from_row or city_hint,
+            postal_hint=postal_code_hint,
+        )
+
         canonical_key = make_canonical_key(clean_name or title, url, city_hint)
 
         existing_row = canonical_key_to_row.get(canonical_key)
@@ -688,6 +1340,15 @@ def main():
 
             needs_review_value = (row_dict.get("Needs Review") or "").strip().upper()
             place_id_value = (row_dict.get("Google Place ID") or "").strip()
+            review_reason_value = (row_dict.get("Review Reason") or "").strip().lower()
+
+            if (
+                needs_review_value == "TRUE"
+                and not place_id_value
+                and review_reason_value not in RETRYABLE_REVIEW_REASONS
+            ):
+                print(f"  -> Existing review row is stable ({review_reason_value}), skipping")
+                continue
 
             if needs_review_value == "FALSE" and place_id_value:
                 match_method_value = (row_dict.get("Match Method") or "").strip()
@@ -708,8 +1369,10 @@ def main():
                         canonical_key_to_row,
                         place_id_to_row,
                         updates,
+                        dry_run=dry_run,
                     )
-                    print(f"  -> Updated row {row_num}")
+                    action = "Would update" if dry_run else "Updated"
+                    print(f"  -> {action} row {row_num}")
                 else:
                     print("  -> Already validated, skipping")
 
@@ -768,20 +1431,45 @@ def main():
                 place_id_to_row,
                 fields,
                 target_row_num=target_row_num,
+                dry_run=dry_run,
             )
-            print(f"  -> Wrote row {row_num}")
+            action = "Would write" if dry_run else "Wrote"
+            print(f"  -> {action} row {row_num}")
 
             time.sleep(1.2)
             continue
 
         query = f"{clean_name} {city_hint}".strip()
 
-        place_id = None
+        google_candidates = []
         if query:
             print(f"  -> Calling Google Places: {query}")
-            place_id = google_find_place(query)
+            google_candidates = google_place_candidate_details(query, max_place_candidates)
 
-        if not place_id:
+        evaluations = [
+            evaluate_google_candidate(
+                bookmark_title=clean_name or title,
+                input_website=links["website"] or "",
+                candidate=candidate,
+                location_expectation=location_expectation,
+                address_hint=address_hint,
+                postal_hint=postal_code_hint,
+            )
+            for candidate in google_candidates
+        ]
+        selected_candidate, review_reason = select_best_candidate(evaluations)
+
+        if evaluations:
+            print_candidate_explanations(
+                evaluations,
+                selected_candidate,
+                review_reason,
+            )
+        else:
+            print("  -> No Google candidates returned")
+
+        if not selected_candidate:
+            print(f"  -> Needs review ({review_reason})")
             cuisine, vibe, features = auto_classify(clean_name or title, folder, [])
 
             fields.update(
@@ -802,16 +1490,16 @@ def main():
                     "Cuisine": ", ".join(cuisine),
                     "Vibe": ", ".join(vibe),
                     "Features": ", ".join(features),
-                    "Review Reason": "no_google_candidate",
+                    "Review Reason": review_reason,
                     "Match Method": "",
                 }
             )
 
         else:
-            details = google_place_details(place_id)
-
-            google_name = details.get("name") or clean_name or title
-            google_address = details.get("formatted_address", "")
+            details = selected_candidate.details
+            place_id = selected_candidate.place_id
+            google_name = selected_candidate.name
+            google_address = selected_candidate.address
             google_website = details.get("website", "")
 
             loc = (details.get("geometry", {}) or {}).get("location", {}) or {}
@@ -821,92 +1509,54 @@ def main():
             types = details.get("types", []) or []
             business_status = details.get("business_status", "UNKNOWN")
 
-            exact_ok, reason = is_exact_enough_match(
-                bookmark_title=clean_name or title,
-                folder=folder,
-                original_url=url,
-                google_name=google_name,
-                google_address=google_address,
-                google_website=google_website,
+            postal = extract_postal_code(google_address)
+            arrondissement = parse_paris_arrondissement(postal)
+            google_city_or_town = extract_city_from_address(google_address)
+
+            cuisine, vibe, features = auto_classify(google_name, folder, types)
+
+            final_website = ""
+            if links["website"]:
+                final_website = links["website"]
+            elif google_website:
+                final_website = canonicalize_url(google_website)
+
+            status = (
+                "closed"
+                if business_status == "CLOSED_PERMANENTLY"
+                else "active"
             )
+            confidence = "high" if (lat is not None and lng is not None) else "medium"
 
-            if not exact_ok:
-                print(f"  -> Needs review ({reason})")
-
-                cuisine, vibe, features = auto_classify(clean_name or title, folder, [])
-
-                fields.update(
-                    {
-                        "Name": clean_name or title,
-                        "Google Place ID": "",
-                        "Status": "to_review",
-                        "Needs Review": "TRUE",
-                        "Confidence": "low",
-                        "Address": "",
-                        "City": city_hint_from_row,
-                        "Postal Code": "",
-                        "Arrondissement": arrondissement_hint,
-                        "Town": town_hint,
-                        "Latitude": "",
-                        "Longitude": "",
-                        "Website": links["website"] or "",
-                        "Cuisine": ", ".join(cuisine),
-                        "Vibe": ", ".join(vibe),
-                        "Features": ", ".join(features),
-                        "Review Reason": reason,
-                        "Match Method": "",
-                    }
-                )
-
+            if postal.startswith("75"):
+                final_city = "Paris"
+                final_town = ""
             else:
-                postal = extract_postal_code(google_address)
-                arrondissement = parse_paris_arrondissement(postal)
-                google_city_or_town = extract_city_from_address(google_address)
+                final_city = google_city_or_town or town_hint or city_hint_from_row
+                final_town = google_city_or_town or town_hint
 
-                cuisine, vibe, features = auto_classify(google_name, folder, types)
-
-                final_website = ""
-                if links["website"]:
-                    final_website = links["website"]
-                elif google_website:
-                    final_website = canonicalize_url(google_website)
-
-                status = (
-                    "closed"
-                    if business_status == "CLOSED_PERMANENTLY"
-                    else "active"
-                )
-                confidence = "high" if (lat is not None and lng is not None) else "medium"
-
-                if postal.startswith("75"):
-                    final_city = "Paris"
-                    final_town = ""
-                else:
-                    final_city = google_city_or_town or town_hint or city_hint_from_row
-                    final_town = google_city_or_town or town_hint
-
-                fields.update(
-                    {
-                        "Name": google_name,
-                        "Google Place ID": place_id,
-                        "Status": normalize_status(status),
-                        "Needs Review": normalize_needs_review(False),
-                        "Confidence": normalize_confidence(confidence),
-                        "Address": google_address,
-                        "City": final_city,
-                        "Postal Code": postal,
-                        "Arrondissement": arrondissement if arrondissement is not None else "",
-                        "Town": final_town,
-                        "Latitude": lat if lat is not None else "",
-                        "Longitude": lng if lng is not None else "",
-                        "Website": final_website,
-                        "Cuisine": ", ".join(cuisine),
-                        "Vibe": ", ".join(vibe),
-                        "Features": ", ".join(features),
-                        "Review Reason": "",
-                        "Match Method": "google_places",
-                    }
-                )
+            fields.update(
+                {
+                    "Name": google_name,
+                    "Google Place ID": place_id,
+                    "Status": normalize_status(status),
+                    "Needs Review": normalize_needs_review(False),
+                    "Confidence": normalize_confidence(confidence),
+                    "Address": google_address,
+                    "City": final_city,
+                    "Postal Code": postal,
+                    "Arrondissement": arrondissement if arrondissement is not None else "",
+                    "Town": final_town,
+                    "Latitude": lat if lat is not None else "",
+                    "Longitude": lng if lng is not None else "",
+                    "Website": final_website,
+                    "Cuisine": ", ".join(cuisine),
+                    "Vibe": ", ".join(vibe),
+                    "Features": ", ".join(features),
+                    "Review Reason": "",
+                    "Match Method": "google_places",
+                }
+            )
 
         row_num = upsert_google_sheet_row(
             worksheet,
@@ -916,9 +1566,11 @@ def main():
             place_id_to_row,
             fields,
             target_row_num=target_row_num,
+            dry_run=dry_run,
         )
 
-        print(f"  -> Wrote row {row_num}")
+        action = "Would write" if dry_run else "Wrote"
+        print(f"  -> {action} row {row_num}")
 
         time.sleep(1.2)
 
