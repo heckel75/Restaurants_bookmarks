@@ -2084,6 +2084,79 @@ Improve Google Places matching quality by evaluating multiple candidates instead
 
 ---
 
+### 10.13 Session 12 — Private map app planning
+
+**Date:** 2026-06-26
+
+**Goal:**
+Prepare the private Google Maps overlay app by defining scope, stack, data contract, privacy architecture, deployment direction, and UX behavior before writing code.
+
+**Completed:**
+- Confirmed the app should be for private use.
+- Confirmed the app should use Google Maps as the base map.
+- Confirmed map markers should come from validated Google Sheet rows.
+- Confirmed the app needs filters and mobile usability.
+- Chose private online deployment with password protection.
+- Accepted the stack:
+  - Next.js
+  - Google Maps JavaScript API
+  - Google Sheets API as read source
+  - Vercel deployment or equivalent
+  - simple password protection for MVP
+- Defined the MVP feature scope:
+  - map
+  - markers
+  - sidebar/list
+  - search
+  - filters
+  - restaurant detail card
+  - mobile bottom sheet
+- Defined the privacy/data architecture:
+  - keep the Google Sheet private
+  - share it read-only with a Google service account
+  - read sheet data server-side
+  - send only safe display/filter fields to the browser
+  - protect both app page and data API behind password protection
+- Defined the `RestaurantMapItem` MVP data contract.
+- Defined which internal fields should not be sent to the browser.
+- Defined desktop and mobile UX behavior.
+- Created `MAP_APP_MVP_SPEC.md`.
+
+**Tested:**
+- No code was implemented or tested in this session.
+- Planning decisions were reviewed step by step and accepted by the user.
+
+**Results:**
+- Session 12 produced a clear private map app MVP specification.
+- The map app direction is now ready for a future scaffold session.
+- The project remains aligned with the rule that map code should not be overbuilt before scope and data model are stable.
+
+**Issues found:**
+- None.
+- Future implementation should still decide whether the app belongs inside the current repository or a separate repository/folder.
+
+**Decisions made:**
+- The app will be a private online app, not local-only.
+- MVP privacy will use simple password protection.
+- Google Sheets remains the source of truth.
+- The Google Sheet should stay private and should not be published to the web.
+- The app should read from the sheet server-side.
+- The browser should receive only safe restaurant display/filter fields.
+- The MVP should include map, markers, sidebar/list, search, filters, restaurant details, and mobile-friendly bottom-sheet behavior.
+- Editing, adding, route planning, public sharing, and user accounts are not part of MVP.
+
+**Open questions added/updated:**
+- Should the map app live inside the current repository or in a separate repository/folder?
+- Should MVP password protection be replaced later with Google login or per-user authentication?
+- Should the "near me" button be included in MVP v1 or delayed to v1.1?
+- Should the app cache Google Sheet data server-side to reduce latency and API calls?
+- Should the restaurant detail card include a generated Google Maps directions/search link?
+
+**Next recommended session:**
+- Session 13 — Private map app scaffold.
+
+---
+
 ## 11. Open questions
 
 These should be updated as the project evolves.
@@ -2105,11 +2178,15 @@ These should be updated as the project evolves.
 13. Should `Last Checked` be filled automatically during Google Places matching?
 14. Should `Favorite` and `Notes` be explicitly protected from all script overwrites?
 15. Can `Map Location` and `Geocode Cache` be safely deleted once script dependencies are checked?
-16. Should the future map app be local-only or deployed privately online?
-17. Should `find_match_test_rows.py` and `debug_match_query.py` remain permanent helper scripts, or move later into a `tools/debug` folder?
-18. Should candidate score thresholds be exposed in `.env` later?
-19. Should candidate explanations be stored in a sheet evidence/debug column, or only printed in terminal output?
-20. Should the next matching batch focus on manually adding arrondissement/town hints to review rows before reprocessing them?
+16. Should `find_match_test_rows.py` and `debug_match_query.py` remain permanent helper scripts, or move later into a `tools/debug` folder?
+17. Should candidate score thresholds be exposed in `.env` later?
+18. Should candidate explanations be stored in a sheet evidence/debug column, or only printed in terminal output?
+19. Should the next matching batch focus on manually adding arrondissement/town hints to review rows before reprocessing them?
+20. Should the map app live inside the current repository or in a separate repository/folder?
+21. Should MVP password protection be replaced later with Google login or per-user authentication?
+22. Should the "near me" button be included in MVP v1 or delayed to v1.1?
+23. Should the app cache Google Sheet data server-side to reduce latency and API calls?
+24. Should the restaurant detail card include a generated Google Maps directions/search link?
 
 ---
 
@@ -2168,9 +2245,9 @@ Reply with the result when completed.
 Recommended next session:
 
 ```text
-Session 12 — Private map app planning
+Session 13 — Private map app scaffold
 ```
 
 Reason:
 
-Session 11 improved Google Places matching and validated the safer multi-candidate scorer in dry-run/debug mode. The main data pipeline is now stable enough to begin planning the private map app MVP, while keeping any full matching reprocessing for a later controlled batch.
+Session 12 completed the private map app planning checkpoint and produced the MVP spec. The next step is to scaffold the app safely, using mocked restaurant data first and avoiding live production Google Sheet access until the app skeleton, environment variables, password gate, and basic map/list UI are in place.
