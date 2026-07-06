@@ -2157,13 +2157,64 @@ Prepare the private Google Maps overlay app by defining scope, stack, data contr
 
 ---
 
+### 10.14 Pre-Session 13 — Product usefulness reset
+
+**Date:** 2026-07-06
+
+**Goal:**
+Record the feedback received before Session 13 and adjust the project direction before scaffolding the private map app.
+
+**Feedback discussed:**
+- The project is unusually disciplined: dry-run defaults, backups before destructive operations, match-or-review behavior, conservative delivery/takeaway policy, controlled vocabularies, and strong session logs are all valuable.
+- The main risk is aggregate drift: many individually sound safety decisions have produced strong infrastructure but not yet a useful day-to-day restaurant tool.
+- The map/app payoff is still missing.
+- Only a tiny number of rows have been LLM-tagged so far.
+- Delivery/takeaway remains mostly `UNKNOWN` by design.
+- A large review queue and hundreds of location-blind rows could become a data-cleanup graveyard if treated as mandatory row-by-row work.
+- The project needs a clearer primary use case, a "good enough" milestone, and a smaller MVP dataset target.
+
+**Conclusions:**
+- The feedback was accepted as a useful course correction, not a rejection of the previous work.
+- The project should now optimize for a usable first product, not complete enrichment of all historical bookmarks.
+- The primary weekly use case should be choosing restaurants personally in Paris/suburbs using a map, search, and practical filters.
+- The MVP should target a deliberately selected useful core dataset, not the full ~2,350-row archive.
+- The app should not be scaffolded as a polished shell over weak data.
+- Google Sheets should remain the editing source of truth, but the app should likely read from a generated cached/static JSON export rather than querying Sheets live on every request.
+- Bookmarks should be retired as an active input source unless there is a specific reason to re-enable them later.
+- Location-blind rows should be excluded from the map MVP path and treated as backlog/parking-lot data.
+- The review queue should be triaged by personal usefulness rather than resolved exhaustively row by row.
+
+**Decisions made:**
+- Change the next session from app scaffolding to a map MVP readiness reset.
+- Define the primary use case before writing app code.
+- Define a realistic MVP dataset target before writing app code.
+- Prefer "Sheets for editing, exported JSON/cache for app runtime" as the default direction unless a later session finds a strong reason to read live Sheets.
+- Retire bookmarks as a normal active input; keep the original bookmarks file only as historical/source material.
+- Exclude location-blind rows from the first map MVP.
+- Do not attempt to manually resolve the entire review queue before the map MVP.
+- Treat ruthless pruning as part of the product strategy, not as data loss.
+
+**Open questions added/updated:**
+- What exact MVP dataset target should be used: 200, 300, 400, or another number?
+- How should the first MVP core dataset be selected: favorites, validated rows, specific arrondissements, manually chosen rows, or some combination?
+- Should a new field such as `Map MVP` or `Include in MVP` be added to the sheet?
+- Should the app data export be static JSON committed/generated locally, server-side cached JSON, SQLite, or another lightweight format?
+- Should Google Maps Platform pricing and API-key restrictions be verified before scaffold implementation?
+- Should controlled vocabularies move from code into a config file before any larger LLM tagging batch?
+- Should the large review queue receive a new triage workflow focused on "would I actually go here?" rather than reason-by-reason cleanup?
+
+**Next recommended session:**
+- Session 13 — Map MVP readiness reset.
+
+---
+
 ## 11. Open questions
 
 These should be updated as the project evolves.
 
 ### Current open questions
 
-1. Should `Cuisine`, `Vibe`, and `Features` vocabularies be stored in code, a config file, or a dedicated Google Sheet tab?
+1. Should `Cuisine`, `Vibe`, and `Features` controlled vocabularies move from code into a config file before any larger LLM tagging batch?
 2. Should LLM evidence get its own separate fields later, such as `Tag Evidence`, `Delivery Evidence`, `Takeaway Evidence`, and `Delivery/Takeaway Last Checked`?
 3. Should `scene` be used only manually, or can the LLM assign it when evidence is strong?
 4. Should deterministic filters be added for more weakly inferred tags such as `cocktails`, `late_night`, `upscale`, and `good_for_groups`?
@@ -2181,12 +2232,16 @@ These should be updated as the project evolves.
 16. Should `find_match_test_rows.py` and `debug_match_query.py` remain permanent helper scripts, or move later into a `tools/debug` folder?
 17. Should candidate score thresholds be exposed in `.env` later?
 18. Should candidate explanations be stored in a sheet evidence/debug column, or only printed in terminal output?
-19. Should the next matching batch focus on manually adding arrondissement/town hints to review rows before reprocessing them?
-20. Should the map app live inside the current repository or in a separate repository/folder?
-21. Should MVP password protection be replaced later with Google login or per-user authentication?
-22. Should the "near me" button be included in MVP v1 or delayed to v1.1?
-23. Should the app cache Google Sheet data server-side to reduce latency and API calls?
-24. Should the restaurant detail card include a generated Google Maps directions/search link?
+19. Should the review queue get a triage workflow based on personal usefulness rather than exhaustive row-by-row cleanup?
+20. What exact MVP dataset target should be used: 200, 300, 400, or another number?
+21. How should the first MVP core dataset be selected?
+22. Should a new field such as `Map MVP` or `Include in MVP` be added to the sheet?
+23. Should the app read from static JSON, server-side cached JSON, SQLite, or another lightweight export format?
+24. Should Google Maps Platform pricing and API-key restrictions be verified before scaffold implementation?
+25. Should the map app live inside the current repository or in a separate repository/folder?
+26. Should MVP password protection be replaced later with Google login or per-user authentication?
+27. Should the "near me" button be included in MVP v1 or delayed to v1.1?
+28. Should the restaurant detail card include a generated Google Maps directions/search link?
 
 ---
 
@@ -2245,9 +2300,9 @@ Reply with the result when completed.
 Recommended next session:
 
 ```text
-Session 13 — Private map app scaffold
+Session 13 — Map MVP readiness reset
 ```
 
 Reason:
 
-Session 12 completed the private map app planning checkpoint and produced the MVP spec. The next step is to scaffold the app safely, using mocked restaurant data first and avoiding live production Google Sheet access until the app skeleton, environment variables, password gate, and basic map/list UI are in place.
+Before scaffolding the private map app, the project needs to lock the primary use case, define a realistic MVP dataset target, decide how the app will read data, and separate the useful first map dataset from the full historical bookmark archive. This prevents building a polished app shell over weak or under-enriched data.
