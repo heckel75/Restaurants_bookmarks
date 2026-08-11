@@ -1,7 +1,7 @@
 # Restaurant Knowledge System — Project Plan
 
-**Version:** 2.3
-**Scope update:** Paris + suburbs only, easy manual additions, structured Google Places matching, delivery/takeaway tracking, LLM enrichment, and step-by-step session workflow.
+**Version:** 2.4
+**Scope update:** Paris-only Map MVP v1 from a user-curated, validated 300-restaurant core dataset; Google Sheets remains the editing source of truth and deterministic static JSON is the app runtime dataset. Suburbs and full-archive cleanup remain later phases.
 
 ---
 
@@ -2208,40 +2208,324 @@ Record the feedback received before Session 13 and adjust the project direction 
 
 ---
 
+### 10.15 Session 13 — Map MVP readiness reset
+
+**Date:** 2026-08-11
+
+**Goal:**
+Reset the project around a useful first map product by defining and producing a deliberately curated Paris-only MVP dataset instead of attempting to clean or enrich the full historical archive before building the app.
+
+**Completed:**
+
+#### 1. Primary MVP use case
+
+- Defined the primary MVP use case as personal restaurant selection in Paris using a map, search, and practical filters.
+- Limited MVP v1 to Paris only.
+- Explicitly deferred suburbs.
+- Excluded location-blind historical rows from the MVP path.
+- Confirmed that exhaustive review-queue cleanup is not required before the map.
+
+#### 2. Dataset target and geographic rule
+
+- Fixed the MVP size at exactly 300 restaurants.
+- Required exactly 15 restaurants from each Paris arrondissement, 1–20.
+- Initially defined a curated-hybrid selection model:
+  - favorites and manual essentials first;
+  - automated curated fill only if needed.
+- In practice, the user manually curated all 300 restaurants, so no automated fill was required.
+- All 300 selected rows currently use `MVP Selection Reason = manual_essential`.
+
+#### 3. New Google Sheet controls
+
+- Added:
+  - `Include in MVP`;
+  - `MVP Selection Reason`.
+- Allowed selection reasons:
+  - `favorite`;
+  - `manual_essential`;
+  - `curated_fill`.
+- Final column placement:
+  - `Include in MVP` = AG / position 33;
+  - `MVP Selection Reason` = AH / position 34;
+  - `Map Location` = AI / position 35;
+  - `Geocode Cache` = AJ / position 36.
+- Created the backup worksheet `Restaurants backup before Map MVP columns` before modification.
+
+#### 4. Readiness audit
+
+- Created `audit_map_mvp_readiness.py`.
+- Found 1,455 eligible active/validated Paris candidates.
+- Every arrondissement had at least 23 eligible candidates.
+- No arrondissement had fewer than the required 15, so the 15 × 20 / 300 target was feasible.
+
+Eligible counts by arrondissement:
+
+```text
+1=84
+2=128
+3=73
+4=34
+5=67
+6=97
+7=77
+8=87
+9=120
+10=112
+11=146
+12=39
+13=30
+14=52
+15=62
+16=43
+17=83
+18=68
+19=23
+20=30
+```
+
+#### 5. Curation signal audit
+
+- Created `audit_map_mvp_curation_signals.py`.
+- Classified automated diversity selection from existing structured tags as `WEAK`.
+
+Coverage among the 1,455 eligible candidates:
+
+- Cuisine: 407 / 27.97%.
+- Vibe: 520 / 35.74%.
+- Features: 2 / 0.14%.
+- Notes: 1 / 0.07%.
+- Website: 1,393 / 95.74%.
+- Instagram: 158 / 10.86%.
+- Facebook: 72 / 4.95%.
+- LLM Tagged at: 3 / 0.21%.
+
+Main conclusion:
+
+- Existing tags are too incomplete and skewed to curate the MVP automatically based on diversity.
+- This does not block the map.
+- Missing enrichment is an optional later improvement, not a prerequisite.
+
+#### 6. Abandoned LLM curation experiment
+
+- Created `pilot_map_mvp_curation.py`.
+- Attempted an LLM-assisted curation pilot for Paris 19 because it had the smallest candidate pool.
+- OpenAI returned `insufficient_quota` / `credit_balance_exhausted`.
+- Did not fabricate LLM profiles or a shortlist.
+- Made no Google Sheet writes.
+- Successfully cached 14 official website homepage extractions.
+- Abandoned the LLM pilot and proposed full manual-review-page workflow as the primary MVP selection path because they had drifted away from the curated-hybrid/product-usefulness reset.
+- Confirmed that OpenAI availability must not block the map MVP.
+
+#### 7. Final manual selection
+
+- The user manually selected exactly 15 restaurants in every arrondissement.
+- Created `validate_map_mvp_selection.py`.
+- Validation result: `PASS`.
+
+Validation results:
+
+- Total selected: 300.
+- Exactly 15 selected per arrondissement.
+- Eligibility violations: 0.
+- Duplicate Google Place IDs: 0.
+- Duplicate sheet rows: 0.
+- Invalid or blank selection reasons: 0.
+- `FALSE` rows with populated selection reasons: 0.
+
+Selection reasons:
+
+- `manual_essential`: 300.
+- `favorite`: 0.
+- `curated_fill`: 0.
+
+Informational missing fields:
+
+- Website: 14.
+- Cuisine: 214.
+- Vibe: 188.
+- Features: 298.
+
+Decisions from these results:
+
+- Missing optional enrichment fields do not block MVP v1.
+- Features should not be a central MVP filter because only two selected restaurants currently have Features populated.
+- Cuisine and Vibe filtering may be incomplete initially and can improve later.
+
+#### 8. Static JSON architecture
+
+- Confirmed that Google Sheets remains the editing/source-of-truth layer.
+- Set the MVP runtime architecture to:
+
+```text
+Google Sheets
+        ↓
+explicit export command
+        ↓
+static JSON
+        ↓
+map app
+```
+
+- Rejected live Google Sheets queries on each app request as the default MVP v1 architecture.
+- Created:
+  - `export_map_mvp_json.py`;
+  - `data/map_mvp/restaurants.json`;
+  - `data/map_mvp/metadata.json`.
+
+Export validation results:
+
+- 300 restaurants.
+- Exactly 15 per arrondissement.
+- 300 unique IDs.
+- Zero eligibility failures.
+- Deterministic `restaurants.json`.
+- Exact reconciliation with `selected_300.csv`.
+- No internal/debug workflow fields exposed.
+
+Browser-visible JSON fields:
+
+- `id`;
+- `name`;
+- `googlePlaceId`;
+- `address`;
+- `city`;
+- `postalCode`;
+- `arrondissement`;
+- `town`;
+- `latitude`;
+- `longitude`;
+- `website`;
+- `instagram`;
+- `cuisine`;
+- `vibe`;
+- `features`;
+- `delivery`;
+- `takeaway`;
+- `favorite`;
+- `notes`.
+
+Static export decisions:
+
+- Google Place ID is the stable public item ID.
+- `arrondissement` is exported as an integer.
+- Tag fields are exported as arrays.
+- Optional singular fields use `null` when absent.
+- Sheet row numbers and internal review/LLM fields are not exposed.
+- The generation timestamp is stored separately in `metadata.json`, keeping `restaurants.json` deterministic.
+
+#### 9. Google Maps implementation readiness
+
+- Checked the current official Google Maps Platform documentation on 2026-08-11 before scaffolding.
+- Current planning assumptions:
+  - Maps JavaScript / Dynamic Maps is appropriate for the MVP;
+  - the current Dynamic Maps free usage cap is 10,000 monthly billable map-load events;
+  - billing still needs to be enabled;
+  - the browser API key should use HTTP-referrer restrictions;
+  - the API key should be restricted to only the required APIs;
+  - quotas and billing alerts should be configured before deployment;
+  - exact pricing should be rechecked against official Google documentation if implementation or deployment occurs much later.
+
+#### 10. Product reset outcome
+
+Session 13 successfully changed the project's milestone from:
+
+> Clean and enrich the entire historical restaurant archive before building the map.
+
+to:
+
+> Ship a useful first Paris map from a curated, validated 300-restaurant core dataset, then improve enrichment and archive quality incrementally.
+
+**Tested:**
+
+- Confirmed the readiness-audit totals and arrondissement feasibility.
+- Validated the final 300-row selection and all per-arrondissement counts.
+- Confirmed zero eligibility, duplicate-ID, duplicate-row, and selection-reason failures.
+- Compiled and ran the static JSON exporter.
+- Parsed and validated both JSON files.
+- Confirmed browser-field privacy rules, numeric coordinates, unique non-empty tag arrays, and deterministic ordering.
+- Ran the exporter twice and confirmed `restaurants.json` was byte-for-byte identical when the Sheet data was unchanged.
+- Reconciled exported Google Place IDs exactly with `selected_300.csv`.
+
+**Results:**
+
+- The project now has a validated, user-curated, Paris-only 300-restaurant core dataset.
+- Data readiness is no longer a reason to delay the first usable map.
+- Google Sheets remains the editing source of truth, while static JSON is ready for browser consumption.
+- Missing enrichment remains visible but is no longer treated as a release blocker.
+
+**Issues found:**
+
+- Cuisine, Vibe, Features, and Notes coverage is too sparse for strong automated diversity selection.
+- Features coverage is especially low and should not drive MVP v1.
+- OpenAI quota availability is unreliable and cannot be a critical-path dependency.
+- `MAP_APP_MVP_SPEC.md` still describes live server-side Sheet reads; Session 13 supersedes that runtime assumption with explicit static JSON export for MVP v1.
+
+**Decisions made:**
+
+- Paris-only MVP v1.
+- Exactly 300 restaurants.
+- Exactly 15 restaurants per arrondissement.
+- User-curated core dataset.
+- Suburbs deferred.
+- Location-blind archive rows deferred.
+- Full review-queue resolution deferred.
+- Missing Cuisine, Vibe, and Features enrichment does not block the map.
+- Google Sheets remains the source of truth.
+- Static JSON is the app runtime dataset.
+- Live Google Sheets app reads are no longer the default MVP architecture.
+- LLM availability does not block MVP.
+- No automatic selection/fill logic is needed for the initial 300 because the user selected all 300 manually.
+
+**Open questions added/updated:**
+
+- Should Cuisine/Vibe enrichment of the selected 300 happen after the first map is usable or in parallel?
+- Should Features filtering be omitted entirely from MVP v1?
+- How should the static JSON export be refreshed operationally after Sheet edits?
+- Should restaurants removed from or replaced in the curated 300 have a selection-history audit trail?
+- Should suburbs later become a second dataset/phase rather than simply expanding the Paris dataset?
+
+**Next recommended session:**
+
+- Session 14 — Private map app scaffold.
+
+Reason:
+
+The project now has a validated, user-curated 300-restaurant Paris dataset and a deterministic browser-safe JSON export. Data readiness is no longer a reason to delay the first usable map.
+
+Session 14 should focus only on:
+
+- establishing the app location/repository structure;
+- creating the Next.js scaffold;
+- loading `restaurants.json`;
+- integrating the Google Maps JavaScript API;
+- displaying the 300 markers;
+- implementing basic restaurant selection/detail UI.
+
+Do not expand Session 14 into enrichment, editing, authentication redesign, routing, or advanced filters.
+
+---
+
 ## 11. Open questions
 
 These should be updated as the project evolves.
 
 ### Current open questions
 
-1. Should `Cuisine`, `Vibe`, and `Features` controlled vocabularies move from code into a config file before any larger LLM tagging batch?
-2. Should LLM evidence get its own separate fields later, such as `Tag Evidence`, `Delivery Evidence`, `Takeaway Evidence`, and `Delivery/Takeaway Last Checked`?
-3. Should `scene` be used only manually, or can the LLM assign it when evidence is strong?
-4. Should deterministic filters be added for more weakly inferred tags such as `cocktails`, `late_night`, `upscale`, and `good_for_groups`?
-5. Should website extraction crawl one additional page such as menu/about/reservation, or stay homepage-only?
-6. Should future session logs and project-plan updates always be done through Codex work orders?
-7. Should a future session run a controlled 10-row LLM batch and manually audit all outputs before expanding?
-8. Should Google Places delivery/takeout fields be tested later in a small optional paid batch before any larger run?
-9. Should rows with strong website evidence for delivery/takeaway be updated directly in `Restaurants`, or only after an automated script can preserve evidence?
-10. Should a small helper script generate review queue counts by `Review Reason` automatically?
-11. Should old/new website domains be stored as evidence somewhere before manually accepting `domain_mismatch` rows?
-12. Should quick-add rows with only a website or Instagram but no arrondissement/town be allowed to call Google Places, or should they also require a location hint?
-13. Should `Last Checked` be filled automatically during Google Places matching?
-14. Should `Favorite` and `Notes` be explicitly protected from all script overwrites?
-15. Can `Map Location` and `Geocode Cache` be safely deleted once script dependencies are checked?
-16. Should `find_match_test_rows.py` and `debug_match_query.py` remain permanent helper scripts, or move later into a `tools/debug` folder?
-17. Should candidate score thresholds be exposed in `.env` later?
-18. Should candidate explanations be stored in a sheet evidence/debug column, or only printed in terminal output?
-19. Should the review queue get a triage workflow based on personal usefulness rather than exhaustive row-by-row cleanup?
-20. What exact MVP dataset target should be used: 200, 300, 400, or another number?
-21. How should the first MVP core dataset be selected?
-22. Should a new field such as `Map MVP` or `Include in MVP` be added to the sheet?
-23. Should the app read from static JSON, server-side cached JSON, SQLite, or another lightweight export format?
-24. Should Google Maps Platform pricing and API-key restrictions be verified before scaffold implementation?
-25. Should the map app live inside the current repository or in a separate repository/folder?
-26. Should MVP password protection be replaced later with Google login or per-user authentication?
-27. Should the "near me" button be included in MVP v1 or delayed to v1.1?
-28. Should the restaurant detail card include a generated Google Maps directions/search link?
+1. Should the `Cuisine`, `Vibe`, and `Features` controlled vocabularies move from code into a config file or dedicated Google Sheet tab before any larger enrichment batch?
+2. When should a future larger LLM enrichment effort resume, and should it begin with a controlled, fully audited sample before expanding?
+3. Should future LLM evidence use separate fields such as `Tag Evidence`, `Delivery Evidence`, `Takeaway Evidence`, and `Delivery/Takeaway Last Checked`?
+4. Should Cuisine/Vibe enrichment of the selected 300 happen after the first map is usable or in parallel?
+5. Should Features filtering be omitted entirely from MVP v1?
+6. Should `Favorite` and `Notes` be explicitly protected from all script overwrites?
+7. Can legacy `Map Location` and `Geocode Cache` columns be safely deleted once all script dependencies are checked?
+8. Should MVP password protection later be replaced with Google login or stronger per-user authentication?
+9. Should the "Near Me" button be included in MVP v1 or delayed to v1.1?
+10. Should the restaurant detail card include a generated Google Maps directions/search link?
+11. Should the map app live inside the current repository or in a separate repository/folder?
+12. How should the static JSON export be refreshed operationally after Google Sheet edits?
+13. Should restaurants removed from or replaced in the curated 300 have a selection-history audit trail?
+14. Should suburbs later become a second dataset/phase rather than simply expanding the Paris dataset?
+15. Should Google Places delivery/takeout fields be tested later in a small optional paid batch before any larger run?
 
 ---
 
@@ -2300,9 +2584,20 @@ Reply with the result when completed.
 Recommended next session:
 
 ```text
-Session 13 — Map MVP readiness reset
+Session 14 — Private map app scaffold
 ```
 
 Reason:
 
-Before scaffolding the private map app, the project needs to lock the primary use case, define a realistic MVP dataset target, decide how the app will read data, and separate the useful first map dataset from the full historical bookmark archive. This prevents building a polished app shell over weak or under-enriched data.
+The project now has a validated, user-curated 300-restaurant Paris dataset and a deterministic browser-safe JSON export. Data readiness is no longer a reason to delay the first usable map.
+
+Session 14 should focus only on:
+
+- establishing the app location/repository structure;
+- creating the Next.js scaffold;
+- loading `restaurants.json`;
+- integrating the Google Maps JavaScript API;
+- displaying the 300 markers;
+- implementing basic restaurant selection/detail UI.
+
+Do not expand Session 14 into enrichment, editing, authentication redesign, routing, or advanced filters.

@@ -1,0 +1,715 @@
+Severity,Issue Type,Sheet Row Number,Name,Arrondissement,Google Place ID,Field,Value,Affected Sheet Rows,Details
+INFO,selected_missing_cuisine,2,19 SAINT ROCH.,1,ChIJ6QNjzqBv5kcRdxkLUD7wcuA,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,2,19 SAINT ROCH.,1,ChIJ6QNjzqBv5kcRdxkLUD7wcuA,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,2,19 SAINT ROCH.,1,ChIJ6QNjzqBv5kcRdxkLUD7wcuA,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,13,Café Joséphine,1,ChIJdd2yjVhv5kcR40Ab9Db4mBI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,14,Café Kitsuné Louvre,1,ChIJzXNG3Ehv5kcRrlMHyynIcWY,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,15,Yam'Tcha Bistrot,1,ChIJwzUxYiJu5kcRL_AV_Y_YiD0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,15,Yam'Tcha Bistrot,1,ChIJwzUxYiJu5kcRL_AV_Y_YiD0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,17,Central Park,1,ChIJyx4fd7dv5kcRI_AtgAIpwOs,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,17,Central Park,1,ChIJyx4fd7dv5kcRI_AtgAIpwOs,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,17,Central Park,1,ChIJyx4fd7dv5kcRI_AtgAIpwOs,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,19,CHARBON KUNITORAYA,1,ChIJHUT1gkBv5kcRZ95ZsUdWzoc,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,19,CHARBON KUNITORAYA,1,ChIJHUT1gkBv5kcRZ95ZsUdWzoc,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,19,CHARBON KUNITORAYA,1,ChIJHUT1gkBv5kcRZ95ZsUdWzoc,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,21,Chez Vong,1,ChIJ6c5NExlu5kcRQNbXZzZ41JM,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,21,Chez Vong,1,ChIJ6c5NExlu5kcRQNbXZzZ41JM,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,21,Chez Vong,1,ChIJ6c5NExlu5kcRQNbXZzZ41JM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,22,Cloche Paris,1,ChIJa5rJE25v5kcRyOBfnhknMQU,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,22,Cloche Paris,1,ChIJa5rJE25v5kcRyOBfnhknMQU,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,22,Cloche Paris,1,ChIJa5rJE25v5kcRyOBfnhknMQU,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,23,Clover Grill,1,ChIJP_BofyFu5kcRWFi09oBCEDE,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,23,Clover Grill,1,ChIJP_BofyFu5kcRWFi09oBCEDE,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,23,Clover Grill,1,ChIJP_BofyFu5kcRWFi09oBCEDE,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,24,Comptoir de la Gastronomie,1,ChIJHQXzdhhu5kcR44cVFMAi95c,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,24,Comptoir de la Gastronomie,1,ChIJHQXzdhhu5kcR44cVFMAi95c,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,24,Comptoir de la Gastronomie,1,ChIJHQXzdhhu5kcR44cVFMAi95c,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,28,Eats Thyme,1,ChIJm28ylHBv5kcRPXdmMOyZEOs,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,28,Eats Thyme,1,ChIJm28ylHBv5kcRPXdmMOyZEOs,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,31,ELSE,1,ChIJU21eyyNu5kcRO6xfeBIiwMc,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,31,ELSE,1,ChIJU21eyyNu5kcRO6xfeBIiwMc,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,31,ELSE,1,ChIJU21eyyNu5kcRO6xfeBIiwMc,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,32,Ernest Samaritaine - La boulangerie par Eric Kayser,1,ChIJUwpHIIBv5kcRhOJAwG9b96E,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,132,ACCENTS table bourse,2,ChIJCfSJczxu5kcR5iWOIrx0RLg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,132,ACCENTS table bourse,2,ChIJCfSJczxu5kcR5iWOIrx0RLg,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,132,ACCENTS table bourse,2,ChIJCfSJczxu5kcR5iWOIrx0RLg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,133,Alma - Corse & Tapas,2,ChIJ-Xn19HFv5kcRUNjiHWBd2yY,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,134,ASADO,2,ChIJi1_un19v5kcRZZfpUApeeeo,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,134,ASADO,2,ChIJi1_un19v5kcRZZfpUApeeeo,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,134,ASADO,2,ChIJi1_un19v5kcRZZfpUApeeeo,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,135,Astair,2,ChIJBfcNFeFv5kcRFebi5QaURWY,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,135,Astair,2,ChIJBfcNFeFv5kcRFebi5QaURWY,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,135,Astair,2,ChIJBfcNFeFv5kcRFebi5QaURWY,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,136,Aux Crus de Bourgogne,2,ChIJtdLOGBhu5kcRwPqBdu55yjM,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,136,Aux Crus de Bourgogne,2,ChIJtdLOGBhu5kcRwPqBdu55yjM,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,136,Aux Crus de Bourgogne,2,ChIJtdLOGBhu5kcRwPqBdu55yjM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,138,Aux Lyonnais,2,ChIJQRZQ6Dtu5kcR-0r2malRDQw,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,138,Aux Lyonnais,2,ChIJQRZQ6Dtu5kcR-0r2malRDQw,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,138,Aux Lyonnais,2,ChIJQRZQ6Dtu5kcR-0r2malRDQw,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,140,Babille - Restaurant Festif & Bar de Nuit,2,ChIJIwI482Vv5kcR_lG24sRl1ig,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,140,Babille - Restaurant Festif & Bar de Nuit,2,ChIJIwI482Vv5kcR_lG24sRl1ig,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,140,Babille - Restaurant Festif & Bar de Nuit,2,ChIJIwI482Vv5kcR_lG24sRl1ig,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,141,Bagnard,2,ChIJ1TZhBjtu5kcRMxqBy0Kb5V8,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,141,Bagnard,2,ChIJ1TZhBjtu5kcRMxqBy0Kb5V8,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,141,Bagnard,2,ChIJ1TZhBjtu5kcRMxqBy0Kb5V8,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,143,Bambou,2,ChIJ__8PhT1u5kcR0iPz_AGQoIk,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,143,Bambou,2,ChIJ__8PhT1u5kcR0iPz_AGQoIk,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,143,Bambou,2,ChIJ__8PhT1u5kcR0iPz_AGQoIk,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,144,Big Black Cook,2,ChIJFeyKXKtt5kcRcOoBj7k3v0s,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,144,Big Black Cook,2,ChIJFeyKXKtt5kcRcOoBj7k3v0s,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,145,Bistro Volnay,2,ChIJL6VKdDFu5kcRHdZY7z6gq3s,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,146,Bistrot Vivienne,2,ChIJH1iNbLMh-kcRr5A4zRPWuSc,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,147,Bolo Bolo - Restaurant HongKongais Paris,2,ChIJFyPPvc9v5kcRSFMas-ZZhfg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,147,Bolo Bolo - Restaurant HongKongais Paris,2,ChIJFyPPvc9v5kcRSFMas-ZZhfg,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,147,Bolo Bolo - Restaurant HongKongais Paris,2,ChIJFyPPvc9v5kcRSFMas-ZZhfg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,149,BOMBA,2,ChIJj5jG0hlv5kcRZaSk9Csn_ek,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,149,BOMBA,2,ChIJj5jG0hlv5kcRZaSk9Csn_ek,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,149,BOMBA,2,ChIJj5jG0hlv5kcRZaSk9Csn_ek,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,150,Brasserie Rosie Lou,2,ChIJE0OZV5Bv5kcRO85oMBPnrt8,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,150,Brasserie Rosie Lou,2,ChIJE0OZV5Bv5kcRO85oMBPnrt8,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,150,Brasserie Rosie Lou,2,ChIJE0OZV5Bv5kcRO85oMBPnrt8,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,325,Carboni's,3,ChIJH7XtmgZu5kcRHzaNGWpmVyM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,326,Caves Saint Gilles,3,ChIJ28az1_9t5kcRIf9FerqQCTI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,327,Chez Alain Miam Miam,3,ChIJq5Q-nQZu5kcRR3WcrGGBKlg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,327,Chez Alain Miam Miam,3,ChIJq5Q-nQZu5kcRR3WcrGGBKlg,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,327,Chez Alain Miam Miam,3,ChIJq5Q-nQZu5kcRR3WcrGGBKlg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,328,Chez Janou,3,ChIJaXXlBgBu5kcRzeSQ0Um9YSg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,328,Chez Janou,3,ChIJaXXlBgBu5kcRzeSQ0Um9YSg,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,328,Chez Janou,3,ChIJaXXlBgBu5kcRzeSQ0Um9YSg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_website,329,Chez Nenesse,3,ChIJPyH-pAZu5kcRLojkF6511eU,Website,,,Selected row has a blank Website; informational only.
+INFO,selected_missing_cuisine,329,Chez Nenesse,3,ChIJPyH-pAZu5kcRLojkF6511eU,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,329,Chez Nenesse,3,ChIJPyH-pAZu5kcRLojkF6511eU,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,329,Chez Nenesse,3,ChIJPyH-pAZu5kcRLojkF6511eU,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,330,Chez Omar,3,ChIJPTuOLARu5kcR2hOHqy5PbbI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,331,Datil,3,ChIJix2wynBv5kcREclRmmNBD24,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,331,Datil,3,ChIJix2wynBv5kcREclRmmNBD24,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,331,Datil,3,ChIJix2wynBv5kcREclRmmNBD24,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,333,Datsha Underground,3,ChIJ0c74YVVv5kcRay_Jgi8-yhQ,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,333,Datsha Underground,3,ChIJ0c74YVVv5kcRay_Jgi8-yhQ,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,334,Dessance,3,ChIJ75I0XQRu5kcRHJRwpkFqu7I,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,334,Dessance,3,ChIJ75I0XQRu5kcRHJRwpkFqu7I,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,334,Dessance,3,ChIJ75I0XQRu5kcRHJRwpkFqu7I,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,335,Distrito Francés Marais,3,ChIJU4ZABSJv5kcRxBrJzKdX5e8,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,336,Donna,3,ChIJp63ERohv5kcR9MRYgY-qLTs,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,337,Elmer,3,ChIJVQZxCg9u5kcRnzjCj6U97w4,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,337,Elmer,3,ChIJVQZxCg9u5kcRnzjCj6U97w4,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,337,Elmer,3,ChIJVQZxCg9u5kcRnzjCj6U97w4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,338,"Faurn, pizzeria libanaise",3,ChIJKzbjikZv5kcR-6Qguq3YZyE,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,338,"Faurn, pizzeria libanaise",3,ChIJKzbjikZv5kcR-6Qguq3YZyE,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,338,"Faurn, pizzeria libanaise",3,ChIJKzbjikZv5kcR-6Qguq3YZyE,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,339,46 & 3RD - Forty Six and Third,3,ChIJpViKr0xv5kcRY-cmedDheHc,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,340,Fulvio,3,ChIJf6qg1wZu5kcRnNB5rytoC5Y,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,340,Fulvio,3,ChIJf6qg1wZu5kcRnNB5rytoC5Y,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,340,Fulvio,3,ChIJf6qg1wZu5kcRnNB5rytoC5Y,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,405,Chez Ajia,4,ChIJ5105DhFx5kcR1yBOj8fS-48,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,405,Chez Ajia,4,ChIJ5105DhFx5kcR1yBOj8fS-48,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,405,Chez Ajia,4,ChIJ5105DhFx5kcR1yBOj8fS-48,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,407,Chez Julien,4,ChIJEwgDtuJx5kcRLGbYnlfZFAU,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,407,Chez Julien,4,ChIJEwgDtuJx5kcRLGbYnlfZFAU,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,408,Grande Brasserie,4,ChIJ-2gmGJxz5kcR4TeT2GHQ59Y,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,408,Grande Brasserie,4,ChIJ-2gmGJxz5kcR4TeT2GHQ59Y,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,408,Grande Brasserie,4,ChIJ-2gmGJxz5kcR4TeT2GHQ59Y,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,410,Homer Lobster,4,ChIJCw0hohxu5kcRYZzwR4XWZ-w,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,410,Homer Lobster,4,ChIJCw0hohxu5kcRYZzwR4XWZ-w,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,411,ilô restaurant,4,ChIJCZsCXE1x5kcRr6bxYSeeIck,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,411,ilô restaurant,4,ChIJCZsCXE1x5kcRr6bxYSeeIck,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,411,ilô restaurant,4,ChIJCZsCXE1x5kcRr6bxYSeeIck,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,412,Jaja,4,ChIJMQVT6AJu5kcRRTJqTENzZus,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,412,Jaja,4,ChIJMQVT6AJu5kcRRTJqTENzZus,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,412,Jaja,4,ChIJMQVT6AJu5kcRRTJqTENzZus,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,415,JANET by Homer - Marais,4,ChIJ79Rdru1v5kcR5ZiQkkPoqns,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,415,JANET by Homer - Marais,4,ChIJ79Rdru1v5kcR5ZiQkkPoqns,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,415,JANET by Homer - Marais,4,ChIJ79Rdru1v5kcR5ZiQkkPoqns,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,417,Kébi,4,ChIJE7nhDSNx5kcRlYevwaFBFDI,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,417,Kébi,4,ChIJE7nhDSNx5kcRlYevwaFBFDI,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,417,Kébi,4,ChIJE7nhDSNx5kcRlYevwaFBFDI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,418,Kuma,4,ChIJoZGnsQhv5kcRuU-gAvV-dyA,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,418,Kuma,4,ChIJoZGnsQhv5kcRuU-gAvV-dyA,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,418,Kuma,4,ChIJoZGnsQhv5kcRuU-gAvV-dyA,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,420,L'Enoteca,4,ChIJfyEUff5x5kcRx5RidwJUHos,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,421,La Baguette du Relais,4,ChIJs1Kn-DBv5kcRecq1D4JaMw8,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,421,La Baguette du Relais,4,ChIJs1Kn-DBv5kcRecq1D4JaMw8,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,421,La Baguette du Relais,4,ChIJs1Kn-DBv5kcRecq1D4JaMw8,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,422,Le Petit Célestin,4,ChIJe8dSn_5x5kcRIoSe6VW08rI,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,422,Le Petit Célestin,4,ChIJe8dSn_5x5kcRIoSe6VW08rI,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,422,Le Petit Célestin,4,ChIJe8dSn_5x5kcRIoSe6VW08rI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,423,Le Sergent Recruteur,4,ChIJe6_hufxx5kcRLJ9Ej7s19UM,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,423,Le Sergent Recruteur,4,ChIJe6_hufxx5kcRLJ9Ej7s19UM,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,423,Le Sergent Recruteur,4,ChIJe6_hufxx5kcRLJ9Ej7s19UM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,424,Les Maquereaux Rive Droite,4,ChIJLyZsI_xx5kcRzel59w_Chss,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,425,Minh Chau,4,ChIJQZ0GSR1u5kcRqVfhZKxZPTI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,456,Kokoro,5,ChIJz7QEfOVx5kcRR10ehIETyUg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,456,Kokoro,5,ChIJz7QEfOVx5kcRR10ehIETyUg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,457,A Braccetto,5,ChIJz1ZMihxx5kcRKbP6nhl8Cwo,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,457,A Braccetto,5,ChIJz1ZMihxx5kcRKbP6nhl8Cwo,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,458,Alimento,5,ChIJ72bCYORx5kcR5TE4sRNpHLk,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,458,Alimento,5,ChIJ72bCYORx5kcR5TE4sRNpHLk,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,458,Alimento,5,ChIJ72bCYORx5kcR5TE4sRNpHLk,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,460,Alliance,5,ChIJeWenk-Rx5kcRRoSlhTbzWlM,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,460,Alliance,5,ChIJeWenk-Rx5kcRRoSlhTbzWlM,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,460,Alliance,5,ChIJeWenk-Rx5kcRRoSlhTbzWlM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,461,Anahuacalli,5,ChIJCbGQPeRx5kcRyxuW1A6gLGs,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,462,Atelier Carnem,5,ChIJ6XpA0u5x5kcRiImLe0FXqWE,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,462,Atelier Carnem,5,ChIJ6XpA0u5x5kcRiImLe0FXqWE,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,462,Atelier Carnem,5,ChIJ6XpA0u5x5kcRiImLe0FXqWE,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,463,Atelier Maître Albert,5,ChIJlTto-ONx5kcR9dX0YOF01lk,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,463,Atelier Maître Albert,5,ChIJlTto-ONx5kcR9dX0YOF01lk,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,463,Atelier Maître Albert,5,ChIJlTto-ONx5kcR9dX0YOF01lk,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,464,Atica,5,ChIJbVin4H9x5kcROTX7yC8uyII,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,464,Atica,5,ChIJbVin4H9x5kcROTX7yC8uyII,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,464,Atica,5,ChIJbVin4H9x5kcROTX7yC8uyII,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,465,Ayadi Gourmet,5,ChIJETbNldZx5kcR81jLbf0lh0M,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,465,Ayadi Gourmet,5,ChIJETbNldZx5kcR81jLbf0lh0M,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,465,Ayadi Gourmet,5,ChIJETbNldZx5kcR81jLbf0lh0M,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,467,Baca'v,5,ChIJ4x6GRPJx5kcRYEiThcBqZM4,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,467,Baca'v,5,ChIJ4x6GRPJx5kcRYEiThcBqZM4,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,467,Baca'v,5,ChIJ4x6GRPJx5kcRYEiThcBqZM4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,468,Baieta,5,ChIJ_78oYuRx5kcR4eAyZp92YKs,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,468,Baieta,5,ChIJ_78oYuRx5kcR4eAyZp92YKs,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,468,Baieta,5,ChIJ_78oYuRx5kcR4eAyZp92YKs,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,469,Le Balzar,5,ChIJW-zV8t1x5kcRVQ2AiWJWpXw,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,469,Le Balzar,5,ChIJW-zV8t1x5kcRVQ2AiWJWpXw,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,469,Le Balzar,5,ChIJW-zV8t1x5kcRVQ2AiWJWpXw,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,470,Bistro des lettres,5,ChIJI7jEef5x5kcRkWRFsJD96So,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,471,Bonvivant,5,ChIJMyQ_p-Vx5kcRyFUxkJYjY5w,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,472,Casa Di Peppe,5,ChIJPa30YOlx5kcRAbCDqOE8840,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,472,Casa Di Peppe,5,ChIJPa30YOlx5kcRAbCDqOE8840,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,553,Casa Bini,6,ChIJRT1VQdlx5kcRTsL38261t3Q,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,553,Casa Bini,6,ChIJRT1VQdlx5kcRTsL38261t3Q,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,553,Casa Bini,6,ChIJRT1VQdlx5kcRTsL38261t3Q,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,554,Chez Fernand,6,ChIJ-1qyjdlx5kcRMX6oCe8oXzg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,554,Chez Fernand,6,ChIJ-1qyjdlx5kcRMX6oCe8oXzg,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,554,Chez Fernand,6,ChIJ-1qyjdlx5kcRMX6oCe8oXzg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,556,Restaurant Chez Lionel Paris 6,6,ChIJcak_tpFx5kcRl-j0PUkdMww,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,556,Restaurant Chez Lionel Paris 6,6,ChIJcak_tpFx5kcRl-j0PUkdMww,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,556,Restaurant Chez Lionel Paris 6,6,ChIJcak_tpFx5kcRl-j0PUkdMww,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,557,Chez Marcel,6,ChIJ13Is9M5x5kcRUKPKwh3phn0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,557,Chez Marcel,6,ChIJ13Is9M5x5kcRUKPKwh3phn0,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,557,Chez Marcel,6,ChIJ13Is9M5x5kcRUKPKwh3phn0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,558,Chez Nous,6,ChIJdddyXd9x5kcRQy5_exrssug,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,559,Coffee Club,6,ChIJtU5zMcRx5kcRH6GOdPdq7_I,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,559,Coffee Club,6,ChIJtU5zMcRx5kcRH6GOdPdq7_I,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,559,Coffee Club,6,ChIJtU5zMcRx5kcRH6GOdPdq7_I,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,560,Colvert,6,ChIJIdwiG8xx5kcR1VFti1Sth6s,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,560,Colvert,6,ChIJIdwiG8xx5kcR1VFti1Sth6s,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,560,Colvert,6,ChIJIdwiG8xx5kcR1VFti1Sth6s,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,561,Comptoirs Les Deux Magots,6,ChIJeUxpUwBx5kcR1EKRVhaMs7A,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,562,Cosi,6,ChIJYVDa49hx5kcR-HSbZ8Zta8I,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,562,Cosi,6,ChIJYVDa49hx5kcR-HSbZ8Zta8I,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,562,Cosi,6,ChIJYVDa49hx5kcR-HSbZ8Zta8I,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,566,Dandino,6,ChIJ9UcutI1x5kcRfF0FYkwjN1E,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,567,Didon,6,ChIJmUnWNT1x5kcR8EL2VvKUH1Q,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,567,Didon,6,ChIJmUnWNT1x5kcR8EL2VvKUH1Q,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,567,Didon,6,ChIJmUnWNT1x5kcR8EL2VvKUH1Q,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,568,Dragon - Cyril Lignac,6,ChIJV58PVihx5kcR1iBUTf4eSxY,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,568,Dragon - Cyril Lignac,6,ChIJV58PVihx5kcR1iBUTf4eSxY,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,568,Dragon - Cyril Lignac,6,ChIJV58PVihx5kcR1iBUTf4eSxY,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,569,Ducky's,6,ChIJ4X7yYsZx5kcRVWcDbOW0Fds,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,569,Ducky's,6,ChIJ4X7yYsZx5kcRVWcDbOW0Fds,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,569,Ducky's,6,ChIJ4X7yYsZx5kcRVWcDbOW0Fds,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,570,Dupin,6,ChIJbVnmudNx5kcR1IA4uTrdgM4,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,570,Dupin,6,ChIJbVnmudNx5kcR1IA4uTrdgM4,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,570,Dupin,6,ChIJbVnmudNx5kcR1IA4uTrdgM4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,572,Evi Evane Restaurant,6,ChIJS3Ywjdlx5kcRTA0vouV1fYQ,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,572,Evi Evane Restaurant,6,ChIJS3Ywjdlx5kcRTA0vouV1fYQ,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,572,Evi Evane Restaurant,6,ChIJS3Ywjdlx5kcRTA0vouV1fYQ,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,672,Café Petibon,7,ChIJ2wqD8KRx5kcRrJWqG2dQ2_4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,674,Aida,7,ChIJ75JwXyxw5kcRqI3wcJMllY4,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,674,Aida,7,ChIJ75JwXyxw5kcRqI3wcJMllY4,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,674,Aida,7,ChIJ75JwXyxw5kcRqI3wcJMllY4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,675,Akabeko - Restaurant fusion franco japonais,7,ChIJW0ICZg5v5kcRvyEFYPJKYxo,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,675,Akabeko - Restaurant fusion franco japonais,7,ChIJW0ICZg5v5kcRvyEFYPJKYxo,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,675,Akabeko - Restaurant fusion franco japonais,7,ChIJW0ICZg5v5kcRvyEFYPJKYxo,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,676,Al Dente,7,ChIJpafTH9Vx5kcRFYDBkk2LCdc,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,677,Au Petit Tonneau,7,ChIJXcQIvtlv5kcRF650lC2T1yA,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,677,Au Petit Tonneau,7,ChIJXcQIvtlv5kcRF650lC2T1yA,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,677,Au Petit Tonneau,7,ChIJXcQIvtlv5kcRF650lC2T1yA,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,678,Au Pied de Fouet,7,ChIJiUzXQj5x5kcRB3AdUUsXgJo,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,678,Au Pied de Fouet,7,ChIJiUzXQj5x5kcRB3AdUUsXgJo,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,678,Au Pied de Fouet,7,ChIJiUzXQj5x5kcRB3AdUUsXgJo,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,679,Au Sauvignon,7,ChIJCaAbttZx5kcRaTI4ce454OY,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,679,Au Sauvignon,7,ChIJCaAbttZx5kcRaTI4ce454OY,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,679,Au Sauvignon,7,ChIJCaAbttZx5kcRaTI4ce454OY,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,680,Auberge Bressane,7,ChIJSWR8mydw5kcRQJNKcxOyvn0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,680,Auberge Bressane,7,ChIJSWR8mydw5kcRQJNKcxOyvn0,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,680,Auberge Bressane,7,ChIJSWR8mydw5kcRQJNKcxOyvn0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,681,Birdy,7,ChIJhf-5V99v5kcRBZUwyIgtCXA,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,681,Birdy,7,ChIJhf-5V99v5kcRBZUwyIgtCXA,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,681,Birdy,7,ChIJhf-5V99v5kcRBZUwyIgtCXA,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,682,Bistrot Belhara,7,ChIJHYW4eidw5kcRDoD3rxP6jzc,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,683,Le Café de Mars,7,ChIJvZmnht9v5kcRjsZS2q-nAAE,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,684,Café des Ministères,7,ChIJ7ei1YNRv5kcRRf7j0QY-e2g,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,685,Café Max,7,ChIJeR7djCdw5kcROp_vWMyonpY,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,686,Restaurant Cléo,7,ChIJ_z4s3Nlv5kcRqRIM5cVK1LE,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,686,Restaurant Cléo,7,ChIJ_z4s3Nlv5kcRqRIM5cVK1LE,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,686,Restaurant Cléo,7,ChIJ_z4s3Nlv5kcRqRIM5cVK1LE,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,687,Cucina Eat,7,ChIJneELMTFx5kcRV5EL-3--lU0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,687,Cucina Eat,7,ChIJneELMTFx5kcRV5EL-3--lU0,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,687,Cucina Eat,7,ChIJneELMTFx5kcRV5EL-3--lU0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,767,Mirage Paris,8,ChIJyyBgR4Vv5kcR4FBr0pBtlKI,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,767,Mirage Paris,8,ChIJyyBgR4Vv5kcR4FBr0pBtlKI,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,767,Mirage Paris,8,ChIJyyBgR4Vv5kcR4FBr0pBtlKI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,768,Petit Bao - Ternes,8,ChIJ1Qq1Uvhv5kcRZZ0AeNNKu04,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,768,Petit Bao - Ternes,8,ChIJ1Qq1Uvhv5kcRZZ0AeNNKu04,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,768,Petit Bao - Ternes,8,ChIJ1Qq1Uvhv5kcRZZ0AeNNKu04,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,769,Anna,8,ChIJzVN9pdJv5kcRmYbJ3emfo68,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,769,Anna,8,ChIJzVN9pdJv5kcRmYbJ3emfo68,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,769,Anna,8,ChIJzVN9pdJv5kcRmYbJ3emfo68,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,770,Thiou Restaurant,8,ChIJ1S254QJv5kcRjwVbhv8D7bM,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,770,Thiou Restaurant,8,ChIJ1S254QJv5kcRjwVbhv8D7bM,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,770,Thiou Restaurant,8,ChIJ1S254QJv5kcRjwVbhv8D7bM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,772,Restaurant & Bar 19.20 by Norbert Tarayre,8,ChIJIfDomZhv5kcRGke9wBF3AGI,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,772,Restaurant & Bar 19.20 by Norbert Tarayre,8,ChIJIfDomZhv5kcRGke9wBF3AGI,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,772,Restaurant & Bar 19.20 by Norbert Tarayre,8,ChIJIfDomZhv5kcRGke9wBF3AGI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,773,24 Le restaurant,8,ChIJLe0K9sVv5kcRt9qr4CrfIZU,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,773,24 Le restaurant,8,ChIJLe0K9sVv5kcRt9qr4CrfIZU,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,773,24 Le restaurant,8,ChIJLe0K9sVv5kcRt9qr4CrfIZU,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,775,Akira Back Paris,8,ChIJx2NEgptv5kcRPJ7AHeThtUM,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,775,Akira Back Paris,8,ChIJx2NEgptv5kcRPJ7AHeThtUM,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,775,Akira Back Paris,8,ChIJx2NEgptv5kcRPJ7AHeThtUM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,776,Restaurant Akrame,8,ChIJbZwQYu5v5kcR3uAetlru3Go,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,776,Restaurant Akrame,8,ChIJbZwQYu5v5kcR3uAetlru3Go,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,776,Restaurant Akrame,8,ChIJbZwQYu5v5kcR3uAetlru3Go,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,777,Bar des Prés - Montaigne,8,ChIJNXkisWhv5kcR8qDfdxCElz0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,777,Bar des Prés - Montaigne,8,ChIJNXkisWhv5kcR8qDfdxCElz0,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,777,Bar des Prés - Montaigne,8,ChIJNXkisWhv5kcR8qDfdxCElz0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,778,Beefbar,8,ChIJdcVJaiNv5kcRVjRXMI54BVI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,780,Bistro Hasard,8,ChIJc-Ej1aRv5kcR58-r_GKwPI8,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,781,Bistrot Cézanne,8,ChIJQyfNUMZv5kcR1vjxbwfdM10,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,782,Le Boeuf sur le Toit,8,ChIJfXfb3MVv5kcRriO2f5dNwCM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,783,Braise,8,ChIJM7F_x-Nv5kcRz8dQrQXk3H0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,783,Braise,8,ChIJM7F_x-Nv5kcRz8dQrQXk3H0,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,783,Braise,8,ChIJM7F_x-Nv5kcRz8dQrQXk3H0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,784,Brasserie Lazare Paris,8,ChIJAbPJYTVu5kcRuFw8L6Iuy6M,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,784,Brasserie Lazare Paris,8,ChIJAbPJYTVu5kcRuFw8L6Iuy6M,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,784,Brasserie Lazare Paris,8,ChIJAbPJYTVu5kcRuFw8L6Iuy6M,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,922,Au Petit Riche,9,ChIJiS_6Fjlu5kcRlTC1oqEVTac,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,922,Au Petit Riche,9,ChIJiS_6Fjlu5kcRlTC1oqEVTac,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,922,Au Petit Riche,9,ChIJiS_6Fjlu5kcRlTC1oqEVTac,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,923,Aux 2 K,9,ChIJe93J-PVv5kcRw8jez7VCZk0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,923,Aux 2 K,9,ChIJe93J-PVv5kcRw8jez7VCZk0,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,923,Aux 2 K,9,ChIJe93J-PVv5kcRw8jez7VCZk0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,926,"B.B.T (Le Bon, Le Beurre & Le Truand)",9,ChIJmU9DssNv5kcRROG8y7UVfSw,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,926,"B.B.T (Le Bon, Le Beurre & Le Truand)",9,ChIJmU9DssNv5kcRROG8y7UVfSw,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,926,"B.B.T (Le Bon, Le Beurre & Le Truand)",9,ChIJmU9DssNv5kcRROG8y7UVfSw,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_website,927,Banh Mi Oi!,9,ChIJA7ODQftv5kcR0YLY7JrSZVg,Website,,,Selected row has a blank Website; informational only.
+INFO,selected_missing_cuisine,927,Banh Mi Oi!,9,ChIJA7ODQftv5kcR0YLY7JrSZVg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,927,Banh Mi Oi!,9,ChIJA7ODQftv5kcR0YLY7JrSZVg,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,927,Banh Mi Oi!,9,ChIJA7ODQftv5kcR0YLY7JrSZVg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,928,BAO & ME,9,ChIJua-XbXNv5kcRj_XurDhAA3Q,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,928,BAO & ME,9,ChIJua-XbXNv5kcRj_XurDhAA3Q,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,928,BAO & ME,9,ChIJua-XbXNv5kcRj_XurDhAA3Q,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,930,Benjamin Schmitt Restaurant,9,ChIJU22EryVv5kcR3XLR1CB5D68,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,930,Benjamin Schmitt Restaurant,9,ChIJU22EryVv5kcR3XLR1CB5D68,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,931,Bien Élevé,9,ChIJFU0rAj9u5kcRMB0C1loHk70,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,931,Bien Élevé,9,ChIJFU0rAj9u5kcRMB0C1loHk70,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,931,Bien Élevé,9,ChIJFU0rAj9u5kcRMB0C1loHk70,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,937,Bleu Bao,9,ChIJw6rkxQRv5kcRDnWJAoztlyo,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,937,Bleu Bao,9,ChIJw6rkxQRv5kcRDnWJAoztlyo,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,938,LAZU Restaurant (Bouillon47),9,ChIJk1bIy0Fu5kcR2hnJCvRJpm0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,938,LAZU Restaurant (Bouillon47),9,ChIJk1bIy0Fu5kcR2hnJCvRJpm0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,939,Bouillon Chartier Grands Boulevards,9,ChIJ4xutfT5u5kcRaJn2NkiOhPU,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,939,Bouillon Chartier Grands Boulevards,9,ChIJ4xutfT5u5kcRaJn2NkiOhPU,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,939,Bouillon Chartier Grands Boulevards,9,ChIJ4xutfT5u5kcRaJn2NkiOhPU,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,941,Brion Restaurant,9,ChIJAZdKRQBv5kcRYra1a9IvCL4,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,941,Brion Restaurant,9,ChIJAZdKRQBv5kcRYra1a9IvCL4,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,941,Brion Restaurant,9,ChIJAZdKRQBv5kcRYra1a9IvCL4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,943,Buvette Paris,9,ChIJcQXFZkZu5kcRM7dlSZoQVK8,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,944,Calice Alto,9,ChIJOWCzr85v5kcRin495oFWGRY,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,946,Restaurant Can Alegria Paris Pigalle,9,ChIJs81H3kVu5kcRl15R15_7vuI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,947,Le Carmen,9,ChIJH1ZMNk9u5kcRHg_dVYwGDnU,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1098,Afendi,10,ChIJ6Q-dHmJv5kcRJJTIKtUHqHY,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1098,Afendi,10,ChIJ6Q-dHmJv5kcRJJTIKtUHqHY,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1098,Afendi,10,ChIJ6Q-dHmJv5kcRJJTIKtUHqHY,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1099,ÅKE - Table & Vin,10,ChIJP8ofonVv5kcRgtGn-1DTzEM,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1099,ÅKE - Table & Vin,10,ChIJP8ofonVv5kcRgtGn-1DTzEM,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1099,ÅKE - Table & Vin,10,ChIJP8ofonVv5kcRgtGn-1DTzEM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1101,Ama,10,ChIJF-etFpht5kcR4VXGgtnctj4,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1101,Ama,10,ChIJF-etFpht5kcR4VXGgtnctj4,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1101,Ama,10,ChIJF-etFpht5kcR4VXGgtnctj4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1102,Arbela,10,ChIJqcc_Ylxv5kcRm0Hi3jhQmCI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_website,1103,Baba Zulu Soul Food & Southern Kitchen,10,ChIJ9y9rquVv5kcRvlEXSjDs0fg,Website,,,Selected row has a blank Website; informational only.
+INFO,selected_missing_cuisine,1103,Baba Zulu Soul Food & Southern Kitchen,10,ChIJ9y9rquVv5kcRvlEXSjDs0fg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1103,Baba Zulu Soul Food & Southern Kitchen,10,ChIJ9y9rquVv5kcRvlEXSjDs0fg,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1103,Baba Zulu Soul Food & Southern Kitchen,10,ChIJ9y9rquVv5kcRvlEXSjDs0fg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1104,BARAK - Poissonnière,10,ChIJzUNl1P9v5kcRVC0b3b3W-Uc,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1104,BARAK - Poissonnière,10,ChIJzUNl1P9v5kcRVC0b3b3W-Uc,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1104,BARAK - Poissonnière,10,ChIJzUNl1P9v5kcRVC0b3b3W-Uc,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1105,Billili,10,ChIJsXTpwFVv5kcRF3fX9d7Sy4g,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1105,Billili,10,ChIJsXTpwFVv5kcRF3fX9d7Sy4g,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1105,Billili,10,ChIJsXTpwFVv5kcRF3fX9d7Sy4g,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1106,Blossom Burgers,10,ChIJU8bmhndv5kcRZjb0PmOiCs4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1107,BMK Paris-Bamako,10,ChIJVVXZmRJu5kcRmgQIviloayA,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1107,BMK Paris-Bamako,10,ChIJVVXZmRJu5kcRmgQIviloayA,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1107,BMK Paris-Bamako,10,ChIJVVXZmRJu5kcRmgQIviloayA,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1110,Bomaye Burger Paradis,10,ChIJp-lQJMhv5kcR1XpBMSPaaqM,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1110,Bomaye Burger Paradis,10,ChIJp-lQJMhv5kcR1XpBMSPaaqM,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1110,Bomaye Burger Paradis,10,ChIJp-lQJMhv5kcR1XpBMSPaaqM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1111,Bonhomie,10,ChIJQ48wCRRu5kcRv6UbLjz_4xo,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1112,Bopome,10,ChIJ__8D9gtu5kcRZC8yMM8sDGA,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1112,Bopome,10,ChIJ__8D9gtu5kcRZC8yMM8sDGA,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1112,Bopome,10,ChIJ__8D9gtu5kcRZC8yMM8sDGA,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1113,Bouillon Julien,10,ChIJg8kIZRFu5kcRULZqe9xS-a0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1113,Bouillon Julien,10,ChIJg8kIZRFu5kcRULZqe9xS-a0,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1113,Bouillon Julien,10,ChIJg8kIZRFu5kcRULZqe9xS-a0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1114,Brasserie Bellanger,10,ChIJLzkwDG5v5kcR4iljevWUw_M,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1114,Brasserie Bellanger,10,ChIJLzkwDG5v5kcR4iljevWUw_M,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1114,Brasserie Bellanger,10,ChIJLzkwDG5v5kcR4iljevWUw_M,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1115,Bricktop Pizza,10,ChIJjY2N-3Ru5kcRF_2u69DL6E4,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,1115,Bricktop Pizza,10,ChIJjY2N-3Ru5kcRF_2u69DL6E4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_website,1253,Bistrot Ordinaire,11,ChIJTYQHwpxz5kcRgCFlMBK-qic,Website,,,Selected row has a blank Website; informational only.
+INFO,selected_missing_features,1253,Bistrot Ordinaire,11,ChIJTYQHwpxz5kcRgCFlMBK-qic,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1255,Cherry Paris,11,ChIJZUZ_0BBu5kcRZnuIziXr3gA,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1255,Cherry Paris,11,ChIJZUZ_0BBu5kcRZnuIziXr3gA,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1255,Cherry Paris,11,ChIJZUZ_0BBu5kcRZnuIziXr3gA,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1256,Mangez et cassez-vous,11,ChIJjQHiyE5z5kcRnpi269qIHDs,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1256,Mangez et cassez-vous,11,ChIJjQHiyE5z5kcRnpi269qIHDs,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1256,Mangez et cassez-vous,11,ChIJjQHiyE5z5kcRnpi269qIHDs,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1257,Théâtre du Roi René,11,ChIJUVJetORt5kcRr38mFS4l9ao,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1257,Théâtre du Roi René,11,ChIJUVJetORt5kcRr38mFS4l9ao,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1257,Théâtre du Roi René,11,ChIJUVJetORt5kcRr38mFS4l9ao,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1258,Sürpriz,11,ChIJS3pDR-9t5kcRMc9G7WPYbCA,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,1258,Sürpriz,11,ChIJS3pDR-9t5kcRMc9G7WPYbCA,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1259,21G Dumpling,11,ChIJuar21Ahy5kcRiV8h1eTWGuo,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1259,21G Dumpling,11,ChIJuar21Ahy5kcRiV8h1eTWGuo,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1259,21G Dumpling,11,ChIJuar21Ahy5kcRiV8h1eTWGuo,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1260,Aglio e Olio - Paris 11,11,ChIJm_uIJ_dt5kcRwABkDmSqco8,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1260,Aglio e Olio - Paris 11,11,ChIJm_uIJ_dt5kcRwABkDmSqco8,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1260,Aglio e Olio - Paris 11,11,ChIJm_uIJ_dt5kcRwABkDmSqco8,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1261,Alluma,11,ChIJPxGQOx9t5kcRmczlkAOj3Ps,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1261,Alluma,11,ChIJPxGQOx9t5kcRmczlkAOj3Ps,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1261,Alluma,11,ChIJPxGQOx9t5kcRmczlkAOj3Ps,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1262,Astier,11,ChIJl7wVSONt5kcRoHde85_JmhI,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1262,Astier,11,ChIJl7wVSONt5kcRoHde85_JmhI,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1262,Astier,11,ChIJl7wVSONt5kcRoHde85_JmhI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_website,1263,Au petit Panisse,11,ChIJT7bvfAty5kcR-Sls7rcwHJg,Website,,,Selected row has a blank Website; informational only.
+INFO,selected_missing_features,1263,Au petit Panisse,11,ChIJT7bvfAty5kcR-Sls7rcwHJg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1264,Auberge Pyrénées Cévennes,11,ChIJefB79Qhu5kcR8JGnXLP6u0I,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1264,Auberge Pyrénées Cévennes,11,ChIJefB79Qhu5kcR8JGnXLP6u0I,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1264,Auberge Pyrénées Cévennes,11,ChIJefB79Qhu5kcR8JGnXLP6u0I,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1265,AVE Pizza Romana - République,11,ChIJp5lAwuJt5kcR4IXZ-PKxOlI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1266,Ayahuma Restaurant,11,ChIJM9-35zlt5kcRllSr_L4eSKg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1266,Ayahuma Restaurant,11,ChIJM9-35zlt5kcRllSr_L4eSKg,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1266,Ayahuma Restaurant,11,ChIJM9-35zlt5kcRllSr_L4eSKg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1268,LE GRAND BALLS | Cuisine méditerranéenne,11,ChIJg1756fBt5kcR82KOYx4NyZI,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1268,LE GRAND BALLS | Cuisine méditerranéenne,11,ChIJg1756fBt5kcR82KOYx4NyZI,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1268,LE GRAND BALLS | Cuisine méditerranéenne,11,ChIJg1756fBt5kcR82KOYx4NyZI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1270,Bidoche Oberkampf,11,ChIJMdg38Adu5kcRCYKyrWurSOQ,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1270,Bidoche Oberkampf,11,ChIJMdg38Adu5kcRCYKyrWurSOQ,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1270,Bidoche Oberkampf,11,ChIJMdg38Adu5kcRCYKyrWurSOQ,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1440,Bistro S,12,ChIJBZelTGpz5kcRukAhjolGzIk,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1441,New Chalet du Lac,12,ChIJxYCuI3By5kcR2va6TDSFMv4,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1441,New Chalet du Lac,12,ChIJxYCuI3By5kcR2va6TDSFMv4,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1441,New Chalet du Lac,12,ChIJxYCuI3By5kcR2va6TDSFMv4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1442,Grand Bleu,12,ChIJ0c46iwJy5kcRkzZrIReMjcU,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1444,JINCHAN Shokudo,12,ChIJKx5y_NVz5kcRw5AOIz_3lsE,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1444,JINCHAN Shokudo,12,ChIJKx5y_NVz5kcRw5AOIz_3lsE,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1444,JINCHAN Shokudo,12,ChIJKx5y_NVz5kcRw5AOIz_3lsE,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1445,Jouvence,12,ChIJSRmutQ5y5kcRIPnSJ8cG0l4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1446,L'Ébauchoir,12,ChIJ37Xhzw5y5kcRr2FfxIiIF_w,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1446,L'Ébauchoir,12,ChIJ37Xhzw5y5kcRr2FfxIiIF_w,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1446,L'Ébauchoir,12,ChIJ37Xhzw5y5kcRr2FfxIiIF_w,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1447,La Ruche à Miel,12,ChIJccDLRQ9y5kcRRbY2mJ-KL80,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,1447,La Ruche à Miel,12,ChIJccDLRQ9y5kcRRbY2mJ-KL80,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1448,Le Charolais,12,ChIJf2C69AVy5kcRP4nJjF7-ops,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1448,Le Charolais,12,ChIJf2C69AVy5kcRP4nJjF7-ops,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1448,Le Charolais,12,ChIJf2C69AVy5kcRP4nJjF7-ops,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1449,Le Cotte Rôti,12,ChIJKS_InAVy5kcRDBXHxcmlhD0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,1449,Le Cotte Rôti,12,ChIJKS_InAVy5kcRDBXHxcmlhD0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1450,Le Picotin,12,ChIJ8xxyHmVy5kcRZBHmNN0Q7vQ,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,1450,Le Picotin,12,ChIJ8xxyHmVy5kcRZBHmNN0Q7vQ,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1451,Le Square Trousseau,12,ChIJ8TiNQ6xz5kcRXl7jsfUd0-o,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,1451,Le Square Trousseau,12,ChIJ8TiNQ6xz5kcRXl7jsfUd0-o,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1452,Mama Jackson Soul Food Paris,12,ChIJMcXU_BFy5kcRagV4QKC38iU,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1452,Mama Jackson Soul Food Paris,12,ChIJMcXU_BFy5kcRagV4QKC38iU,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1452,Mama Jackson Soul Food Paris,12,ChIJMcXU_BFy5kcRagV4QKC38iU,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1453,Mazali,12,ChIJG_fgM8Vz5kcRyof2L5hfXLA,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1453,Mazali,12,ChIJG_fgM8Vz5kcRyof2L5hfXLA,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1453,Mazali,12,ChIJG_fgM8Vz5kcRyof2L5hfXLA,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1454,Morry's Bagels,12,ChIJAeohfq1z5kcRD9_5ZaZ3-MU,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1454,Morry's Bagels,12,ChIJAeohfq1z5kcRD9_5ZaZ3-MU,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1454,Morry's Bagels,12,ChIJAeohfq1z5kcRD9_5ZaZ3-MU,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1455,Restaurant Passerini,12,ChIJG_fMygVy5kcRCLfpTD8eflk,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,1455,Restaurant Passerini,12,ChIJG_fMygVy5kcRCLfpTD8eflk,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1481,Restaurant KISS,13,ChIJFe2feJJx5kcRs0A0IzJjW38,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1481,Restaurant KISS,13,ChIJFe2feJJx5kcRs0A0IzJjW38,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1481,Restaurant KISS,13,ChIJFe2feJJx5kcRs0A0IzJjW38,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1482,Les Frangins,13,ChIJazZ_zZJx5kcRsgsQEGJh6Mc,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1485,Miam Miam Cool,13,ChIJm7sNhFJx5kcRYsR0OHLjzK0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1485,Miam Miam Cool,13,ChIJm7sNhFJx5kcRYsR0OHLjzK0,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1485,Miam Miam Cool,13,ChIJm7sNhFJx5kcRYsR0OHLjzK0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1486,LÜKS Kebab Paris 13,13,ChIJ0Tk7Gotx5kcREtPFlGY3lFc,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1486,LÜKS Kebab Paris 13,13,ChIJ0Tk7Gotx5kcREtPFlGY3lFc,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1486,LÜKS Kebab Paris 13,13,ChIJ0Tk7Gotx5kcREtPFlGY3lFc,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1487,Yi Bowl Noodle 小黄碗胡辣汤·羊汤,13,ChIJ8yVPLeNz5kcRI9rYg-IsGsg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,1487,Yi Bowl Noodle 小黄碗胡辣汤·羊汤,13,ChIJ8yVPLeNz5kcRI9rYg-IsGsg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1489,Auberge Etchegorry,13,ChIJ0YAMtpNx5kcRet2zGGWI5Fg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1489,Auberge Etchegorry,13,ChIJ0YAMtpNx5kcRet2zGGWI5Fg,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1489,Auberge Etchegorry,13,ChIJ0YAMtpNx5kcRet2zGGWI5Fg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1491,Aupa Caminito - croissant burger,13,ChIJN0xlPyVy5kcRSSQowtcp8dw,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1492,BORIA,13,ChIJ2SOBsihy5kcR8YD18eXezzg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1493,Chez Mamane,13,ChIJ7fV4qZFx5kcRUHp9ayb4ZkE,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1493,Chez Mamane,13,ChIJ7fV4qZFx5kcRUHp9ayb4ZkE,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1493,Chez Mamane,13,ChIJ7fV4qZFx5kcRUHp9ayb4ZkE,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1494,Chez Trassoudaine,13,ChIJr36aZSdy5kcRAddTio5dOrQ,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1496,Coupi bar,13,ChIJK-ofsi5y5kcRA8Q6uWtfoa0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1497,Dame Augustine,13,ChIJ75Si4fdx5kcR9y7ygtTd-dk,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1497,Dame Augustine,13,ChIJ75Si4fdx5kcR9y7ygtTd-dk,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1497,Dame Augustine,13,ChIJ75Si4fdx5kcR9y7ygtTd-dk,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1499,Fleurs de Mai,13,ChIJQ7SDCYdx5kcRy1kiOkRyxeI,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1499,Fleurs de Mai,13,ChIJQ7SDCYdx5kcRy1kiOkRyxeI,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1499,Fleurs de Mai,13,ChIJQ7SDCYdx5kcRy1kiOkRyxeI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1500,Impérial Choisy 美丽都,13,ChIJH7bObodx5kcRZvKndkGRXQo,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1500,Impérial Choisy 美丽都,13,ChIJH7bObodx5kcRZvKndkGRXQo,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1500,Impérial Choisy 美丽都,13,ChIJH7bObodx5kcRZvKndkGRXQo,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1501,L'Hommage,13,ChIJDzdubodx5kcRsW4IdxJzRA0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1501,L'Hommage,13,ChIJDzdubodx5kcRsW4IdxJzRA0,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1501,L'Hommage,13,ChIJDzdubodx5kcRsW4IdxJzRA0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1530,La Taverne de Zhao,14,ChIJTxzcA9Nx5kcRJyR_2DjInGY,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1530,La Taverne de Zhao,14,ChIJTxzcA9Nx5kcRJyR_2DjInGY,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1530,La Taverne de Zhao,14,ChIJTxzcA9Nx5kcRJyR_2DjInGY,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1531,Maison Edgar,14,ChIJp_sg6oVx5kcRIPvHJVhrHoo,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1532,L’EMPREINTE,14,ChIJEcUSM7dx5kcRo3kHqPKmfao,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1532,L’EMPREINTE,14,ChIJEcUSM7dx5kcRo3kHqPKmfao,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1532,L’EMPREINTE,14,ChIJEcUSM7dx5kcRo3kHqPKmfao,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1533,NOUS épicerie anti-gaspi Paris Montparnasse,14,ChIJWwMFux5x5kcRkrkUiQbDc0Q,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1533,NOUS épicerie anti-gaspi Paris Montparnasse,14,ChIJWwMFux5x5kcRkrkUiQbDc0Q,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1533,NOUS épicerie anti-gaspi Paris Montparnasse,14,ChIJWwMFux5x5kcRkrkUiQbDc0Q,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1534,INKA BISTROT,14,ChIJneWlSXhx5kcRGyFOamiUAM0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1535,Le Ruisseau Burger Alésia,14,ChIJV4S6eNdx5kcRlwchD_OyMGo,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1535,Le Ruisseau Burger Alésia,14,ChIJV4S6eNdx5kcRlwchD_OyMGo,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1535,Le Ruisseau Burger Alésia,14,ChIJV4S6eNdx5kcRlwchD_OyMGo,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1536,Kokodak,14,ChIJU0wdbwBx5kcRspD3BRyZrUk,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1536,Kokodak,14,ChIJU0wdbwBx5kcRspD3BRyZrUk,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1536,Kokodak,14,ChIJU0wdbwBx5kcRspD3BRyZrUk,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1537,Yatai Ramen Montparnasse,14,ChIJ2YusqEJx5kcRjeIoO27OMCg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1538,Le 17.45 Paris Daguerre - Planches à composer,14,ChIJc7i4DsZx5kcR8MYlBBKkFnA,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1539,Wingstop Paris 14 (livraison uniquement),14,ChIJU57p-sVx5kcRxWWxVxy4U2o,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1539,Wingstop Paris 14 (livraison uniquement),14,ChIJU57p-sVx5kcRxWWxVxy4U2o,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1539,Wingstop Paris 14 (livraison uniquement),14,ChIJU57p-sVx5kcRxWWxVxy4U2o,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1541,Le Cornichon,14,ChIJi994frZx5kcRKNYXb8J4sEg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1541,Le Cornichon,14,ChIJi994frZx5kcRKNYXb8J4sEg,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1541,Le Cornichon,14,ChIJi994frZx5kcRKNYXb8J4sEg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1546,Armand Bar & Cantine,14,ChIJlxJkqstx5kcR8iPyxKeFn6I,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1546,Armand Bar & Cantine,14,ChIJlxJkqstx5kcR8iPyxKeFn6I,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1546,Armand Bar & Cantine,14,ChIJlxJkqstx5kcR8iPyxKeFn6I,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1548,L'As du Poulet,14,ChIJs1Hq1kxw5kcRDSZDrMlctKw,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1548,L'As du Poulet,14,ChIJs1Hq1kxw5kcRDSZDrMlctKw,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1548,L'As du Poulet,14,ChIJs1Hq1kxw5kcRDSZDrMlctKw,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1549,Augustin,14,ChIJjRK57rVx5kcRGrW2O9Bq6XQ,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1549,Augustin,14,ChIJjRK57rVx5kcRGrW2O9Bq6XQ,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1549,Augustin,14,ChIJjRK57rVx5kcRGrW2O9Bq6XQ,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1550,Aux Plumes,14,ChIJsVtS27Zx5kcRNPqIHyz4o-o,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1550,Aux Plumes,14,ChIJsVtS27Zx5kcRNPqIHyz4o-o,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1550,Aux Plumes,14,ChIJsVtS27Zx5kcRNPqIHyz4o-o,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_website,1604,Le P'tit Gavroche paris,15,ChIJLbe2iD5w5kcRfbS3cpp04L4,Website,,,Selected row has a blank Website; informational only.
+INFO,selected_missing_features,1604,Le P'tit Gavroche paris,15,ChIJLbe2iD5w5kcRfbS3cpp04L4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1605,Au Bon Coin,15,ChIJRfoW-kNw5kcRboL23tIdBVc,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1606,Armonia,15,ChIJ17KKZyZx5kcRhBLlekYD1J0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1606,Armonia,15,ChIJ17KKZyZx5kcRhBLlekYD1J0,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1606,Armonia,15,ChIJ17KKZyZx5kcRhBLlekYD1J0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1607,Piou,15,ChIJtdLSaclx5kcRdQEZq_51GJE,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1607,Piou,15,ChIJtdLSaclx5kcRdQEZq_51GJE,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1607,Piou,15,ChIJtdLSaclx5kcRdQEZq_51GJE,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1609,Grand Pacific Buffet à volonté - Tour Eiffel,15,ChIJy14Vij5x5kcRDDlIwA6RxTI,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1609,Grand Pacific Buffet à volonté - Tour Eiffel,15,ChIJy14Vij5x5kcRDDlIwA6RxTI,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1609,Grand Pacific Buffet à volonté - Tour Eiffel,15,ChIJy14Vij5x5kcRDDlIwA6RxTI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_website,1610,DO ET RIZ CONVENTION,15,ChIJ1d3bBwBx5kcRku8YoAGEL4w,Website,,,Selected row has a blank Website; informational only.
+INFO,selected_missing_cuisine,1610,DO ET RIZ CONVENTION,15,ChIJ1d3bBwBx5kcRku8YoAGEL4w,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,1610,DO ET RIZ CONVENTION,15,ChIJ1d3bBwBx5kcRku8YoAGEL4w,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1611,Restaurant Bistrot Le dôme Paris 15,15,ChIJ_RQ0_Xpx5kcRIirH9sGHO2Q,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1612,750g La Table,15,ChIJ-2rO0Wpw5kcRUxkyLZaRCmU,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1612,750g La Table,15,ChIJ-2rO0Wpw5kcRUxkyLZaRCmU,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1612,750g La Table,15,ChIJ-2rO0Wpw5kcRUxkyLZaRCmU,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1613,Abstinence - Restaurant & Bar,15,ChIJiyWKCSpx5kcRrxn0lPzLc7k,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1614,Le Bélisaire,15,ChIJP4CTeD9w5kcRhPlltZPUhJM,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1614,Le Bélisaire,15,ChIJP4CTeD9w5kcRhPlltZPUhJM,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1614,Le Bélisaire,15,ChIJP4CTeD9w5kcRhPlltZPUhJM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1615,Le Beurre Noisette,15,ChIJ35ar7nJw5kcRR2-Jh-Zj4Bs,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1615,Le Beurre Noisette,15,ChIJ35ar7nJw5kcRR2-Jh-Zj4Bs,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1615,Le Beurre Noisette,15,ChIJ35ar7nJw5kcRR2-Jh-Zj4Bs,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1616,Restaurant Biscotte,15,ChIJB9SzTgZx5kcRp7lN4whrb3U,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1616,Restaurant Biscotte,15,ChIJB9SzTgZx5kcRp7lN4whrb3U,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1616,Restaurant Biscotte,15,ChIJB9SzTgZx5kcRp7lN4whrb3U,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1617,Chez Tonton,15,ChIJIX0tsMBx5kcRKLLuSDXu2Mc,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1617,Chez Tonton,15,ChIJIX0tsMBx5kcRKLLuSDXu2Mc,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1617,Chez Tonton,15,ChIJIX0tsMBx5kcRKLLuSDXu2Mc,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1618,Claudia Paris,15,ChIJHcQ1291x5kcRT_2DVyLuSxA,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1618,Claudia Paris,15,ChIJHcQ1291x5kcRT_2DVyLuSxA,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1618,Claudia Paris,15,ChIJHcQ1291x5kcRT_2DVyLuSxA,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1620,Crêperie Mad'eo!,15,ChIJaYNvXCnpC0ERtKpGxE6614Y,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1620,Crêperie Mad'eo!,15,ChIJaYNvXCnpC0ERtKpGxE6614Y,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1620,Crêperie Mad'eo!,15,ChIJaYNvXCnpC0ERtKpGxE6614Y,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1681,OKA SUSHI,16,ChIJj1rZEQBw5kcR1jI8q4iiFGc,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1682,L'Auberge des Crus,16,ChIJn3M3XEZ75kcRYHGlnkvVNFk,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,1682,L'Auberge des Crus,16,ChIJn3M3XEZ75kcRYHGlnkvVNFk,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1683,Alfredo Positano,16,ChIJTbZsmVVx5kcRpk28nPvZIxU,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1683,Alfredo Positano,16,ChIJTbZsmVVx5kcRpk28nPvZIxU,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1683,Alfredo Positano,16,ChIJTbZsmVVx5kcRpk28nPvZIxU,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1686,Alphonsine Paris XVI,16,ChIJ_5BGWY975kcRKaPAEAKx5kI,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1686,Alphonsine Paris XVI,16,ChIJ_5BGWY975kcRKaPAEAKx5kI,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1686,Alphonsine Paris XVI,16,ChIJ_5BGWY975kcRKaPAEAKx5kI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1687,ANDIA,16,ChIJ6RIysFRl5kcRgTQU1vLwwWg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1688,Attabler,16,ChIJ37siM05v5kcRqlraFJgROqg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1688,Attabler,16,ChIJ37siM05v5kcRqlraFJgROqg,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1688,Attabler,16,ChIJ37siM05v5kcRqlraFJgROqg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1689,Auteuil Brasserie,16,ChIJEcNXrLB65kcR6leyh3yLQpk,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1690,Bistro de l'Arc,16,ChIJ3-DnpO1v5kcR_dkXzj4aqgs,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1692,Bistrot 31,16,ChIJ96U23qh65kcRTAgsz7H2F0U,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1693,Brasserie Victor Hugo,16,ChIJiWyX5NNv5kcRbb5gt7QvZ-Q,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1694,Café de l’Homme,16,ChIJlSwHnvxv5kcR2JG3yHEsjG4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1695,Café du Mexique,16,ChIJXTyMhvlv5kcRRcZFKxlH4s8,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1697,Casa Luisa,16,ChIJtfhyPQBl5kcRCpxUioh6GRM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1700,Bistrot Chez Martine,16,ChIJn80l2QZv5kcRK441LvmwU9s,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1701,Comice,16,ChIJAc56Jah65kcRPUvIVLIaIjI,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1701,Comice,16,ChIJAc56Jah65kcRPUvIVLIaIjI,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1701,Comice,16,ChIJAc56Jah65kcRPUvIVLIaIjI,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_website,1744,Lebon Caviste,17,ChIJL4yfBCFv5kcRw9H0kPgSPe0,Website,,,Selected row has a blank Website; informational only.
+INFO,selected_missing_cuisine,1744,Lebon Caviste,17,ChIJL4yfBCFv5kcRw9H0kPgSPe0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1744,Lebon Caviste,17,ChIJL4yfBCFv5kcRw9H0kPgSPe0,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1744,Lebon Caviste,17,ChIJL4yfBCFv5kcRw9H0kPgSPe0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1746,Autana,17,ChIJ2artXLlv5kcRHKyaXv9bwuo,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1746,Autana,17,ChIJ2artXLlv5kcRHKyaXv9bwuo,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1746,Autana,17,ChIJ2artXLlv5kcRHKyaXv9bwuo,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1747,Pizza Di Loretta - Courcelles,17,ChIJKf37Q7dv5kcR04WKTJcvSak,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,1747,Pizza Di Loretta - Courcelles,17,ChIJKf37Q7dv5kcR04WKTJcvSak,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1749,Restaurant Junglii Indian Kitchen Paris 17,17,ChIJgaQ1A4lv5kcRXmDJT6Mje6Y,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,1749,Restaurant Junglii Indian Kitchen Paris 17,17,ChIJgaQ1A4lv5kcRXmDJT6Mje6Y,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1750,Charbon,17,ChIJ0R7dNbhv5kcRlcaxHAvmOuA,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1750,Charbon,17,ChIJ0R7dNbhv5kcRlcaxHAvmOuA,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1750,Charbon,17,ChIJ0R7dNbhv5kcRlcaxHAvmOuA,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1751,"Agapé, Restaurant gastronomique Paris 17ème",17,ChIJQ3-giLxv5kcRgYmfvT0hy6I,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1751,"Agapé, Restaurant gastronomique Paris 17ème",17,ChIJQ3-giLxv5kcRgYmfvT0hy6I,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1751,"Agapé, Restaurant gastronomique Paris 17ème",17,ChIJQ3-giLxv5kcRgYmfvT0hy6I,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1752,ANONA,17,ChIJhXXqWUZv5kcRIeS11clgDck,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1752,ANONA,17,ChIJhXXqWUZv5kcRIeS11clgDck,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1752,ANONA,17,ChIJhXXqWUZv5kcRIeS11clgDck,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1754,Au Coin !,17,ChIJxdn4Jupv5kcRmpXhlT7Dlu8,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1754,Au Coin !,17,ChIJxdn4Jupv5kcRmpXhlT7Dlu8,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1754,Au Coin !,17,ChIJxdn4Jupv5kcRmpXhlT7Dlu8,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1755,Bloom Sushi Wagram,17,ChIJWYknG3dv5kcR5wjfCFNpc6s,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,1755,Bloom Sushi Wagram,17,ChIJWYknG3dv5kcR5wjfCFNpc6s,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1757,BRUTUS - Batignolles,17,ChIJVVUZX7Fv5kcRdSoRBT3M51U,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1758,Caves Pétrissans,17,ChIJ31BAi5Nv5kcRcdw5fTkEJC8,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1760,"Chez Fred, depuis 1945",17,ChIJn9AJVKNv5kcReD66EJgUWVc,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1760,"Chez Fred, depuis 1945",17,ChIJn9AJVKNv5kcReD66EJgUWVc,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1760,"Chez Fred, depuis 1945",17,ChIJn9AJVKNv5kcReD66EJgUWVc,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1761,Chicahualco,17,ChIJw6p5cU1v5kcRnYNJWy2zLNo,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1761,Chicahualco,17,ChIJw6p5cU1v5kcRnYNJWy2zLNo,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1761,Chicahualco,17,ChIJw6p5cU1v5kcRnYNJWy2zLNo,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1762,Comme Chez Maman,17,ChIJo7MOEK5v5kcRilGQNw2mAKw,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1762,Comme Chez Maman,17,ChIJo7MOEK5v5kcRilGQNw2mAKw,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1762,Comme Chez Maman,17,ChIJo7MOEK5v5kcRilGQNw2mAKw,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1763,Coretta,17,ChIJieM35q5v5kcRSsWWTlMpbA0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1763,Coretta,17,ChIJieM35q5v5kcRSsWWTlMpbA0,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1763,Coretta,17,ChIJieM35q5v5kcRSsWWTlMpbA0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1853,Un Amour de Bistro,18,ChIJCfgBp0tv5kcRntSheWro_jY,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1854,La Belle Maison,18,ChIJs5FnbQBv5kcRqv75IMiKVmE,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1855,Le Boucan,18,ChIJaXBMYU5u5kcRT10W6s3e-h0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1856,Chez Pradel,18,ChIJ85emdFdu5kcR5gtx5HsSvSQ,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1858,Abuela Pigalle,18,ChIJmXqvMUZu5kcRhwAZdpyXqL4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1859,adraba,18,ChIJ81Z3EIhv5kcR-eurCHPgU14,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1859,adraba,18,ChIJ81Z3EIhv5kcR-eurCHPgU14,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1859,adraba,18,ChIJ81Z3EIhv5kcR-eurCHPgU14,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1860,Amonē,18,ChIJ39JFWGVv5kcR1IXYU61ayfs,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1860,Amonē,18,ChIJ39JFWGVv5kcR1IXYU61ayfs,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1860,Amonē,18,ChIJ39JFWGVv5kcR1IXYU61ayfs,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_website,1863,Armande,18,ChIJ-5kHXjZv5kcRmPW0wRJ-8z4,Website,,,Selected row has a blank Website; informational only.
+INFO,selected_missing_cuisine,1863,Armande,18,ChIJ-5kHXjZv5kcRmPW0wRJ-8z4,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1863,Armande,18,ChIJ-5kHXjZv5kcRmPW0wRJ-8z4,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1863,Armande,18,ChIJ-5kHXjZv5kcRmPW0wRJ-8z4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1865,Au Paradis Tropical,18,ChIJpbWNuGdu5kcRn6W2vB7PNrY,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1865,Au Paradis Tropical,18,ChIJpbWNuGdu5kcRn6W2vB7PNrY,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1865,Au Paradis Tropical,18,ChIJpbWNuGdu5kcRn6W2vB7PNrY,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1866,Bel-Ami,18,ChIJOxqYz01u5kcR0J23wEcwEiM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1867,Bob's Bake Shop,18,ChIJOf1opftv5kcRejSMahu6Vqg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1867,Bob's Bake Shop,18,ChIJOf1opftv5kcRejSMahu6Vqg,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1867,Bob's Bake Shop,18,ChIJOf1opftv5kcRejSMahu6Vqg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1868,Bobby,18,ChIJs1Cy4cRv5kcRCbGxR9U7tx0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1868,Bobby,18,ChIJs1Cy4cRv5kcRCbGxR9U7tx0,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1868,Bobby,18,ChIJs1Cy4cRv5kcRCbGxR9U7tx0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1869,Bouillon Pigalle,18,ChIJVb7Sx0Vu5kcR5gDcYjssPWw,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1869,Bouillon Pigalle,18,ChIJVb7Sx0Vu5kcR5gDcYjssPWw,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1869,Bouillon Pigalle,18,ChIJVb7Sx0Vu5kcR5gDcYjssPWw,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1870,Brasserie Barbès,18,ChIJ4f7h_mhu5kcRtb3IkgcT7pU,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1871,Café de Luce - Bistrot parisien,18,ChIJERDTe1xv5kcRYJ_ltcqznqY,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1945,Casa Giorgio,19,ChIJC1YRrcBt5kcRhyyIAl3bjh4,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1945,Casa Giorgio,19,ChIJC1YRrcBt5kcRhyyIAl3bjh4,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1945,Casa Giorgio,19,ChIJC1YRrcBt5kcRhyyIAl3bjh4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_website,1947,16 Marcel Landowski,19,ChIJuyf6xNdt5kcRMrdvDGuWV1M,Website,,,Selected row has a blank Website; informational only.
+INFO,selected_missing_cuisine,1947,16 Marcel Landowski,19,ChIJuyf6xNdt5kcRMrdvDGuWV1M,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1947,16 Marcel Landowski,19,ChIJuyf6xNdt5kcRMrdvDGuWV1M,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1947,16 Marcel Landowski,19,ChIJuyf6xNdt5kcRMrdvDGuWV1M,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1950,Le Cheval d'Or,19,ChIJGedv2cFt5kcRiLIcelO4-wk,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1950,Le Cheval d'Or,19,ChIJGedv2cFt5kcRiLIcelO4-wk,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1950,Le Cheval d'Or,19,ChIJGedv2cFt5kcRiLIcelO4-wk,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1951,Coup de Tête,19,ChIJW4OvAvlt5kcRxAjgddRpc8c,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1951,Coup de Tête,19,ChIJW4OvAvlt5kcRxAjgddRpc8c,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1951,Coup de Tête,19,ChIJW4OvAvlt5kcRxAjgddRpc8c,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1952,Efendi Grill House,19,ChIJVdENFn5t5kcRNucd7RlDIYo,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1952,Efendi Grill House,19,ChIJVdENFn5t5kcRNucd7RlDIYo,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1952,Efendi Grill House,19,ChIJVdENFn5t5kcRNucd7RlDIYo,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1953,L'Atlantide,19,ChIJ5duE18Rt5kcRMO-CClqLn00,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1953,L'Atlantide,19,ChIJ5duE18Rt5kcRMO-CClqLn00,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1953,L'Atlantide,19,ChIJ5duE18Rt5kcRMO-CClqLn00,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1954,"La Marmite d’Afrique, restaurant social et solidaire",19,ChIJeUE7njFs5kcRlXaPF__zBz4,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1954,"La Marmite d’Afrique, restaurant social et solidaire",19,ChIJeUE7njFs5kcRlXaPF__zBz4,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1954,"La Marmite d’Afrique, restaurant social et solidaire",19,ChIJeUE7njFs5kcRlXaPF__zBz4,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_website,1955,Lao Siam,19,ChIJbzglYOht5kcR3kcbx_uOXX0,Website,,,Selected row has a blank Website; informational only.
+INFO,selected_missing_cuisine,1955,Lao Siam,19,ChIJbzglYOht5kcR3kcbx_uOXX0,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1955,Lao Siam,19,ChIJbzglYOht5kcR3kcbx_uOXX0,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1955,Lao Siam,19,ChIJbzglYOht5kcR3kcbx_uOXX0,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_website,1956,Le Bar Fleuri,19,ChIJncqSKsJt5kcRnGNWsjRvfIA,Website,,,Selected row has a blank Website; informational only.
+INFO,selected_missing_features,1956,Le Bar Fleuri,19,ChIJncqSKsJt5kcRnGNWsjRvfIA,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1957,Le Barlu,19,ChIJlcEJOdht5kcRIX2rbZH-PMk,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1957,Le Barlu,19,ChIJlcEJOdht5kcRIX2rbZH-PMk,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1957,Le Barlu,19,ChIJlcEJOdht5kcRIX2rbZH-PMk,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1958,Le Cadoret,19,ChIJgV0tFuht5kcRbpN7ju0-Vho,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1961,Le Pavillon des Canaux,19,ChIJ5YzMRNBt5kcRube978t86bo,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_website,1964,Le Square,19,ChIJN2w8RwBt5kcRidZiWuwWeA8,Website,,,Selected row has a blank Website; informational only.
+INFO,selected_missing_cuisine,1964,Le Square,19,ChIJN2w8RwBt5kcRidZiWuwWeA8,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1964,Le Square,19,ChIJN2w8RwBt5kcRidZiWuwWeA8,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1964,Le Square,19,ChIJN2w8RwBt5kcRidZiWuwWeA8,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1965,Les Bancs Publics,19,ChIJd0bF1M1t5kcRh_G6Uho2coA,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1965,Les Bancs Publics,19,ChIJd0bF1M1t5kcRh_G6Uho2coA,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1965,Les Bancs Publics,19,ChIJd0bF1M1t5kcRh_G6Uho2coA,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1966,Mensae,19,ChIJFUqB_sFt5kcRWPU8lkviUVw,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1979,Le montana - Bar Paris 20,20,ChIJu8RG2Klz5kcRF_XWvjMtjPE,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_website,1980,Come a Casa,20,ChIJ9xFaqghu5kcRuLhOTQwwW3s,Website,,,Selected row has a blank Website; informational only.
+INFO,selected_missing_cuisine,1980,Come a Casa,20,ChIJ9xFaqghu5kcRuLhOTQwwW3s,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_features,1980,Come a Casa,20,ChIJ9xFaqghu5kcRuLhOTQwwW3s,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1981,Amagat,20,ChIJhz9qXldt5kcRGzJ2nlZzm2g,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1981,Amagat,20,ChIJhz9qXldt5kcRGzJ2nlZzm2g,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1981,Amagat,20,ChIJhz9qXldt5kcRGzJ2nlZzm2g,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1982,Atelier Fratelli,20,ChIJFzdIhJFt5kcRmnJUMUIUtcM,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1982,Atelier Fratelli,20,ChIJFzdIhJFt5kcRmnJUMUIUtcM,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1982,Atelier Fratelli,20,ChIJFzdIhJFt5kcRmnJUMUIUtcM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1984,BangBang Restaurant,20,ChIJmeVsScJt5kcRZeGCqAm1T2k,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1984,BangBang Restaurant,20,ChIJmeVsScJt5kcRZeGCqAm1T2k,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1984,BangBang Restaurant,20,ChIJmeVsScJt5kcRZeGCqAm1T2k,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1985,Becquetance,20,ChIJW3lz7RZt5kcR1fxpr9IiDps,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1985,Becquetance,20,ChIJW3lz7RZt5kcR1fxpr9IiDps,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1985,Becquetance,20,ChIJW3lz7RZt5kcR1fxpr9IiDps,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1987,Belleville Sauvage,20,ChIJ2y13i-1t5kcRfLkmBMU5-9M,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1988,Caché,20,ChIJHz8LNGRt5kcRuIV4hJfw9Kg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1988,Caché,20,ChIJHz8LNGRt5kcRuIV4hJfw9Kg,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1988,Caché,20,ChIJHz8LNGRt5kcRuIV4hJfw9Kg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1989,Chez Ramona,20,ChIJPUO8qOht5kcRtNzOj95-9eM,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1989,Chez Ramona,20,ChIJPUO8qOht5kcRtNzOj95-9eM,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1989,Chez Ramona,20,ChIJPUO8qOht5kcRtNzOj95-9eM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1991,Chez Rita,20,ChIJPZKDDIdt5kcRMVM4Cdf7Q9U,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1991,Chez Rita,20,ChIJPZKDDIdt5kcRMVM4Cdf7Q9U,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1991,Chez Rita,20,ChIJPZKDDIdt5kcRMVM4Cdf7Q9U,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1994,Dandelion,20,ChIJ9_cKy7Zz5kcRNYRZ7LWNJvM,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1994,Dandelion,20,ChIJ9_cKy7Zz5kcRNYRZ7LWNJvM,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1994,Dandelion,20,ChIJ9_cKy7Zz5kcRNYRZ7LWNJvM,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_features,1995,Des Terres,20,ChIJEyUuGcpz5kcRUTU9FiqBmTU,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1996,Dilia,20,ChIJ2xMOOOxt5kcRmDNZv-pydrg,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1996,Dilia,20,ChIJ2xMOOOxt5kcRmDNZv-pydrg,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1996,Dilia,20,ChIJ2xMOOOxt5kcRmDNZv-pydrg,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1997,Restaurant Galerna,20,ChIJeQBSG05t5kcRkl_4l_Yk6oo,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1997,Restaurant Galerna,20,ChIJeQBSG05t5kcRkl_4l_Yk6oo,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1997,Restaurant Galerna,20,ChIJeQBSG05t5kcRkl_4l_Yk6oo,Features,,,Selected row has a blank Features; informational only.
+INFO,selected_missing_cuisine,1998,Il Posto,20,ChIJLaWjPupt5kcRfUh78D6c8uk,Cuisine,,,Selected row has a blank Cuisine; informational only.
+INFO,selected_missing_vibe,1998,Il Posto,20,ChIJLaWjPupt5kcRfUh78D6c8uk,Vibe,,,Selected row has a blank Vibe; informational only.
+INFO,selected_missing_features,1998,Il Posto,20,ChIJLaWjPupt5kcRfUh78D6c8uk,Features,,,Selected row has a blank Features; informational only.
