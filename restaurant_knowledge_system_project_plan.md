@@ -1,7 +1,7 @@
 # Restaurant Knowledge System — Project Plan
 
-**Version:** 2.4
-**Scope update:** Paris-only Map MVP v1 from a user-curated, validated 300-restaurant core dataset; Google Sheets remains the editing source of truth and deterministic static JSON is the app runtime dataset. Suburbs and full-archive cleanup remain later phases.
+**Version:** 2.5
+**Scope update:** Session 14 delivered the first working, locally verified Paris Map MVP foundation from the user-curated 300-restaurant core dataset. Google Sheets remains the editing source of truth, deterministic static JSON remains the app runtime dataset, and restaurant discovery controls are the next product milestone. Suburbs and full-archive cleanup remain later phases.
 
 ---
 
@@ -33,7 +33,11 @@ LLM enrichment using controlled vocabularies
         ↓
 Google Sheets as source of truth
         ↓
-Later: private Google Maps overlay / web app
+Explicit deterministic export
+        ↓
+Static JSON runtime dataset
+        ↓
+Private Google Maps web app
 ```
 
 The database should become a **clean personal restaurant operating system**, not just a dump of bookmarks.
@@ -187,17 +191,27 @@ The LLM should run only after a row is either:
 
 This avoids enriching obviously wrong matches.
 
-### 3.6 Future map layer
+### 3.6 Current map layer
 
-The desired future map is not Google My Maps.
+The map is a private Next.js web app in `map-app/`, not Google My Maps.
 
-Preferred future direction:
+Its current data path is:
 
 ```text
-Private web app overlaying Google Maps
+Private Google Sheet (editing source of truth)
+        ↓
+Explicit export command
+        ↓
+data/map_mvp/restaurants.json (deterministic runtime input)
+        ↓
+Server-side validation
+        ↓
+Approved 19-field RestaurantMapItem[] browser contract
+        ↓
+Google Maps JavaScript API with Advanced Markers and clustering
 ```
 
-This would use Google Sheets as the backend data source and display custom restaurant markers on top of Google Maps.
+The app does not query Google Sheets, Places, geocoding, or another restaurant-data service at runtime. Session 14 implemented the base map, 300 clustered markers, selection, responsive restaurant details, and configuration/error states. Search, list navigation, and arrondissement discovery controls remain the next unimplemented product layer.
 
 ---
 
@@ -584,14 +598,11 @@ Recommended rule:
 Only run LLM tagging on validated rows.
 ```
 
-### 7.5 We should not overbuild the map before the sheet is stable
+### 7.5 The map should remain useful without full-archive completion
 
-The map is valuable, but only after:
+Sessions 13 and 14 established that a deliberately curated, validated core dataset is sufficient for the first map. Full review-queue cleanup, complete delivery/takeaway coverage, and complete LLM enrichment are not prerequisites for improving the MVP.
 
-- matching is reliable;
-- review workflow is stable;
-- delivery/takeaway fields are defined;
-- LLM tagging plan is ready.
+Further map work should prioritize day-to-day usefulness while preserving visible data uncertainty and the validated export boundary.
 
 ---
 
@@ -2505,6 +2516,103 @@ Do not expand Session 14 into enrichment, editing, authentication redesign, rout
 
 ---
 
+### 10.16 Session 14 — Private map app scaffold
+
+**Date:** 2026-08-13
+
+**Goal:**
+
+Build the first usable private Paris map from the validated 300-restaurant static dataset.
+
+**Completed:**
+
+- Chose `map-app/` inside the existing repository.
+- Created a Next.js 16.3.0 App Router application using TypeScript, ESLint, and npm.
+- Kept `data/map_mvp/restaurants.json` as the canonical generated runtime dataset.
+- Imported and validated the canonical JSON server-side without maintaining a duplicate.
+- Enforced the approved 19-field public contract, valid coordinates, unique IDs, exactly 300 records, all 20 arrondissements, and exactly 15 records per arrondissement.
+- Added client-only Maps JavaScript API loading with `@googlemaps/js-api-loader` using its current `setOptions()` and `importLibrary()` API.
+- Used `AdvancedMarkerElement`, not the deprecated `google.maps.Marker`.
+- Created 300 markers and clustered them with `@googlemaps/markerclusterer`.
+- Added initial bounds covering all 300 restaurants, marker selection, visibly selected-marker styling, pan-without-zoom behavior, deselection, and map-runtime cleanup.
+- Added responsive desktop restaurant details and mobile bottom-sheet behavior.
+- Displayed only approved restaurant details and safe external links.
+- Added clear missing-key and Maps API load-failure states.
+- Added an SVG application icon after live verification detected a favicon 404.
+- Kept the browser key in ignored `.env.local`; no credential was committed or exposed.
+- Made no Places, geocoding, Google Sheets, or other restaurant-data runtime calls.
+
+**Tested:**
+
+- Data validation passed with 300 restaurants, 20 arrondissements, and exactly 15 restaurants per arrondissement.
+- All 12 automated tests passed.
+- ESLint passed.
+- The production build passed.
+- The browser contract audit passed with exactly 19 approved fields and no internal fields.
+- Live Chrome verification passed.
+- All 300 unique prepared marker objects reached clustering.
+- Cluster expansion, marker selection, selected-marker styling, detail updates, pan-without-zoom behavior, deselection, and reload behavior passed.
+- Desktop at 1440px and mobile at exactly 390 × 844 passed without horizontal overflow.
+- Final console errors, failed HTTP responses, and uncaught exceptions were zero.
+- No duplicate loader, map, or marker initialization was observed.
+- No unauthorized runtime data-service calls occurred.
+- The user manually tested the map on 2026-08-13.
+- Clustering, marker selection, restaurant details, deselection, external links, refresh behavior, and responsive mobile behavior passed the user's manual test.
+
+**Results:**
+
+- Session 14 delivered the first working and locally verified Paris Map MVP foundation.
+- Data readiness and base-map implementation are no longer blockers.
+- The next product gap is efficient discovery among 300 restaurants.
+- The user accepted the Session 14 milestone.
+
+**Issues found:**
+
+- The only live defect was a missing favicon; it was fixed with `map-app/app/icon.svg` and the affected checks were repeated successfully.
+- Cuisine, Vibe, and especially Features remain incomplete and should not be prerequisites for the next usability milestone.
+- Deployment and production authentication remain deliberately deferred.
+
+**Decisions made:**
+
+- The app lives in `map-app/` inside the existing repository.
+- Google Sheets remains the editing source of truth, and static JSON remains the runtime dataset.
+- Dataset validation occurs on the server.
+- The browser receives only the approved public restaurant contract.
+- Google Maps Advanced Markers and clustering are the marker architecture.
+- Browser credentials are environment-configured and excluded from Git.
+- `DEMO_MAP_ID` is acceptable only for local development.
+- Search, list navigation, filters, editing, directions, Near Me, authentication redesign, enrichment, and deployment were excluded from Session 14.
+
+**Open questions added/updated:**
+
+- Resolved: the map app lives in `map-app/` inside the current repository.
+- Which platform should host the eventual private deployment?
+- Which production map ID and map style should be used?
+- When discovery filters change visible markers, should the map refit bounds automatically?
+- Should Cuisine and Vibe filters explicitly communicate their incomplete coverage?
+
+**Next recommended session:**
+
+- Session 15 — Restaurant discovery controls.
+
+Reason:
+
+The map works with all 300 restaurants, but users need a faster way to locate and browse restaurants without navigating clusters manually.
+
+Session 15 should focus only on:
+
+- a searchable restaurant list;
+- text search over dependable populated fields;
+- arrondissement filtering;
+- synchronizing list selection with map selection;
+- updating visible markers, clusters, and result counts;
+- responsive desktop/mobile discovery UI;
+- empty-result and clear-filter behavior.
+
+Defer Features filtering, enrichment, editing, directions, Near Me, authentication redesign, deployment, and advanced multi-filter logic.
+
+---
+
 ## 11. Open questions
 
 These should be updated as the project evolves.
@@ -2514,18 +2622,21 @@ These should be updated as the project evolves.
 1. Should the `Cuisine`, `Vibe`, and `Features` controlled vocabularies move from code into a config file or dedicated Google Sheet tab before any larger enrichment batch?
 2. When should a future larger LLM enrichment effort resume, and should it begin with a controlled, fully audited sample before expanding?
 3. Should future LLM evidence use separate fields such as `Tag Evidence`, `Delivery Evidence`, `Takeaway Evidence`, and `Delivery/Takeaway Last Checked`?
-4. Should Cuisine/Vibe enrichment of the selected 300 happen after the first map is usable or in parallel?
+4. When should Cuisine/Vibe enrichment of the selected 300 resume now that the base map is usable?
 5. Should Features filtering be omitted entirely from MVP v1?
 6. Should `Favorite` and `Notes` be explicitly protected from all script overwrites?
 7. Can legacy `Map Location` and `Geocode Cache` columns be safely deleted once all script dependencies are checked?
-8. Should MVP password protection later be replaced with Google login or stronger per-user authentication?
-9. Should the "Near Me" button be included in MVP v1 or delayed to v1.1?
-10. Should the restaurant detail card include a generated Google Maps directions/search link?
-11. Should the map app live inside the current repository or in a separate repository/folder?
-12. How should the static JSON export be refreshed operationally after Google Sheet edits?
-13. Should restaurants removed from or replaced in the curated 300 have a selection-history audit trail?
-14. Should suburbs later become a second dataset/phase rather than simply expanding the Paris dataset?
-15. Should Google Places delivery/takeout fields be tested later in a small optional paid batch before any larger run?
+8. Should production privacy use simple password protection, Google login, or stronger per-user authentication?
+9. When, if ever, should a "Near Me" control be added after the discovery milestone?
+10. Should the restaurant detail card eventually include a generated Google Maps directions/search link?
+11. How should the static JSON export be refreshed operationally after Google Sheet edits?
+12. Should restaurants removed from or replaced in the curated 300 have a selection-history audit trail?
+13. Should suburbs later become a second dataset/phase rather than simply expanding the Paris dataset?
+14. Should Google Places delivery/takeout fields be tested later in a small optional paid batch before any larger run?
+15. Which platform should host the eventual private deployment?
+16. Which production Google Maps map ID and visual style should be used?
+17. When search or arrondissement filtering changes visible markers, should the map refit bounds automatically or preserve the user's viewport?
+18. Should future Cuisine and Vibe filters explicitly communicate that those fields have incomplete coverage?
 
 ---
 
@@ -2584,20 +2695,21 @@ Reply with the result when completed.
 Recommended next session:
 
 ```text
-Session 14 — Private map app scaffold
+Session 15 — Restaurant discovery controls
 ```
 
 Reason:
 
-The project now has a validated, user-curated 300-restaurant Paris dataset and a deterministic browser-safe JSON export. Data readiness is no longer a reason to delay the first usable map.
+The map works with all 300 restaurants, but users need a faster way to locate and browse restaurants without navigating clusters manually.
 
-Session 14 should focus only on:
+Session 15 should focus only on:
 
-- establishing the app location/repository structure;
-- creating the Next.js scaffold;
-- loading `restaurants.json`;
-- integrating the Google Maps JavaScript API;
-- displaying the 300 markers;
-- implementing basic restaurant selection/detail UI.
+- a searchable restaurant list;
+- text search over dependable populated fields;
+- arrondissement filtering;
+- synchronizing list selection with map selection;
+- updating visible markers, clusters, and result counts;
+- responsive desktop/mobile discovery UI;
+- empty-result and clear-filter behavior.
 
-Do not expand Session 14 into enrichment, editing, authentication redesign, routing, or advanced filters.
+Defer Features filtering, enrichment, editing, directions, Near Me, authentication redesign, deployment, and advanced multi-filter logic.

@@ -1,0 +1,6 @@
+.shell {
+  width: 100%;
+  min-width: 0;
+  height: 100dvh;
+  overflow: hidden;
+}
