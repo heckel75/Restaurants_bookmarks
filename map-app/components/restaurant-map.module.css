@@ -10,7 +10,7 @@
 
 .mapCanvas {
   position: absolute;
-  inset: 0;
+  inset: 0 0 0 25rem;
 }
 
 .brandPanel {
@@ -68,6 +68,191 @@
   font-weight: 700;
 }
 
+.discoveryPanel {
+  position: absolute;
+  z-index: 3;
+  top: 10.25rem;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  left: max(1rem, env(safe-area-inset-left));
+  display: flex;
+  width: min(24rem, calc(100% - 2rem));
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgb(222 213 199 / 90%);
+  border-radius: 1.25rem;
+  background: rgb(255 253 248 / 97%);
+  box-shadow: 0 1rem 3rem rgb(45 36 25 / 16%);
+  backdrop-filter: blur(0.75rem);
+}
+
+.discoveryControls {
+  display: grid;
+  flex: 0 0 auto;
+  gap: 0.85rem;
+  padding: 1rem 1.1rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.discoveryHeadingRow {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.discoveryHeadingRow h2 {
+  min-width: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.clearButton,
+.emptyClearButton,
+.backButton {
+  min-height: 2.5rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent-strong);
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.76rem;
+  font-weight: 750;
+}
+
+.clearButton {
+  flex: 0 0 auto;
+  padding: 0.5rem 0.75rem;
+}
+
+.fieldGroup {
+  display: grid;
+  min-width: 0;
+  gap: 0.35rem;
+}
+
+.fieldGroup label {
+  color: var(--ink-muted);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+}
+
+.fieldGroup input,
+.fieldGroup select {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  color: var(--ink);
+  background: var(--surface-raised);
+}
+
+.fieldGroup input::placeholder {
+  color: #8c8378;
+}
+
+.resultCount {
+  color: var(--ink-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.resultList {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+  scrollbar-gutter: stable;
+}
+
+.resultList li:not(:last-child) {
+  border-bottom: 1px solid var(--line);
+}
+
+.resultButton {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  min-height: 4.5rem;
+  gap: 0.3rem;
+  padding: 0.85rem 1.1rem;
+  border: 0;
+  border-left: 0.25rem solid transparent;
+  color: var(--ink);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.resultButton[data-selected="true"] {
+  border-left-color: #1f5e7a;
+  background: #eaf2f4;
+}
+
+.resultName,
+.resultAddress {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.resultName {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.resultMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  color: var(--accent-strong);
+  font-size: 0.7rem;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.resultAddress {
+  color: var(--ink-muted);
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+.emptyResults {
+  display: grid;
+  min-height: 0;
+  flex: 1 1 auto;
+  place-content: center;
+  justify-items: center;
+  gap: 0.65rem;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.emptyResults h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.emptyResults p {
+  color: var(--ink-muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.emptyClearButton {
+  margin-top: 0.25rem;
+  padding: 0.55rem 0.85rem;
+}
+
 .stateOverlay {
   position: absolute;
   z-index: 4;
@@ -111,8 +296,7 @@
   line-height: 1.6;
 }
 
-.loadingStatus,
-.selectionHint {
+.loadingStatus {
   position: absolute;
   z-index: 3;
   left: 50%;
@@ -161,6 +345,10 @@
   cursor: pointer;
   font-size: 1.45rem;
   line-height: 1;
+}
+
+.backButton {
+  display: none;
 }
 
 .detailPanel h2 {
@@ -269,21 +457,35 @@
 :global(gmp-advanced-marker:focus-visible) .restaurantMarker,
 :global(gmp-advanced-marker:focus-visible) .clusterMarker,
 .closeButton:focus-visible,
-.externalLinks a:focus-visible {
+.externalLinks a:focus-visible,
+.clearButton:focus-visible,
+.emptyClearButton:focus-visible,
+.backButton:focus-visible,
+.fieldGroup input:focus-visible,
+.fieldGroup select:focus-visible,
+.resultButton:focus-visible {
   outline: 0.2rem solid #1f5e7a;
   outline-offset: 0.2rem;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .closeButton:hover,
-  .externalLinks a:hover {
+  .externalLinks a:hover,
+  .clearButton:hover,
+  .emptyClearButton:hover,
+  .backButton:hover,
+  .resultButton:hover {
     background: #f0e7db;
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 959px) {
   .experience {
     min-height: 28rem;
+  }
+
+  .mapCanvas {
+    inset: 0;
   }
 
   .brandPanel {
@@ -307,15 +509,60 @@
     display: none;
   }
 
+  .discoveryPanel {
+    top: auto;
+    right: max(0.5rem, env(safe-area-inset-right));
+    bottom: max(0.5rem, env(safe-area-inset-bottom));
+    left: max(0.5rem, env(safe-area-inset-left));
+    width: auto;
+    height: min(52dvh, 30rem);
+    border-radius: 1.25rem;
+  }
+
+  .discoveryPanelHiddenMobile {
+    display: none;
+  }
+
+  .discoveryControls {
+    gap: 0.65rem;
+    padding: 0.85rem 0.9rem 0.75rem;
+  }
+
+  .discoveryHeadingRow h2 {
+    font-size: 1.2rem;
+  }
+
+  .fieldGroup input,
+  .fieldGroup select {
+    min-height: 2.65rem;
+  }
+
+  .resultButton {
+    min-height: 4.25rem;
+    padding: 0.75rem 0.9rem;
+  }
+
   .detailPanel {
     top: auto;
     right: max(0.5rem, env(safe-area-inset-right));
     bottom: max(0.5rem, env(safe-area-inset-bottom));
     left: max(0.5rem, env(safe-area-inset-left));
     width: auto;
-    max-height: min(48dvh, 24rem);
+    max-height: min(52dvh, 30rem);
     padding: 1.15rem;
     border-radius: 1.25rem;
+  }
+
+  .backButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 0.8rem;
+    padding: 0.55rem 0.8rem;
+  }
+
+  .closeButton {
+    display: none;
   }
 
   .detailPanel h2 {
@@ -331,7 +578,6 @@
     padding-top: 0.9rem;
   }
 
-  .selectionHint,
   .loadingStatus {
     bottom: max(0.75rem, env(safe-area-inset-bottom));
     width: max-content;

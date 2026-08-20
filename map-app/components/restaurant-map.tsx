@@ -1,13 +1,26 @@
 "use client";
 
 import { MarkerClusterer, type Renderer } from "@googlemaps/markerclusterer";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  type ChangeEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   createClusteredMarkerSet,
   findRestaurantById,
   getRestaurantDetailModel,
   prepareMapInput,
 } from "@/lib/map-logic.mjs";
+import {
+  EMPTY_DISCOVERY_CRITERIA,
+  filterRestaurants,
+  getVisibleRestaurantIds,
+  selectedRestaurantRemainsVisible,
+} from "@/lib/restaurant-discovery.mjs";
 import type { RestaurantMapItem } from "@/types/restaurant";
 import { loadGoogleMapsLibraries } from "./google-maps-loader";
 import styles from "./restaurant-map.module.css";
@@ -37,6 +50,12 @@ type MapRuntime = {
 };
 
 type LoadStatus = "loading" | "ready" | "error";
+
+const ARRONDISSEMENTS = Array.from({ length: 20 }, (_, index) => index + 1);
+
+function formatListArrondissement(arrondissement: number) {
+  return `Paris ${arrondissement}${arrondissement === 1 ? "er" : "e"}`;
+}
 
 function createClusterRenderer(
   AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
@@ -153,6 +172,18 @@ function applySelection(runtime: MapRuntime, selectedId: string | null) {
   }
 }
 
+function applyVisibleMarkers(runtime: MapRuntime, visibleRestaurantIds: Set<string>) {
+  const visibleMarkers: google.maps.marker.AdvancedMarkerElement[] = [];
+  for (const record of runtime.markerRecords.values()) {
+    if (visibleRestaurantIds.has(record.restaurantId)) {
+      visibleMarkers.push(record.marker);
+    }
+  }
+
+  runtime.clusterer.clearMarkers(true);
+  runtime.clusterer.addMarkers(visibleMarkers);
+}
+
 function disposeMapRuntime(runtime: MapRuntime) {
   if (runtime.disposed) {
     return;
@@ -182,9 +213,21 @@ export default function RestaurantMap({
   const runtimeRef = useRef<MapRuntime | null>(null);
   const initializationRef = useRef<Promise<MapRuntime> | null>(null);
   const mountedRef = useRef(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const mobileBackButtonRef = useRef<HTMLButtonElement>(null);
+  const resultButtonRefs = useRef(new Map<string, HTMLButtonElement>());
   const [loadStatus, setLoadStatus] = useState<LoadStatus>("loading");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [criteria, setCriteria] = useState({ ...EMPTY_DISCOVERY_CRITERIA });
   const mapInput = useMemo(() => prepareMapInput(restaurants), [restaurants]);
+  const filteredRestaurants = useMemo(
+    () => filterRestaurants(restaurants, criteria),
+    [criteria, restaurants],
+  );
+  const visibleRestaurantIds = useMemo(
+    () => getVisibleRestaurantIds(filteredRestaurants),
+    [filteredRestaurants],
+  );
   const selectedRestaurant = useMemo(
     () => findRestaurantById(restaurants, selectedId),
     [restaurants, selectedId],
@@ -193,6 +236,8 @@ export default function RestaurantMap({
     () => (selectedRestaurant ? getRestaurantDetailModel(selectedRestaurant) : null),
     [selectedRestaurant],
   );
+  const criteriaActive =
+    criteria.search.trim().length > 0 || criteria.arrondissement !== null;
   const configurationIssue = useMemo(
     () =>
       !apiKey
@@ -214,6 +259,52 @@ export default function RestaurantMap({
   const handleSelect = useCallback((restaurantId: string) => {
     setSelectedId(restaurantId);
   }, []);
+
+  const applyCriteria = useCallback(
+    (nextCriteria: typeof criteria) => {
+      setCriteria(nextCriteria);
+      const nextVisibleRestaurantIds = getVisibleRestaurantIds(
+        filterRestaurants(restaurants, nextCriteria),
+      );
+      if (!selectedRestaurantRemainsVisible(selectedId, nextVisibleRestaurantIds)) {
+        setSelectedId(null);
+      }
+    },
+    [restaurants, selectedId],
+  );
+
+  const handleSearchChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      applyCriteria({ ...criteria, search: event.target.value });
+    },
+    [applyCriteria, criteria],
+  );
+
+  const handleArrondissementChange = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      const value = event.target.value;
+      applyCriteria({
+        ...criteria,
+        arrondissement: value ? Number(value) : null,
+      });
+    },
+    [applyCriteria, criteria],
+  );
+
+  const handleClearFilters = useCallback(() => {
+    applyCriteria({ ...EMPTY_DISCOVERY_CRITERIA });
+  }, [applyCriteria]);
+
+  const handleBackToResults = useCallback(() => {
+    const restaurantId = selectedId;
+    setSelectedId(null);
+    requestAnimationFrame(() => {
+      const previousResult = restaurantId
+        ? resultButtonRefs.current.get(restaurantId)
+        : undefined;
+      (previousResult ?? searchInputRef.current)?.focus();
+    });
+  }, [selectedId]);
 
   useEffect(() => {
     if (configurationIssue || !containerRef.current) {
@@ -274,12 +365,27 @@ export default function RestaurantMap({
     }
   }, [loadStatus, selectedId]);
 
+  useEffect(() => {
+    if (loadStatus === "ready" && runtimeRef.current) {
+      applyVisibleMarkers(runtimeRef.current, visibleRestaurantIds);
+    }
+  }, [loadStatus, visibleRestaurantIds]);
+
+  useEffect(() => {
+    if (!selectedId || !window.matchMedia("(max-width: 959px)").matches) {
+      return;
+    }
+
+    const frame = requestAnimationFrame(() => mobileBackButtonRef.current?.focus());
+    return () => cancelAnimationFrame(frame);
+  }, [selectedId]);
+
   return (
     <section className={styles.experience} aria-label="Paris restaurant map">
       <div
         ref={containerRef}
         className={styles.mapCanvas}
-        aria-label={`Map of ${restaurants.length} Paris restaurants`}
+        aria-label={`Map showing ${filteredRestaurants.length} Paris restaurants`}
       />
 
       <header className={styles.brandPanel}>
@@ -292,6 +398,109 @@ export default function RestaurantMap({
         </div>
         {usingDemoMapId ? <p className={styles.demoBadge}>Local demo map style</p> : null}
       </header>
+
+      <aside
+        className={`${styles.discoveryPanel} ${selectedRestaurant ? styles.discoveryPanelHiddenMobile : ""}`}
+        aria-labelledby="discovery-heading"
+      >
+        <div className={styles.discoveryControls}>
+          <div className={styles.discoveryHeadingRow}>
+            <h2 id="discovery-heading">Find a restaurant</h2>
+            {criteriaActive ? (
+              <button
+                type="button"
+                className={styles.clearButton}
+                onClick={handleClearFilters}
+              >
+                Clear all
+              </button>
+            ) : null}
+          </div>
+
+          <div className={styles.fieldGroup}>
+            <label htmlFor="restaurant-search">Search</label>
+            <input
+              ref={searchInputRef}
+              id="restaurant-search"
+              type="search"
+              value={criteria.search}
+              onChange={handleSearchChange}
+              placeholder="Name, address, or postcode"
+              autoComplete="off"
+              spellCheck={false}
+            />
+          </div>
+
+          <div className={styles.fieldGroup}>
+            <label htmlFor="arrondissement-filter">Arrondissement</label>
+            <select
+              id="arrondissement-filter"
+              value={criteria.arrondissement ?? ""}
+              onChange={handleArrondissementChange}
+            >
+              <option value="">Any arrondissement</option>
+              {ARRONDISSEMENTS.map((arrondissement) => (
+                <option key={arrondissement} value={arrondissement}>
+                  Paris {arrondissement}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <p
+            className={styles.resultCount}
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            {filteredRestaurants.length} {filteredRestaurants.length === 1 ? "result" : "results"}
+          </p>
+        </div>
+
+        {filteredRestaurants.length > 0 ? (
+          <ol className={styles.resultList} aria-label="Restaurant results">
+            {filteredRestaurants.map((restaurant) => {
+              const isSelected = restaurant.id === selectedId;
+              return (
+                <li key={restaurant.id}>
+                  <button
+                    ref={(element) => {
+                      if (element) {
+                        resultButtonRefs.current.set(restaurant.id, element);
+                      } else {
+                        resultButtonRefs.current.delete(restaurant.id);
+                      }
+                    }}
+                    type="button"
+                    className={styles.resultButton}
+                    data-selected={String(isSelected)}
+                    aria-current={isSelected ? "true" : undefined}
+                    onClick={() => handleSelect(restaurant.id)}
+                  >
+                    <span className={styles.resultName}>{restaurant.name}</span>
+                    <span className={styles.resultMeta}>
+                      <span>{formatListArrondissement(restaurant.arrondissement)}</span>
+                      <span aria-hidden="true">·</span>
+                      <span>{restaurant.postalCode}</span>
+                    </span>
+                    <span className={styles.resultAddress}>
+                      {restaurant.address ?? "Address unavailable"}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ol>
+        ) : (
+          <div className={styles.emptyResults}>
+            <h3>No restaurants found</h3>
+            <p>Try a different search or arrondissement.</p>
+            <button type="button" className={styles.emptyClearButton} onClick={handleClearFilters}>
+              Clear all filters
+            </button>
+          </div>
+        )}
+      </aside>
 
       {configurationIssue ? (
         <div className={styles.stateOverlay} role="status">
@@ -319,6 +528,14 @@ export default function RestaurantMap({
         </div>
       ) : selectedRestaurant && detail ? (
         <aside className={styles.detailPanel} aria-labelledby="restaurant-name" aria-live="polite">
+          <button
+            ref={mobileBackButtonRef}
+            type="button"
+            className={styles.backButton}
+            onClick={handleBackToResults}
+          >
+            <span aria-hidden="true">←</span> Back to results
+          </button>
           <button
             type="button"
             className={styles.closeButton}
@@ -368,9 +585,7 @@ export default function RestaurantMap({
             </nav>
           ) : null}
         </aside>
-      ) : (
-        <p className={styles.selectionHint}>Select a restaurant marker to view details.</p>
-      )}
+      ) : null}
     </section>
   );
 }

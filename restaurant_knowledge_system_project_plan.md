@@ -1,7 +1,7 @@
 # Restaurant Knowledge System — Project Plan
 
-**Version:** 2.5
-**Scope update:** Session 14 delivered the first working, locally verified Paris Map MVP foundation from the user-curated 300-restaurant core dataset. Google Sheets remains the editing source of truth, deterministic static JSON remains the app runtime dataset, and restaurant discovery controls are the next product milestone. Suburbs and full-archive cleanup remain later phases.
+**Version:** 2.6
+**Scope update:** Session 15 delivered the first practical restaurant discovery workflow for the locally verified Paris Map MVP, including dependable text search, arrondissement filtering, synchronized results and markers, and responsive desktop/mobile discovery UI. Google Sheets remains the editing source of truth, deterministic static JSON remains the app runtime dataset, and private deployment is the next product milestone. Suburbs and full-archive cleanup remain later phases.
 
 ---
 
@@ -211,7 +211,7 @@ Approved 19-field RestaurantMapItem[] browser contract
 Google Maps JavaScript API with Advanced Markers and clustering
 ```
 
-The app does not query Google Sheets, Places, geocoding, or another restaurant-data service at runtime. Session 14 implemented the base map, 300 clustered markers, selection, responsive restaurant details, and configuration/error states. Search, list navigation, and arrondissement discovery controls remain the next unimplemented product layer.
+The app does not query Google Sheets, Places, geocoding, or another restaurant-data service at runtime. Session 14 implemented the base map, 300 clustered markers, selection, responsive restaurant details, and configuration/error states. Session 15 added a searchable restaurant list, accent/case-insensitive search over dependable text fields, arrondissement filtering, synchronized result counts/list/markers/clusters, clear and empty states, and responsive desktop/mobile discovery UI. Cuisine and Vibe remain detail metadata rather than discovery filters, and Features remains excluded from MVP filtering.
 
 ---
 
@@ -2613,6 +2613,171 @@ Defer Features filtering, enrichment, editing, directions, Near Me, authenticati
 
 ---
 
+### 10.17 Session 15 — Restaurant discovery controls
+
+**Date:** 2026-08-20
+
+**Goal:**
+
+Make the working Paris Map MVP useful for browsing and locating restaurants by adding a searchable list, dependable text search, arrondissement filtering, synchronized markers/results, and responsive discovery UI.
+
+**Completed:**
+
+- Added `map-app/lib/restaurant-discovery.mjs`.
+- Added pure helpers for:
+  - accent/case-insensitive text normalization;
+  - restaurant filtering;
+  - visible restaurant IDs;
+  - selection visibility checks.
+- Added `map-app/scripts/restaurant-discovery.test.mjs`.
+- Added searchable restaurant discovery UI.
+- Search covers:
+  - name;
+  - address;
+  - postal code.
+- Search is case-insensitive and accent-insensitive.
+- Added a single-select arrondissement filter with Any arrondissement and Paris 1 through Paris 20.
+- Added one immutable `filteredRestaurants` result set driving:
+  - result count;
+  - restaurant list;
+  - marker membership;
+  - clustering inputs;
+  - map accessibility label;
+  - empty-result state.
+- Reused the existing Google Map instance and the existing 300 marker objects.
+- Filtering changes clusterer membership only; it does not recreate the map or markers.
+- List selection uses the existing restaurant-selection path and `panTo()` behavior.
+- Introduced no automatic zooming.
+- Current selection is cleared only when filtering removes that restaurant from the result set.
+- Added Clear all behavior restoring:
+  - empty search;
+  - Any arrondissement;
+  - all 300 restaurants;
+  - all 300 markers.
+- Filtering preserves the current map viewport.
+- The only `fitBounds()` behavior remains initial map setup.
+- Added a desktop discovery sidebar/panel.
+- Added a mobile discovery bottom sheet.
+- On mobile, restaurant details replace results and provide Back to results.
+- Added accessibility improvements:
+  - visible Search label;
+  - visible Arrondissement label;
+  - restrained live result count;
+  - keyboard-operable restaurant rows;
+  - selected-state semantics;
+  - visible focus styling;
+  - mobile focus return behavior.
+- Session 15 explicitly did not add:
+  - Cuisine filtering;
+  - Vibe filtering;
+  - Features filtering;
+  - Delivery/Takeaway filtering;
+  - Near Me;
+  - directions;
+  - editing;
+  - Quick Add;
+  - enrichment;
+  - authentication changes;
+  - deployment.
+
+**Tested:**
+
+- `npm run validate:data` passed with 300 restaurants, 20 arrondissements, and exactly 15 restaurants per arrondissement.
+- `npm test` passed: 24/24.
+- `npm run lint` passed.
+- `npm run build` passed.
+- `git diff --check` passed.
+- Added 12 focused automated discovery tests covering:
+  - no criteria returns all 300;
+  - case-insensitive search;
+  - accent-insensitive search;
+  - address search;
+  - postal-code search;
+  - arrondissement filtering;
+  - combined search + arrondissement AND semantics;
+  - zero results;
+  - clear criteria restores all 300;
+  - filtered IDs determine visible-marker IDs;
+  - selection remains when still visible;
+  - selection clears when filtered out.
+- Automated visual/headless Chrome verification could not complete because the Windows headless GPU/process stalled.
+- The user manually tested the app in a normal desktop browser on 2026-08-20 and reported `Desktop PASS`.
+- The user then manually tested at exactly 390 × 844 mobile viewport and reported `Mobile PASS`.
+- Desktop manual acceptance included:
+  - 300 initial results;
+  - restaurant-name search;
+  - postcode/address search;
+  - arrondissement filtering;
+  - combined search + arrondissement;
+  - list selection and pan-without-zoom;
+  - selection clearing when excluded;
+  - Clear all returning to 300;
+  - no unwanted viewport refit;
+  - no visible layout or console errors.
+- Mobile manual acceptance included:
+  - no horizontal overflow;
+  - usable search/filter controls;
+  - mobile results sheet;
+  - synchronized filtering;
+  - details replacing results;
+  - Back to results;
+  - sensible focus return;
+  - Clear all restoring 300;
+  - no overlapping/clipped sheets or console errors.
+
+**Results:**
+
+- Session 15 delivered the first practical restaurant discovery workflow on top of the working Paris map.
+- Users can now find restaurants by dependable text fields or arrondissement without manually navigating all map clusters.
+- List, result count, markers, and clusters stay synchronized through one filtered result set.
+- The MVP remains usable even though Cuisine/Vibe/Features enrichment is incomplete.
+- The feature passed automated validation and user desktop/mobile acceptance.
+
+**Issues found:**
+
+- Automated headless browser visual testing is unreliable in the current Windows environment because the Chrome GPU/headless process stalled.
+- This did not block acceptance because the user completed normal desktop and exact 390 × 844 mobile manual smoke tests successfully.
+- Cuisine and Vibe coverage remains incomplete and was deliberately not made part of Session 15 discovery filtering.
+
+**Decisions made:**
+
+- Session 15 discovery scope is a searchable list, dependable text search, and an arrondissement filter.
+- Cuisine and Vibe remain detail metadata for now, not discovery filters.
+- Features remains excluded from MVP filtering.
+- Search + arrondissement use AND semantics.
+- Filter changes preserve the user's map viewport.
+- No automatic refit occurs when filters change.
+- List and map selection share the same selection path.
+- Static JSON remains the runtime dataset.
+- No new dependencies were required.
+
+**Open questions added/updated:**
+
+- Resolved: search and arrondissement filtering preserve the current viewport rather than automatically refitting bounds.
+- Future Cuisine/Vibe filtering and how to communicate incomplete coverage remains a later product decision.
+- Deployment/authentication, Near Me, directions, enrichment, static-export refresh, and suburbs remain open.
+
+**Next recommended session:**
+
+- Session 16 — Private deployment MVP.
+
+Reason:
+
+The map now has the core day-to-day discovery workflow and has passed desktop and mobile acceptance locally. The highest-value next milestone is making the private app safely accessible from the user's phone and other devices without requiring a local development server.
+
+Session 16 should stay tightly scoped to:
+
+- choosing or confirming the hosting platform;
+- production deployment of `map-app/`;
+- simple MVP password protection/private access;
+- production Google Maps browser-key restrictions;
+- production map ID configuration;
+- basic deployment smoke testing on desktop and phone.
+
+Defer Cuisine/Vibe enrichment or filters, Near Me, directions, editing/Quick Add, suburbs, full-archive cleanup, and stronger multi-user account systems unless simple password protection proves unsuitable.
+
+---
+
 ## 11. Open questions
 
 These should be updated as the project evolves.
@@ -2622,21 +2787,19 @@ These should be updated as the project evolves.
 1. Should the `Cuisine`, `Vibe`, and `Features` controlled vocabularies move from code into a config file or dedicated Google Sheet tab before any larger enrichment batch?
 2. When should a future larger LLM enrichment effort resume, and should it begin with a controlled, fully audited sample before expanding?
 3. Should future LLM evidence use separate fields such as `Tag Evidence`, `Delivery Evidence`, `Takeaway Evidence`, and `Delivery/Takeaway Last Checked`?
-4. When should Cuisine/Vibe enrichment of the selected 300 resume now that the base map is usable?
-5. Should Features filtering be omitted entirely from MVP v1?
-6. Should `Favorite` and `Notes` be explicitly protected from all script overwrites?
-7. Can legacy `Map Location` and `Geocode Cache` columns be safely deleted once all script dependencies are checked?
-8. Should production privacy use simple password protection, Google login, or stronger per-user authentication?
-9. When, if ever, should a "Near Me" control be added after the discovery milestone?
-10. Should the restaurant detail card eventually include a generated Google Maps directions/search link?
-11. How should the static JSON export be refreshed operationally after Google Sheet edits?
-12. Should restaurants removed from or replaced in the curated 300 have a selection-history audit trail?
-13. Should suburbs later become a second dataset/phase rather than simply expanding the Paris dataset?
-14. Should Google Places delivery/takeout fields be tested later in a small optional paid batch before any larger run?
-15. Which platform should host the eventual private deployment?
-16. Which production Google Maps map ID and visual style should be used?
-17. When search or arrondissement filtering changes visible markers, should the map refit bounds automatically or preserve the user's viewport?
-18. Should future Cuisine and Vibe filters explicitly communicate that those fields have incomplete coverage?
+4. When should Cuisine/Vibe enrichment of the selected 300 resume now that the map's core discovery workflow is usable?
+5. Should `Favorite` and `Notes` be explicitly protected from all script overwrites?
+6. Can legacy `Map Location` and `Geocode Cache` columns be safely deleted once all script dependencies are checked?
+7. Should production privacy use simple password protection, Google login, or stronger per-user authentication?
+8. When, if ever, should a "Near Me" control be added after the discovery milestone?
+9. Should the restaurant detail card eventually include a generated Google Maps directions/search link?
+10. How should the static JSON export be refreshed operationally after Google Sheet edits?
+11. Should restaurants removed from or replaced in the curated 300 have a selection-history audit trail?
+12. Should suburbs later become a second dataset/phase rather than simply expanding the Paris dataset?
+13. Should Google Places delivery/takeout fields be tested later in a small optional paid batch before any larger run?
+14. Which platform should host the private deployment?
+15. Which production Google Maps map ID and visual style should be used?
+16. If Cuisine/Vibe discovery filters are added in a later product phase, how should the UI communicate their incomplete coverage?
 
 ---
 
@@ -2695,21 +2858,28 @@ Reply with the result when completed.
 Recommended next session:
 
 ```text
-Session 15 — Restaurant discovery controls
+Session 16 — Private deployment MVP
 ```
 
 Reason:
 
-The map works with all 300 restaurants, but users need a faster way to locate and browse restaurants without navigating clusters manually.
+The map now has the core day-to-day discovery workflow and has passed desktop and mobile acceptance locally. The highest-value next milestone is making the private app safely accessible from the user's phone and other devices without requiring a local development server.
 
-Session 15 should focus only on:
+Session 16 should stay tightly scoped to:
 
-- a searchable restaurant list;
-- text search over dependable populated fields;
-- arrondissement filtering;
-- synchronizing list selection with map selection;
-- updating visible markers, clusters, and result counts;
-- responsive desktop/mobile discovery UI;
-- empty-result and clear-filter behavior.
+- choosing or confirming the hosting platform;
+- production deployment of `map-app/`;
+- simple MVP password protection/private access;
+- production Google Maps browser-key restrictions;
+- production map ID configuration;
+- basic deployment smoke testing on desktop and phone.
 
-Defer Features filtering, enrichment, editing, directions, Near Me, authentication redesign, deployment, and advanced multi-filter logic.
+Explicitly defer in Session 16:
+
+- Cuisine/Vibe enrichment or filters;
+- Near Me;
+- directions;
+- editing/Quick Add;
+- suburbs;
+- full-archive cleanup;
+- stronger multi-user account systems unless simple password protection proves unsuitable.
